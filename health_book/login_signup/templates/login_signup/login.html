@@ -1,0 +1,30 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+{% block title %}Connexion{% endblock title %}
+
+{% block content %}
+
+<h1>Connexion</h1>
+{% if not is_valid %}
+<p style="color:red;">Incorrect !</p>
+{% endif %}
+<form action="" method="post">
+    {% csrf_token %}
+
+    {% for field in form %}
+    <div class="form__group">
+        <label for="{{field.auto_id}}">{{field.label}}</label>
+        {{field}}
+    </div>
+    {% endfor %}
+    <div class="btn-group flex--col">
+        <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
+        <a href="{% url 'index' %}" class="btn btn--dark-green btn--small mb-10">Précédent</a>
+    </div>
+
+</form>
+{% endblock content %}
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script src="{% static 'login_signup/js/cleave-format.js'%}"></script>
+{% endblock script %}

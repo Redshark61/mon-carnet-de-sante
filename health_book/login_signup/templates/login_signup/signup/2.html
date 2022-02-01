@@ -1,0 +1,48 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - 2{% endblock title %}
+
+{% block content %}
+<div class="progression-container">
+    {% for i in step_progress %}
+    {% if current_id == i %}
+    <div class="progression-dot" data-active="true">
+        <span>{{i}}</span>
+    </div>
+    {% else %}
+    <div class="progression-dot" data-active="false">
+        <span>{{i}}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% if not is_valid %}
+<p style="color:red">Probleme</p>
+{% endif %}
+
+<h1>Informations personnelles</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form__group">
+        <label for="{{field.auto_id}}">{{field.label}}</label>
+        {{field}}
+    </div>
+    {% endfor %}
+
+    <div class="btn-group flex--col">
+        {% if not is_medical%}
+        <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
+        {% else %}
+        <button type="submit" value="medical" class="btn btn--light-green mt-5">Suivant</button>
+        {% endif %}
+        <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green mb-5 btn--small">Précédent</a>
+    </div>
+</form>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'login_signup/js/remove-medical.js' %}"></script>
+{% endblock script %}

@@ -1,0 +1,47 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - 6{% endblock title %}
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script src="{% static 'login_signup/js/later-input.js'%}"></script>
+<script src="{% static 'login_signup/js/cleave-format.js'%}"></script>
+<script src="{% static 'login_signup/js/remove-medical.js'%}"></script>
+{% endblock script %}
+
+{% block content %}
+
+<div class="progression-container">
+    {% for i in '123456' %}
+    {% if current_id == i %}
+    <div class="progression-dot" data-active="true">
+        <span>{{i}}</span>
+    </div>
+    {% else %}
+    <div class="progression-dot" data-active="false">
+        <span>{{i}}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<h1>Parents</h1>
+<form action="" method="post">
+    <div class="form__group">
+        <label for="id1">Identifiant du parent 1</label>
+        <input type="tel" name="id1" id="id1" class="form__control js-security-code js-later-input"
+            placeholder="1-23-45-67-890-123 45" autocomplete="off" required>
+    </div>
+
+    <div class="form__group">
+        <label for="id2">Identifiant du parent 2</label>
+        <input type="tel" name="id2" id="id2" class="form__control js-security-code js-later-input"
+            placeholder="1-23-45-67-890-123 45" autocomplete="off" required>
+    </div>
+
+    <div class="btn-group flex--col">
+        <a href="{% url 'home:home' %}" class="btn btn--light-green mt-5 js-later-button">Plus tard</a>
+        <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green btn--small">Précédent</a>
+    </div>
+</form>
+{% endblock content %}

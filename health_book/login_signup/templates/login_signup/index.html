@@ -1,0 +1,34 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Accueil{% endblock title %}
+
+{% block content %}
+
+<!---- MODAL ---->
+<div class="modal-bg js-modal-bg"></div>
+<div class="modal js-modal">
+    <img class="modal__close js-modal-close" src="{% static 'login_signup/img/close.svg'%}" alt="Fermer">
+    <h3 class="modal__title">Qui êtes-vous</h3>
+    <form action="" method="post" class="modal__choices">
+        {% csrf_token %}
+        <button type="submit" name="button" value="medical" class="modal__choice js-modal-choice">Personnel
+            médical</button>
+        <button type="submit" name="button" value="personal" class="modal__choice js-modal-choice">Patient</but>
+    </form>
+</div>
+<!---- MODAL END  ---->
+
+<div class="login flex--col">
+    <h1 class="mt-5">Mon carnet de santé</h1>
+    <div class="flex--row">
+        <a href="#" id="login" class="btn btn--dark-green js-modal-input">Accéder à mon carnet</a>
+        <a href="#" id="signup" class="btn btn--light-green js-modal-input">Créer un compte</a>
+    </div>
+    <img src="{% static 'login_signup/img/files.svg'%}" alt="">
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'login_signup/js/modal.js' %}"></script>
+{% endblock script %}

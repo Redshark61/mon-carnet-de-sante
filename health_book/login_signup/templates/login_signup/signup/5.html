@@ -1,0 +1,61 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - 5{% endblock title %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/addons/cleave-phone.fr.js"></script>
+<script src="{% static 'login_signup/js/later-input.js'%}"></script>
+<script src="{% static 'login_signup/js/cleave-format.js'%}"></script>
+<script src="{% static 'login_signup/js/remove-medical.js'%}"></script>
+{% endblock script %}
+
+{% block content %}
+
+<div class="progression-container">
+    {% for i in '123456' %}
+    {% if current_id == i %}
+    <div class="progression-dot" data-active="true">
+        <span>{{i}}</span>
+    </div>
+    {% else %}
+    <div class="progression-dot" data-active="false">
+        <span>{{i}}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<h1>Personne de confiance</h1>
+<form action="" method="post">
+    <div class="form__group">
+        <label for="firstname">Prénom</label>
+        <input type="text" name="firstname" id="firstname" class="form__control js-later-input" placeholder="Jean"
+            required>
+    </div>
+
+    <div class="form__group">
+        <label for="lastname">Nom</label>
+        <input type="text" name="lastname" id="lastname" class="form__control js-later-input" placeholder="Dupuis"
+            required>
+    </div>
+
+    <div class="form__group">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" class="form__control js-later-input" placeholder="exemple@gmail.com"
+            required>
+    </div>
+
+    <div class="form__group">
+        <label for="tel">Téléphone</label>
+        <input type="tel" name="tel" id="tel" class="form__control js-later-input js-tel-input"
+            placeholder="06 12 34 56 78" required>
+    </div>
+
+    <div class="btn-group flex--col">
+        <a href="{% url 'login_signup:signup' next_id %}" class="btn btn--light-green mt-5 js-later-button">Plus tard</a>
+        <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green btn--small">Précédent</a>
+    </div>
+</form>
+{% endblock content %}

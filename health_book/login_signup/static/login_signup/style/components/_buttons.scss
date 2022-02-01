@@ -1,0 +1,53 @@
+a.btn,
+button.btn {
+	border: none;
+	@include button;
+
+	&[class*="--dark-green"] {
+		@include btn-dark-green;
+
+		&:hover {
+			background: $hover-dark-green;
+		}
+	}
+
+	&[class*="--light-green"] {
+		@include btn-light-green;
+
+		&:hover {
+			background: $hover-light-green;
+		}
+	}
+
+	&[class*="--dim-orange"] {
+		@include btn-dim-orange;
+
+		&[class*="--empty"] {
+			background: none;
+			box-shadow: none;
+			color: $dim-orange;
+
+			&:hover {
+				text-decoration: underline;
+				background: none;
+			}
+		}
+
+		&:hover {
+			background: $hover-light-green;
+		}
+	}
+
+	&.btn--small {
+		@include button(0.5rem);
+		width: fit-content;
+	}
+}
+
+*[class*="btn-group"] {
+	gap: 1rem;
+
+	&[class*="btn-group--3"] {
+		gap: 3rem;
+	}
+}

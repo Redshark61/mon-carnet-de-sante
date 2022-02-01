@@ -1,0 +1,45 @@
+.loader {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.js-loader {
+    height: 1rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: rgb(179, 179, 179);
+
+    &.active {
+        background: orange;
+        border: 0.5rem solid white;
+        border-color: transparent transparent white transparent;
+        animation: load 1s ease infinite;
+    }
+
+    &.done {
+        position: relative;
+        animation: none;
+        background-color: lightgreen;
+        outline: 1px solid black;
+
+
+        &::before {
+            content: "✔";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+@keyframes load {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,52 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - 2{% endblock title %}
+
+{% block content %}
+
+<div class="loading"></div>
+<div class="progression-container">
+    {% for i in '123456' %}
+    {% if current_id == i %}
+    <div class="progression-dot" data-active="true">
+        <span>{{i}}</span>
+    </div>
+    {% else %}
+    <div class="progression-dot" data-active="false">
+        <span>{{i}}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<h1>Adresse</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="form__group">
+        {{form.city.errors}}
+        <label for="{{form.city.auto_id}}">{{form.city.label}}</label>
+        {{form.city}}
+        <datalist id="city--list" class=".js-datalist-adress"></datalist>
+    </div>
+
+    <div class="form__group">
+        {{form.address.errors}}
+        <label for="{{form.address.auto_id}}">{{form.address.label}}</label>
+        <div class="loader">
+            {{form.address}}
+            <div class="js-loader"></div>
+        </div>
+    </div>
+
+    <div class="btn-group flex--col">
+        <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
+        <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green btn--small">Précédent</a>
+    </div>
+</form>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'login_signup/js/adress.js'%}"></script>
+<script src="{% static 'login_signup/js/remove-medical.js' %}"></script>
+{% endblock script %}

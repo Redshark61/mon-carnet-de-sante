@@ -1,0 +1,78 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - 4{% endblock title %}
+
+{% block content %}
+
+<div class="progression-container">
+    {% for i in '123456' %}
+    {% if current_id == i %}
+    <div class="progression-dot" data-active="true">
+        <span>{{i}}</span>
+    </div>
+    {% else %}
+    <div class="progression-dot" data-active="false">
+        <span>{{i}}</span>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<h1>Informations de santé</h1>
+<form action="" method="post">
+
+    <div class="form__group">
+        <label for="doctor">Médecin Traitant</label>
+        <input type="text" name="doctor" id="doctor" class="form__control" placeholder="Jean Dupuis" list="doctor--list"
+            required>
+        <datalist id="doctor--list">
+            <option value="Jean Dupuis">Jean Dupuis</option>
+            <option value="Marie Leroi">Marie Leroi</option>
+        </datalist>
+    </div>
+
+    <div class="form__group">
+        <label for="treatment">Traitement(s)</label>
+        <div class="form--add">
+            <input type="text" class="form__control js-input" id="treatment" name="treatment">
+            <div class="form__plus js-add-element">➕</div>
+        </div>
+        <ul class="form__list js-list">
+
+        </ul>
+    </div>
+
+    <div class="form__group">
+        <label for="disease">Maladie(s) actuelle(s)</label>
+        <div class="form--add">
+            <input type="text" class="form__control js-input" id="disease" name="disease">
+            <div class="form__plus js-add-element">➕</div>
+        </div>
+        <ul class="form__list js-list">
+
+        </ul>
+    </div>
+
+    <div class="form__group">
+        <label for="hospital">Hospitalisation(s) passée(s)</label>
+        <div class="form--add">
+            <input type="text" class="form__control js-input" id="hospital" name="hospital">
+            <div class="form__plus js-add-element">➕</div>
+        </div>
+        <ul class="form__list js-list">
+
+        </ul>
+    </div>
+
+    <div class="btn-group flex--col">
+        <a href="{% url 'login_signup:signup' next_id %}" class="btn btn--light-green mt-5">Suivant</a>
+        <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green btn--small">Précédent</a>
+    </div>
+</form>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'login_signup/js/add-list.js'%}"></script>
+<script src="{% static 'login_signup/js/remove-medical.js' %}"></script>
+{% endblock script %}

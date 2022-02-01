@@ -1,0 +1,34 @@
+*[class*="flex"] {
+    display: flex;
+    word-break: break-word;
+
+    &[class*="--col"] {
+        flex-direction: column;
+    }
+
+    &[class*="--row"] {
+        flex-direction: row;
+
+        @include media-min($phone) {
+            flex-direction: column;
+        }
+    }
+
+    &[class*="--center"] {
+        align-items: center;
+    }
+
+    &[class*="--space-around"] {
+        justify-content: space-around;
+    }
+
+    &[class*="--space-between"] {
+        justify-content: space-between;
+    }
+
+    &[class*="--space-evenly"] {
+        justify-content: space-evenly;
+    }
+	
+
+}

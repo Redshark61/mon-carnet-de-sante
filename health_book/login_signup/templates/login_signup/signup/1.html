@@ -1,0 +1,71 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+{% block title %} Signup - 1 {% endblock title %}
+{% block content %}
+
+<div class="progression-container">
+  {% for i in step_progress %}
+  {% if current_id == i %}
+  <div class="progression-dot" data-active="true">
+    <span>{{i}}</span>
+  </div>
+  {% else %}
+  <div class="progression-dot" data-active="false">
+    <span>{{i}}</span>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<h1>Inscription</h1>
+
+{% if not is_valid %}
+<p style="color:red">Probleme</p>
+{% endif %}
+
+<form action="" method="post">
+  {% csrf_token %}
+
+  {% if is_medical %}
+  <div class="form__group">
+    <label for="code_id">RPPS</label>
+    <input type="text" name="code_id" id="code_id" class="form__control btn btn--dark-green" placeholder="01234567891"
+      required>
+  </div>
+  <div class="form__group">
+    <label for="job">Spécialité</label>
+    <input type="text" name="job" id="job" class="form__control btn btn--dark-green" placeholder="Cardiologie" required
+      list='job--list'>
+    <datalist id='job--list'>
+      {% for job in jobs %}
+      <option value="{{job}}">
+        {% endfor %}
+    </datalist>
+  </div>
+  {% else %}
+  <div class="form__group">
+    <label for="code_id">Code de sécurité sociale</label>
+    <input type="text" name="code_id" id="code_id" class="form__control btn btn--dark-green js-security-code"
+      placeholder="0-12-34-56-789-123 45" required>
+  </div>
+  {% endif %}
+
+  {% for field in form %}
+  <div class="form__group">
+    <label for="{{field.auto_id}}">{{field.label}}</label>
+    {{field}}
+  </div>
+  {% endfor %}
+
+  <div class="btn-group flex--col">
+    <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
+    <a href="{% url 'index' %}" class="btn btn--dark-green btn--small mb-10">Précédent</a>
+  </div>
+</form>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'login_signup/js/remove-medical.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script src="{% static 'login_signup/js/cleave-format.js'%}"></script>
+{% endblock script %}

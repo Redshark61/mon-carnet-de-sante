@@ -1,0 +1,32 @@
+{% extends 'login_signup/base.html' %}
+{% load static %}
+
+{% block title %}Signup - Médical{% endblock title %}
+
+{% block content %}
+
+<h1>Connexion en tant que personnel médical</h1>
+<form action="" method="post">
+  <div class="form__group">
+    <label for="firstname">Prénom</label>
+    <input type="text" name="firstname" id="firstname" class="form__control" placeholder="Jean" required>
+  </div>
+
+  <div class="form__group">
+    <label for="lastname">Nom</label>
+    <input type="text" name="lastname" id="lastname" class="form__control btn btn--dark-green" placeholder="Dupuis"
+      required>
+  </div>
+
+  <div class="form__group">
+    <label for="rpps">RPPS</label>
+    <input type="number" name="rpps" id="rpps" class="form__control btn btn--dark-green" placeholder="01234567891"
+      required>
+  </div>
+
+  <div class="btn-group flex--col">
+    <a href="{% url 'login_signup:signup' 1 %}" class="btn btn--light-green mt-5">Suivant</a>
+    <a href="../../" class="btn btn--dark-green btn--small mb-10">Précédent</a>
+  </div>
+</form>
+{% endblock content %}
