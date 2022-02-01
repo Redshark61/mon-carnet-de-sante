@@ -10,18 +10,15 @@ def index(request):
     response.set_cookie('medical', 'false')
     if request.method == 'POST':
         person, direction = request.POST.get('button').split("&")
+        print(person, direction)
 
         if person == 'personal':
-            request.session['medical'] = False
-            if direction == 'login':
-                response = redirect('login_signup:login') if direction == 'login' else redirect(
-                    'login_signup:signup', 1)
-                response.set_cookie('medical', 'false')
-                return response
+            response = redirect('login') if direction == 'login' else redirect('login_signup:signup', 1)
+            response.set_cookie('medical', 'false')
+            return response
 
         elif person == 'medical':
-            request.session['medical'] = True
-            response = redirect('login_signup:login') if direction == 'login' else redirect(
+            response = redirect('login') if direction == 'login' else redirect(
                 'login_signup:signup', 1)
             response.set_cookie('medical', 'true')
             return response
@@ -97,33 +94,10 @@ def signup(request, number):
         return render(request, f'login_signup/signup/{number}.html', context)
 
 
-def signupMedical(request):
-    response = redirect('login_signup:signup', 1)
-    response.set_cookie('medical', 'true')
-    return response
-
-
-# def medicalValidate(request):
-#     if request.method == 'POST':
-#         form = MedicalValidateForm(request.POST)
-#         if form.is_valid():
-#             user = authenticate(username=form.cleaned_data['rpps_code'], password=form.cleaned_data['password'])
-#             if user is not None:
-#                 loginUser(request, user)
-#                 return redirect('home:home')
-#             else:
-#                 return render(request, 'login_signup:login', {'form': form, 'is_valid': False})
-#         else:
-#             form = LoginForm()
-#             return render(request, 'login_signup:login', {'is_valid': False, 'form': form})
-#     else:
-#         form = LoginForm()
-#         return render(request, 'login_signup:login', {'is_valid': True, 'form': form})
-
 def login(request):
 
     def deleteField(request):
-        if request.session.get('medical'):
+        if request.COOKIES['medical']:
             del form.fields['id_code']
             return 'rpps_code'
         else:
@@ -139,13 +113,13 @@ def login(request):
                 loginUser(request, user)
                 return redirect('home:home')
             else:
-                return render(request, 'login_signup:login', {'form': form, 'is_valid': False})
+                return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
         else:
             form = LoginForm()
             deleteField(request)
-            return render(request, 'login_signup:login', {'is_valid': False, 'form': form})
+            return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
     else:
         form = LoginForm()
         deleteField(request)
 
-        return render(request, 'login_signup:login', {'form': form, 'is_valid': True})
+        return render(request, 'login_signup/login.html', {'form': form, 'is_valid': True})
