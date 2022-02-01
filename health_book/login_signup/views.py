@@ -7,20 +7,20 @@ from login_signup.forms import *
 
 def index(request):
     response = render(request, 'login_signup/index.html')
-    response.set_cookie('medical', 'false')
+    response.set_cookie('medical', False)
     if request.method == 'POST':
         person, direction = request.POST.get('button').split("&")
         print(person, direction)
 
         if person == 'personal':
             response = redirect('login') if direction == 'login' else redirect('login_signup:signup', 1)
-            response.set_cookie('medical', 'false')
+            response.set_cookie('medical', False)
             return response
 
         elif person == 'medical':
             response = redirect('login') if direction == 'login' else redirect(
                 'login_signup:signup', 1)
-            response.set_cookie('medical', 'true')
+            response.set_cookie('medical', True)
             return response
     return response
 
@@ -30,14 +30,13 @@ def signup(request, number):
     nextNumber = number + 1
     previousNumber = number - 1
     isMedical = request.COOKIES['medical']
-    print(isMedical)
-    stepProgress = '12' if isMedical else '123456'
+    stepProgress = '12' if isMedical == 'True' else '123456'
     jobs = Job.objects.all() if number == 1 else None
     context = {
         'next_id': nextNumber,
         'current_id': str(number),
         'prev_id': previousNumber,
-        'is_medical': isMedical,
+        'is_medical': True if isMedical == 'True' else False,
         'step_progress': stepProgress,
         'is_valid': True,
         'jobs': jobs,
@@ -48,7 +47,6 @@ def signup(request, number):
         context['form'] = form
         if form.is_valid():
             if number == 1:
-                print("in signup 1")
                 user = CustomUser.objects.create_user(
                     username=request.POST['code_id'],
                     email=form.cleaned_data['mail'],
@@ -56,7 +54,7 @@ def signup(request, number):
                     first_name=form.cleaned_data['first_name'],
                     last_name=form.cleaned_data['last_name'])
                 user.save()
-                if isMedical:
+                if isMedical == 'True':
                     job = Job.objects.get(name=request.POST['job'])
                     rpps = RPPS.objects.get(rpps=request.POST['code_id'])
                     doctor = Doctor(user=user,
@@ -65,23 +63,20 @@ def signup(request, number):
                     doctor.save()
                 loginUser(request, user)
                 return redirect('login_signup:signup', nextNumber)
-            elif number == 2:
+            if number == 2:
                 request.user.birth_date = form.cleaned_data['birth_date']
                 request.user.gender = form.cleaned_data['gender']
                 request.user.save()
-                print("in signup 2")
-                if isMedical:
+                if isMedical == 'True':
                     return redirect('home:home')
                 return redirect('login_signup:signup', nextNumber)
-            elif number == 3:
-                print("in signup 3")
+            if number == 3:
                 print(request.POST)
                 location = form.save(commit=False)
                 location.postal_code = request.POST['postal_code']
                 location.save()
-                currentUserData = CustomUser.objects.get(user=request.user)
-                currentUserData.address_id = location
-                currentUserData.save()
+                request.user.address = location
+                request.user.save()
                 return redirect('home:home')
         else:
             print("invalid form")
@@ -97,7 +92,7 @@ def signup(request, number):
 def login(request):
 
     def deleteField(request):
-        if request.COOKIES['medical']:
+        if request.COOKIES['medical'] == 'True':
             del form.fields['id_code']
             return 'rpps_code'
         else:
