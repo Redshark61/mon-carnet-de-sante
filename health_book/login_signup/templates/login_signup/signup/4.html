@@ -20,7 +20,9 @@
 </div>
 
 <h1>Informations de santé</h1>
-<form action="" method="post">
+<form action="" method="post" novalidate>
+
+    {% csrf_token %}
 
     <div class="form__group">
         <label for="doctor">Médecin Traitant</label>
@@ -35,7 +37,12 @@
     <div class="form__group">
         <label for="treatment">Traitement(s)</label>
         <div class="form--add">
-            <input type="text" class="form__control js-input" id="treatment" name="treatment">
+            <input type="text" class="form__control js-input" id="treatment" name="treatment" list="treatment--list">
+            <datalist id="treatment--list">
+                <option value="Doliprane">Doliprane</option>
+                <option value="Smecta">Smecta</option>
+                <option value="Sirop">Sirop</option>
+            </datalist>
             <div class="form__plus js-add-element">➕</div>
         </div>
         <ul class="form__list js-list">
@@ -46,7 +53,11 @@
     <div class="form__group">
         <label for="disease">Maladie(s) actuelle(s)</label>
         <div class="form--add">
-            <input type="text" class="form__control js-input" id="disease" name="disease">
+            <input type="text" class="form__control js-input" id="disease" name="disease" list='disease--list'>
+            <datalist id="disease--list">
+                <option value="Maladie 1">Maladie 1</option>
+                <option value="Maladie 2">Maladie 2</option>
+            </datalist>
             <div class="form__plus js-add-element">➕</div>
         </div>
         <ul class="form__list js-list">
@@ -54,19 +65,9 @@
         </ul>
     </div>
 
-    <div class="form__group">
-        <label for="hospital">Hospitalisation(s) passée(s)</label>
-        <div class="form--add">
-            <input type="text" class="form__control js-input" id="hospital" name="hospital">
-            <div class="form__plus js-add-element">➕</div>
-        </div>
-        <ul class="form__list js-list">
-
-        </ul>
-    </div>
 
     <div class="btn-group flex--col">
-        <a href="{% url 'login_signup:signup' next_id %}" class="btn btn--light-green mt-5">Suivant</a>
+        <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
         <a href="{% url 'login_signup:signup' prev_id %}" class="btn btn--dark-green btn--small">Précédent</a>
     </div>
 </form>

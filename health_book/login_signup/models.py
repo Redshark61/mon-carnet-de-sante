@@ -58,7 +58,7 @@ class CustomUser(AbstractUser):
                                 blank=True, related_name="User_parent2")
     address = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     birth_date = models.DateField(null=True)
-    diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease", null=True)
+    diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
 
     def __str__(self):
         return f"{self.username}"

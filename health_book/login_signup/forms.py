@@ -1,5 +1,5 @@
 from django import forms
-from login_signup.models import CustomUser, Location
+from login_signup.models import CustomUser, Location, Diseases
 
 
 class Connection1(forms.Form):
@@ -60,19 +60,11 @@ class Connection3(forms.ModelForm):
 
 class Connection4(forms.ModelForm):
     class Meta:
-        model = Location
-        fields = ['city', 'address']
-        widgets = {
-            'city': forms.TextInput(attrs={
-                'class': 'form__control js-input-cities',
-                'placeholder': '61250',
-                'list': 'city--list'
-            }),
-            'address': forms.TextInput(attrs={
-                'class': 'form__control btn btn--dark-green js-input-address',
-                'placeholder': '12 bis rue des sources'
-            })
-        }
+        model = CustomUser
+        fields = ['diseases']
+
+    diseases = forms.ModelMultipleChoiceField(queryset=Diseases.objects.all(),
+                                              widget=forms.CheckboxSelectMultiple())
 
 
 class LoginForm(forms.Form):

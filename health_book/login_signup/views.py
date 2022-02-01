@@ -41,11 +41,11 @@ def signup(request, number):
         'is_valid': True,
         'jobs': jobs,
     }
-
+    print(request.method)
     if request.method == 'POST':
         form = className.__call__(request.POST)
         context['form'] = form
-        if form.is_valid():
+        if form.is_valid() or (number == 4 and request.POST.get('doctor') != ''):
             if number == 1:
                 user = CustomUser.objects.create_user(
                     username=request.POST['code_id'],
@@ -71,15 +71,23 @@ def signup(request, number):
                     return redirect('home:home')
                 return redirect('login_signup:signup', nextNumber)
             if number == 3:
-                print(request.POST)
                 location = form.save(commit=False)
                 location.postal_code = request.POST['postal_code']
                 location.save()
                 request.user.address = location
                 request.user.save()
                 return redirect('home:home')
+            if number == 4:
+                print(len(request.POST) - 3)
+                print(request.POST)
+                # treatment = []
+                # location.postal_code = request.POST['postal_code']
+                # location.save()
+                # request.user.address = location
+                # request.user.save()
+                return render(request, f'login_signup/signup/{number}.html', context)
         else:
-            print("invalid form")
+            print("invalid form : " + str(form.errors))
             context['is_valid'] = False
             return render(request, f'login_signup/signup/{number}.html', context)
     else:
