@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login as loginUser
 from django.shortcuts import redirect, render
-from login_signup.models import Job, Doctor, RPPS, CustomUser
+from login_signup.models import Job, Doctor, RPPS, CustomUser, Diseases, Treatment
 from login_signup.forms import *
 # Create your views here.
 
@@ -45,7 +45,7 @@ def signup(request, number):
     if request.method == 'POST':
         form = className.__call__(request.POST)
         context['form'] = form
-        if form.is_valid() or (number == 4 and request.POST.get('doctor') != ''):
+        if form.is_valid() or (number == 4 and request.POST.get('doctor') != '') or number == 5:
             if number == 1:
                 user = CustomUser.objects.create_user(
                     username=request.POST['code_id'],
@@ -76,16 +76,32 @@ def signup(request, number):
                 location.save()
                 request.user.address = location
                 request.user.save()
-                return redirect('home:home')
+                return redirect('login_signup:signup', nextNumber)
             if number == 4:
-                print(len(request.POST) - 3)
+                treatments = {key: value for key, value in request.POST.items()
+                              if 'treatment' in key and value != ''}
+                diseases = {key: value for key, value in request.POST.items()
+                            if 'disease' in key and value != ''}
+                for treatment in treatments:
+                    treatment = Treatment.objects.get(name=treatments[treatment])
+                    request.user.treatments.add(treatment)
+
+                for disease in diseases:
+                    disease = Diseases.objects.get(name=diseases[disease])
+                    request.user.diseases.add(disease)
+
+                doctor_first_name, doctor_last_name = request.POST['doctor'].split(' - ')
+                main_doctor = CustomUser.objects.get(first_name=doctor_first_name, last_name=doctor_last_name)
+                request.user.main_doctor = main_doctor
+                request.user.save()
+                return redirect('login_signup:signup', nextNumber)
+            if number == 5:
                 print(request.POST)
-                # treatment = []
-                # location.postal_code = request.POST['postal_code']
-                # location.save()
-                # request.user.address = location
-                # request.user.save()
-                return render(request, f'login_signup/signup/{number}.html', context)
+                if request.POST.get('first_name') != '' and request.POST.get('last_name') != '' and request.POST.get('phone_number') != '':
+                    trustedPerson = form.save(commit=False)
+                    trustedPerson.user = request.user
+                    trustedPerson.save()
+                return redirect('home:home')
         else:
             print("invalid form : " + str(form.errors))
             context['is_valid'] = False
@@ -94,6 +110,11 @@ def signup(request, number):
         print("in signup else")
         form = className.__call__()
         context['form'] = form
+
+        if number == 4:
+            context['treatments'] = Treatment.objects.all()
+            context['diseases'] = Diseases.objects.all()
+            context['doctors'] = Doctor.objects.all()
         return render(request, f'login_signup/signup/{number}.html', context)
 
 

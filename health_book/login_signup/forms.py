@@ -1,5 +1,5 @@
 from django import forms
-from login_signup.models import CustomUser, Location, Diseases
+from login_signup.models import CustomUser, Location, TrustedPerson
 
 
 class Connection1(forms.Form):
@@ -58,13 +58,33 @@ class Connection3(forms.ModelForm):
         }
 
 
-class Connection4(forms.ModelForm):
-    class Meta:
-        model = CustomUser
-        fields = ['diseases']
+class Connection4(forms.Form):
+    pass
 
-    diseases = forms.ModelMultipleChoiceField(queryset=Diseases.objects.all(),
-                                              widget=forms.CheckboxSelectMultiple())
+
+class Connection5(forms.ModelForm):
+
+    class Meta:
+        model = TrustedPerson
+        fields = ['first_name', 'last_name', 'phone_number']
+        widgets = {
+            'first_name': forms.TextInput(attrs={
+                'class': 'form__control js-later-input',
+                'placeholder': 'Jean',
+                "autoComplete": "off"
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'form__control js-later-input',
+                'placeholder': 'Dupont',
+                "autoComplete": "off"
+            }),
+            'phone_number': forms.TextInput(attrs={
+                'class': 'form__control js-later-input js-tel-input',
+                'placeholder': '06 01 02 03 04',
+                'type': 'tel',
+                "autoComplete": "off"
+            })
+        }
 
 
 class LoginForm(forms.Form):

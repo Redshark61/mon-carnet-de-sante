@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from login_signup.models import Diseases, RPPS, Job, Location, CustomUser, Doctor
+from login_signup.models import *
 
 
 class CustomUserAdmin(UserAdmin):
@@ -15,7 +15,8 @@ class CustomUserAdmin(UserAdmin):
                     'parent2',
                     'main_doctor',
                     'address',
-                    'birth_date'
+                    'birth_date',
+                    'treatments'
                 ),
             },
         ),
@@ -37,3 +38,6 @@ admin.site.register(Job)
 admin.site.register(Location)
 admin.site.register(Doctor, CustomDoctorAdmin)
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Treatment)
+admin.site.register(TrustedPerson)
+admin.site.register(UserDisease)

@@ -42,6 +42,14 @@ class Location(models.Model):
         return f"{self.address}, {self.city} {self.postal_code}"
 
 
+class Treatment(models.Model):
+
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class CustomUser(AbstractUser):
 
     class Genders(models.TextChoices):
@@ -59,6 +67,7 @@ class CustomUser(AbstractUser):
     address = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
     birth_date = models.DateField(null=True)
     diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
+    treatments = models.ManyToManyField(Treatment, related_name="User_treatment")
 
     def __str__(self):
         return f"{self.username}"
@@ -66,11 +75,13 @@ class CustomUser(AbstractUser):
 
 class TrustedPerson(models.Model):
 
-    firstname = models.CharField(max_length=100)
-    lastname = models.CharField(max_length=100)
-    address = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class UserDisease(models.Model):
@@ -100,7 +111,7 @@ class Appointment(models.Model):
     description = models.TextField()
 
 
-class Treatment(models.Model):
+class Prescription(models.Model):
 
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

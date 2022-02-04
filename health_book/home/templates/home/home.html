@@ -39,23 +39,20 @@
 
 <main class="grid__7">
 	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+
 	<div class="flex--row flex--space-evenly mt-10">
 		<section>
 			<h2 class="text-center">Traitements</h2>
+			{% for treatment in user.treatments.all %}
 			<div class="card card--row card--dotted-line mt-5">
-				<h3>Doliprane</h3>
+				<h3>{{treatment}}</h3>
 				<div class="flex flex--col">
 					<p class="sm-subheader">Jusqu'au</p>
-					<h3>12/10/2022</h3>
+					<h3>INDETERMINÉ</h3>
 				</div>
 			</div>
-			<div class="card card--row card--dotted-line mt-5">
-				<h3>Smecta</h3>
-				<div class="flex flex--col">
-					<p class="sm-subheader">Jusqu'au</p>
-					<h3>PERMANENT</h3>
-				</div>
-			</div>
+			{% endfor %}
+
 		</section>
 
 		<div class="middle-line"></div>

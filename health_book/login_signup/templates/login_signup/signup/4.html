@@ -29,8 +29,9 @@
         <input type="text" name="doctor" id="doctor" class="form__control" placeholder="Jean Dupuis" list="doctor--list"
             required>
         <datalist id="doctor--list">
-            <option value="Jean Dupuis">Jean Dupuis</option>
-            <option value="Marie Leroi">Marie Leroi</option>
+            {% for doctor in doctors %}
+            <option value="{{doctor.user.first_name}} - {{doctor.user.last_name}}">
+                {% endfor %}
         </datalist>
     </div>
 
@@ -39,9 +40,9 @@
         <div class="form--add">
             <input type="text" class="form__control js-input" id="treatment" name="treatment" list="treatment--list">
             <datalist id="treatment--list">
-                <option value="Doliprane">Doliprane</option>
-                <option value="Smecta">Smecta</option>
-                <option value="Sirop">Sirop</option>
+                {% for treatment in treatments %}
+                <option value="{{treatment}}">{{treatment}}</option>
+                {% endfor %}
             </datalist>
             <div class="form__plus js-add-element">➕</div>
         </div>
@@ -55,8 +56,9 @@
         <div class="form--add">
             <input type="text" class="form__control js-input" id="disease" name="disease" list='disease--list'>
             <datalist id="disease--list">
-                <option value="Maladie 1">Maladie 1</option>
-                <option value="Maladie 2">Maladie 2</option>
+                {% for disease in diseases %}
+                <option value="{{disease}}">{{disease}}</option>
+                {% endfor %}
             </datalist>
             <div class="form__plus js-add-element">➕</div>
         </div>
@@ -75,5 +77,4 @@
 
 {% block script %}
 <script src="{% static 'login_signup/js/add-list.js'%}"></script>
-<script src="{% static 'login_signup/js/remove-medical.js' %}"></script>
 {% endblock script %}
