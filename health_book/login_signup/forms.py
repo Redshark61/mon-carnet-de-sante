@@ -87,6 +87,25 @@ class Connection5(forms.ModelForm):
         }
 
 
+class Connection6(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ["parent1", "parent2"]
+        widgets = {
+            'parent1': forms.TextInput(attrs={
+                'class': 'form__control js-later-input',
+                'placeholder': '1-11-11-11-111-111 11',
+                "autoComplete": "off"
+            }),
+            'parent2': forms.TextInput(attrs={
+                'class': 'form__control js-later-input',
+                'placeholder': '1-11-11-11-111-111 11',
+                "autoComplete": "off"
+            })
+        }
+
+
 class LoginForm(forms.Form):
 
     id_code = forms.CharField(widget=forms.TextInput(

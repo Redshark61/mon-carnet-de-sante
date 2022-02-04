@@ -101,6 +101,8 @@ def signup(request, number):
                     trustedPerson = form.save(commit=False)
                     trustedPerson.user = request.user
                     trustedPerson.save()
+                return redirect('login_signup:signup', nextNumber)
+            if number == 6:
                 return redirect('home:home')
         else:
             print("invalid form : " + str(form.errors))
