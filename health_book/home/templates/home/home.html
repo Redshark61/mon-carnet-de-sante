@@ -1,4 +1,4 @@
-{% extends 'login_signup/base.html' %}
+{% extends '_base.html' %}
 {% load static %}
 {% block title %} Acceuil {% endblock title %}
 {% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
@@ -11,28 +11,28 @@
 <aside class="grid__3 flex--col btn-group--3 js-nav">
 	<div class="btn-group flex--col">
 		<a href="#" class="flex--center btn btn--light-green">
-			<img src="{% static 'login_signup/img/gear.svg'%}" alt="">
+			<img src="{% static '/img/gear.svg'%}" alt="">
 			Paramètre</a>
 		<a href="{% url 'logout' %}" class="flex--center btn btn--light-green">
-			<img src="{% static 'login_signup/img/leave.svg'%}" alt="">
+			<img src="{% static '/img/leave.svg'%}" alt="">
 			Se déconnecter</a>
 	</div>
 
 	<div class="flex--col">
 		<a href="#" class="flex--center btn btn--dim-orange--empty btn-group">
-			<img src="{% static 'login_signup/img/home.svg'%}" alt="">Accueil</a>
+			<img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
 
 		<a href="#" class="flex--center btn btn--dim-orange--empty btn-group">
-			<img src="{% static 'login_signup/img/bacteria.svg'%}" alt="">Maladies</a>
+			<img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
 
 		<a href="#" class="flex--center btn btn--dim-orange--empty btn-group">
-			<img src="{% static 'login_signup/img/pills.svg'%}" alt="">Traitements</a>
+			<img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
 
 		<a href="#" class="flex--center btn btn--dim-orange--empty btn-group">
-			<img src="{% static 'login_signup/img/calendar.svg'%}" alt="">Rendez-vous</a>
+			<img src="{% static '/img/calendar.svg'%}" alt="">Rendez-vous</a>
 
 		<a href="#" class="flex--center btn btn--dim-orange--empty btn-group">
-			<img src="{% static 'login_signup/img/hospital.svg'%}" alt="">Hospitalisations</a>
+			<img src="{% static '/img/hospital.svg'%}" alt="">Hospitalisations</a>
 
 	</div>
 </aside>
@@ -98,5 +98,5 @@
 {% endblock content	 %}
 
 {% block script %}
-<script src="{% static 'login_signup/js/nav-button.js' %}"></script>
+<script src="{% static '/js/nav-button.js' %}"></script>
 {% endblock script %}

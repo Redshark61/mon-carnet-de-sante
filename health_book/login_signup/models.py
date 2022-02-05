@@ -64,7 +64,7 @@ class CustomUser(AbstractUser):
                                 blank=True, related_name="User_parent1")
     parent2 = models.ForeignKey("self", on_delete=models.SET_NULL, null=True,
                                 blank=True, related_name="User_parent2")
-    address = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+    address = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
     birth_date = models.DateField(null=True)
     diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
     treatments = models.ManyToManyField(Treatment, related_name="User_treatment")

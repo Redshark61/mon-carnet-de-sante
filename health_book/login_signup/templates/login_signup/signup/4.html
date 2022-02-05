@@ -1,4 +1,4 @@
-{% extends 'login_signup/base.html' %}
+{% extends '_base.html' %}
 {% load static %}
 
 {% block title %}Signup - 4{% endblock title %}
@@ -76,5 +76,5 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'login_signup/js/add-list.js'%}"></script>
+<script src="{% static '/js/add-list.js'%}"></script>
 {% endblock script %}

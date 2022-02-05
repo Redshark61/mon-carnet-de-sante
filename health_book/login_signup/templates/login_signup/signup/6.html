@@ -1,12 +1,12 @@
-{% extends 'login_signup/base.html' %}
+{% extends '_base.html' %}
 {% load static %}
 
 {% block title %}Signup - 6{% endblock title %}
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
-<script src="{% static 'login_signup/js/later-input.js'%}"></script>
-<script src="{% static 'login_signup/js/cleave-format.js'%}"></script>
-<script src="{% static 'login_signup/js/remove-medical.js'%}"></script>
+<script src="{% static '/js/later-input.js'%}"></script>
+<script src="{% static '/js/cleave-format.js'%}"></script>
+<script src="{% static '/js/remove-medical.js'%}"></script>
 {% endblock script %}
 
 {% block content %}
