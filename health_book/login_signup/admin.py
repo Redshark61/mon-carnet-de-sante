@@ -14,7 +14,6 @@ class CustomUserAdmin(UserAdmin):
                     'parent1',
                     'parent2',
                     'main_doctor',
-                    'address',
                     'birth_date',
                     'treatments'
                 ),
@@ -31,11 +30,15 @@ class CustomRPPSAdmin(admin.ModelAdmin):
     list_display = ('rpps', 'firstname', 'lastname')
 
 
+class CustomLocationAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+
+
 # Register your models here.
 admin.site.register(Diseases)
 admin.site.register(RPPS, CustomRPPSAdmin)
 admin.site.register(Job)
-admin.site.register(Location)
+admin.site.register(Location, CustomLocationAdmin)
 admin.site.register(Doctor, CustomDoctorAdmin)
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Treatment)

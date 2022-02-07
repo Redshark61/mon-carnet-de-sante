@@ -20,9 +20,17 @@ inputAdress.addEventListener("keyup", async function (e) {
 		// Add the loading animation
 		loading.classList.add("active");
 		loading.classList.remove("done");
-		await validate(e.currentTarget.line);
+		loading.classList.remove("wrong");
+		isCorrect = await validate(e.currentTarget.line);
 		loading.classList.remove("active");
-		loading.classList.add("done");
+
+		if (isCorrect) {
+			// Remove the loading animation
+			// Add the class to the input
+			loading.classList.add("done");
+		} else {
+			loading.classList.add("wrong");
+		}
 	}
 });
 
@@ -50,12 +58,15 @@ async function validate(lines) {
 		document.querySelector("form").appendChild(cityElement);
 		// Use the government API to check if the adress is valid
 		const url = `https://api-adresse.data.gouv.fr/search/?q=${value}&postcode=${postcode}&limit=1`;
+		console.log(url);
+		console.log(value);
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
 				const p = document.createElement("p");
 				let properties = data.features[0].properties;
-				resolve();
+				console.log(properties.score);
+				resolve(true ? properties.score > 0.7 : false);
 			});
 	});
 }

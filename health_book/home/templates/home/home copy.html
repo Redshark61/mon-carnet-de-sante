@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %} Acceuil {% endblock title %}
+{% block title %} Maladies {% endblock title %}
 
 {% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
 {% block content %}
@@ -21,11 +21,12 @@
 			<img src="{% static '/img/leave.svg'%}" alt="">
 			Se déconnecter</a>
 	</div>
+
 	<div class="flex--col">
-		{% with request.resolver_match.url_name as url_name %}
+		{% with request.path as url_name %}
 
 		<a href="{% url 'home:home' %}"
-			class="flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home' %}link--active{% endif %}">
+			class="flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home:home' %}link--active{% endif %}">
 			<img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
 
 		<a href="#"

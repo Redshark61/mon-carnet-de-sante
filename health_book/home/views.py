@@ -14,3 +14,7 @@ class HomeView(View):
         }
 
         return render(request, self.template_name, context)
+
+
+class DiseasesView(View):
+    template_name = 'home/diseases.html'

@@ -505,12 +505,29 @@ button.btn.btn--small *:not(input) {
           animation: load 1s ease infinite;
 }
 
-.js-loader.done {
+.js-loader.wrong, .js-loader.done {
   position: relative;
   -webkit-animation: none;
           animation: none;
-  background-color: lightgreen;
   outline: 1px solid black;
+}
+
+.js-loader.wrong {
+  background: red;
+}
+
+.js-loader.wrong::before {
+  content: "❌";
+  font-size: 0.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.js-loader.done {
+  background-color: lightgreen;
 }
 
 .js-loader.done::before {
@@ -723,6 +740,33 @@ button.btn.btn--small *:not(input) {
   color: #007120;
 }
 
+.alert {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 14px;
+}
+
+.alert.alert--neutral {
+  margin-top: 5vh;
+  background: rgba(227, 207, 151, 0.5);
+}
+
+.alert.alert--success {
+  margin-top: 5vh;
+  background: rgba(0, 255, 0, 0.5);
+}
+
+.alert.alert--error {
+  margin-top: 5vh;
+  background: rgba(255, 0, 0, 0.719);
+}
+
+.alert.alert--warning {
+  margin-top: 5vh;
+  background: #ffa600;
+}
+
 .login {
   height: 100%;
   -webkit-box-pack: center;
@@ -860,5 +904,9 @@ main {
     display: block;
     z-index: 2;
   }
+}
+
+.link--active {
+  outline: 2px dotted black;
 }
 /*# sourceMappingURL=main.css.map */
