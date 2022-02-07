@@ -1,14 +1,26 @@
 from django.contrib.auth import authenticate, login as loginUser
 from django.shortcuts import redirect, render
+from django.views import View
 from login_signup.models import Job, Doctor, RPPS, CustomUser, Diseases, Treatment
 from login_signup.forms import *
 # Create your views here.
 
 
-def index(request):
-    response = render(request, 'login_signup/index.html')
-    response.set_cookie('medical', False)
-    if request.method == 'POST':
+class IndexView(View):
+    template_name = 'login_signup/index.html'
+
+    def render_to_response(self, context, **response_kwargs):
+        response = super(IndexView, self).render_to_response(context, **response_kwargs)
+        response.set_cookie('medical', False)
+        return response
+
+    def get(self, request):
+        response = render(request, self.template_name)
+        response.set_cookie('medical', False)
+
+        return response
+
+    def post(self, request):
         person, direction = request.POST.get('button').split("&")
         print(person, direction)
 
@@ -22,29 +34,50 @@ def index(request):
                 'login_signup:signup', 1)
             response.set_cookie('medical', True)
             return response
-    return response
 
 
-def signup(request, number):
-    className = eval(f"Connection{number}")
-    nextNumber = number + 1
-    previousNumber = number - 1
-    isMedical = request.COOKIES['medical']
-    stepProgress = '12' if isMedical == 'True' else '123456'
-    jobs = Job.objects.all() if number == 1 else None
-    context = {
-        'next_id': nextNumber,
-        'current_id': str(number),
-        'prev_id': previousNumber,
-        'is_medical': True if isMedical == 'True' else False,
-        'step_progress': stepProgress,
-        'is_valid': True,
-        'jobs': jobs,
-    }
-    print(request.method)
-    if request.method == 'POST':
-        form = className.__call__(request.POST)
+class SignupView(View):
+    template_name = 'login_signup/signup/$.html'
+
+    def set_context(self, request, **kwargs):
+        number = kwargs['number']
+        className = eval(f"Connection{number}")
+        nextNumber = number + 1
+        previousNumber = number - 1
+        isMedical = request.COOKIES['medical']
+        stepProgress = '12' if isMedical == 'True' else '123456'
+        jobs = Job.objects.all() if number == 1 else None
+        context = {
+            'next_id': nextNumber,
+            'current_id': str(number),
+            'prev_id': previousNumber,
+            'is_medical': True if isMedical == 'True' else False,
+            'step_progress': stepProgress,
+            'is_valid': True,
+            'jobs': jobs,
+        }
+
+        form = className.__call__(request.POST or None)
         context['form'] = form
+        return context
+
+    def get(self, request, *args, **kwargs):
+        number = kwargs['number']
+        context = self.set_context(request, **kwargs)
+
+        if number == 4:
+            context['treatments'] = Treatment.objects.all()
+            context['diseases'] = Diseases.objects.all()
+            context['doctors'] = Doctor.objects.all()
+        return render(request, f'login_signup/signup/{number}.html', context)
+
+    def post(self, request, *args, **kwargs):
+        number = kwargs['number']
+        context = self.set_context(request, **kwargs)
+        form = context['form']
+        nextNumber = number + 1
+        isMedical = request.COOKIES['medical']
+
         if form.is_valid() or (number == 4 and request.POST.get('doctor') != '') or number == 5:
             if number == 1:
                 user = CustomUser.objects.create_user(
@@ -108,16 +141,6 @@ def signup(request, number):
             print("invalid form : " + str(form.errors))
             context['is_valid'] = False
             return render(request, f'login_signup/signup/{number}.html', context)
-    else:
-        print("in signup else")
-        form = className.__call__()
-        context['form'] = form
-
-        if number == 4:
-            context['treatments'] = Treatment.objects.all()
-            context['diseases'] = Diseases.objects.all()
-            context['doctors'] = Doctor.objects.all()
-        return render(request, f'login_signup/signup/{number}.html', context)
 
 
 def login(request):

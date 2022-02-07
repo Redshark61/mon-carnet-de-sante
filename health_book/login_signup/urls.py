@@ -3,5 +3,5 @@ from login_signup import views
 
 app_name = 'login_signup'
 urlpatterns = [
-    path('<int:number>/', views.signup, name="signup"),
+    path('<int:number>/', views.SignupView.as_view(), name="signup"),
 ]

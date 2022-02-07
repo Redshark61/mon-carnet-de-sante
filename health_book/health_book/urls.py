@@ -4,7 +4,7 @@ from login_signup import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('signup/', include('login_signup.urls')),
     path('home/', include('home.urls'), name='home'),
     path('login/', views.login, name="login"),
