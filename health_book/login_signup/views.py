@@ -29,17 +29,20 @@ class IndexView(View):
             response.set_cookie('medical', False)
             return response
 
-        elif person == 'medical':
+        if person == 'medical':
             response = redirect('login') if direction == 'login' else redirect(
                 'login_signup:signup', 1)
             response.set_cookie('medical', True)
             return response
 
+        return redirect('login_signup:index')
+
 
 class SignupView(View):
     template_name = 'login_signup/signup/$.html'
 
-    def set_context(self, request, **kwargs):
+    @staticmethod
+    def set_context(request, **kwargs):
         number = kwargs['number']
         className = eval(f"Connection{number}")
         nextNumber = number + 1
@@ -61,7 +64,7 @@ class SignupView(View):
         context['form'] = form
         return context
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, **kwargs):
         number = kwargs['number']
         context = self.set_context(request, **kwargs)
 
@@ -71,7 +74,7 @@ class SignupView(View):
             context['doctors'] = Doctor.objects.all()
         return render(request, f'login_signup/signup/{number}.html', context)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, **kwargs):
         number = kwargs['number']
         context = self.set_context(request, **kwargs)
         form = context['form']
@@ -143,32 +146,33 @@ class SignupView(View):
             return render(request, f'login_signup/signup/{number}.html', context)
 
 
-def login(request):
+class LoginView(View):
+    template_name = 'login_signup/login.html'
+    form = LoginForm
 
-    def deleteField(request):
+    @staticmethod
+    def deleteField(request, form):
         if request.COOKIES['medical'] == 'True':
             del form.fields['id_code']
-            return 'rpps_code'
-        else:
-            del form.fields['rpps_code']
-            return 'id_code'
+            return 'rpps_code', form
 
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        username = deleteField(request)
+        del form.fields['rpps_code']
+        return 'id_code', form
+
+    def get(self, request):
+        form = self.form()
+        _, form = self.deleteField(request, form)
+        return render(request, self.template_name, {'form': form, 'is_valid': True})
+
+    def post(self, request):
+        form = self.form(request.POST)
+        username, form = self.deleteField(request, form)
         if form.is_valid():
             user = authenticate(username=form.cleaned_data[username], password=form.cleaned_data['password'])
             if user is not None:
                 loginUser(request, user)
                 return redirect('home:home')
-            else:
-                return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
-        else:
-            form = LoginForm()
-            deleteField(request)
-            return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
-    else:
-        form = LoginForm()
-        deleteField(request)
+            return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
 
-        return render(request, 'login_signup/login.html', {'form': form, 'is_valid': True})
+        _, form = self.deleteField(request, form)
+        return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
