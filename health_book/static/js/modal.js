@@ -8,7 +8,18 @@ const buttonChoices = document.querySelectorAll(".js-modal-choice");
 // Add the modal
 modalInputs.forEach((modalInput) => {
 	modalInput.addEventListener("click", (e) => {
+		currentPath = window.location.pathname;
 		e.preventDefault();
+
+		if (currentPath == "/login/") {
+			hiddentInput = document.createElement("input");
+			hiddentInput.setAttribute("type", "hidden");
+			hiddentInput.setAttribute("name", "login");
+			hiddentInput.setAttribute("value", "true");
+			hiddentInput.classList.add("js-modal-hidden");
+			document.querySelector(".js-modal-form").appendChild(hiddentInput);
+		}
+
 		modal.classList.add("modal--active");
 		modalBG.classList.add("modal-bg--active");
 
@@ -34,5 +45,6 @@ modalsClose.forEach((modalClose) => {
 		e.preventDefault();
 		modal.classList.remove("modal--active");
 		modalBG.classList.remove("modal-bg--active");
+		document.getElementsByClassName("js-modal-hidden")[0].remove();
 	});
 });

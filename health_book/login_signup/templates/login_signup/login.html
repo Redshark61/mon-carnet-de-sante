@@ -3,6 +3,20 @@
 {% block title %}Connexion{% endblock title %}
 
 {% block content %}
+<!---- MODAL ---->
+<div class="modal-bg js-modal-bg"></div>
+<div class="modal js-modal">
+    <img class="modal__close js-modal-close" src="{% static 'img/close.svg'%}" alt="Fermer">
+    <h3 class="modal__title">Qui êtes-vous</h3>
+    <form action="" method="post" class="modal__choices js-modal-form">
+        {% csrf_token %}
+        <button type="submit" name="button" value="medical" class="modal__choice js-modal-choice">Personnel
+            médical</button>
+        <button type="submit" name="button" value="personal" class="modal__choice js-modal-choice">Patient</but>
+    </form>
+</div>
+<!---- MODAL END  ---->
+
 
 <h1>Connexion</h1>
 {% if not is_valid %}
@@ -19,7 +33,10 @@
     {% endfor %}
     <div class="btn-group flex--col">
         <button type="submit" class="btn btn--light-green mt-5">Suivant</button>
-        <a href="{% url 'index' %}" class="btn btn--dark-green btn--small mb-10">Précédent</a>
+        <div class="flex flex--row--space-around">
+            <a href="{% url 'index' %}" class="btn btn--dark-green btn--small mb-10">Précédent</a>
+            <a href="#" id="signup" class="btn btn--dark-green btn--small mb-10 js-modal-input">Créer un compte</a>
+        </div>
     </div>
 
 </form>
@@ -27,4 +44,5 @@
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
 <script src="{% static 'js/cleave-format.js'%}"></script>
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock script %}

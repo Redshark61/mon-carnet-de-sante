@@ -20,7 +20,7 @@ class IndexView(View):
 
         return response
 
-    def post(self, request):
+    def redirect_to_signup(self, request):
         person, direction = request.POST.get('button').split("&")
         print(person, direction)
 
@@ -37,9 +37,14 @@ class IndexView(View):
 
         return redirect('login_signup:index')
 
+    def post(self, request):
+        resonse = self.redirect_to_signup(request)
+        return resonse
+
 
 class SignupView(View):
-    template_name = 'login_signup/signup/$.html'
+    number = 1
+    template_name = f'login_signup/signup/{number}.html'
 
     @staticmethod
     def set_context(request, **kwargs):
@@ -64,25 +69,27 @@ class SignupView(View):
         context['form'] = form
         return context
 
+    def dispatch(self, request, *args, **kwargs):
+        self.number = kwargs['number']
+        return super(SignupView, self).dispatch(request, *args, **kwargs)
+
     def get(self, request, **kwargs):
-        number = kwargs['number']
         context = self.set_context(request, **kwargs)
 
-        if number == 4:
+        if self.number == 4:
             context['treatments'] = Treatment.objects.all()
             context['diseases'] = Diseases.objects.all()
             context['doctors'] = Doctor.objects.all()
-        return render(request, f'login_signup/signup/{number}.html', context)
+        return render(request, f'login_signup/signup/{self.number}.html', context)
 
     def post(self, request, **kwargs):
-        number = kwargs['number']
         context = self.set_context(request, **kwargs)
         form = context['form']
-        nextNumber = number + 1
+        nextNumber = self.number + 1
         isMedical = request.COOKIES['medical']
 
-        if form.is_valid() or (number == 4 and request.POST.get('doctor') != '') or number == 5:
-            if number == 1:
+        if form.is_valid() or (self.number == 4 and request.POST.get('doctor') != '') or self.number == 5:
+            if self.number == 1:
                 user = CustomUser.objects.create_user(
                     username=request.POST['code_id'],
                     email=form.cleaned_data['mail'],
@@ -99,21 +106,21 @@ class SignupView(View):
                     doctor.save()
                 loginUser(request, user)
                 return redirect('login_signup:signup', nextNumber)
-            if number == 2:
+            if self.number == 2:
                 request.user.birth_date = form.cleaned_data['birth_date']
                 request.user.gender = form.cleaned_data['gender']
                 request.user.save()
                 if isMedical == 'True':
                     return redirect('home:home')
                 return redirect('login_signup:signup', nextNumber)
-            if number == 3:
+            if self.number == 3:
                 location = form.save(commit=False)
                 location.postal_code = request.POST['postal_code']
                 location.save()
                 request.user.address = location
                 request.user.save()
                 return redirect('login_signup:signup', nextNumber)
-            if number == 4:
+            if self.number == 4:
                 treatments = {key: value for key, value in request.POST.items()
                               if 'treatment' in key and value != ''}
                 diseases = {key: value for key, value in request.POST.items()
@@ -131,22 +138,22 @@ class SignupView(View):
                 request.user.main_doctor = main_doctor
                 request.user.save()
                 return redirect('login_signup:signup', nextNumber)
-            if number == 5:
+            if self.number == 5:
                 print(request.POST)
                 if request.POST.get('first_name') != '' and request.POST.get('last_name') != '' and request.POST.get('phone_number') != '':
                     trustedPerson = form.save(commit=False)
                     trustedPerson.user = request.user
                     trustedPerson.save()
                 return redirect('login_signup:signup', nextNumber)
-            if number == 6:
+            if self.number == 6:
                 return redirect('home:home')
         else:
             print("invalid form : " + str(form.errors))
             context['is_valid'] = False
-            return render(request, f'login_signup/signup/{number}.html', context)
+            return render(request, f'login_signup/signup/{self.number}.html', context)
 
 
-class LoginView(View):
+class LoginView(IndexView):
     template_name = 'login_signup/login.html'
     form = LoginForm
 
@@ -167,12 +174,22 @@ class LoginView(View):
     def post(self, request):
         form = self.form(request.POST)
         username, form = self.deleteField(request, form)
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data[username], password=form.cleaned_data['password'])
-            if user is not None:
-                loginUser(request, user)
-                return redirect('home:home')
-            return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
 
-        _, form = self.deleteField(request, form)
-        return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
+        inputs = [input for input in request.POST]
+        if 'login' in inputs:
+            print("its login")
+            print(request.POST.get('button'))
+            response = super().redirect_to_signup(request)
+            return response
+        else:
+
+            if form.is_valid():
+                user = authenticate(
+                    username=form.cleaned_data[username], password=form.cleaned_data['password'])
+                if user is not None:
+                    loginUser(request, user)
+                    return redirect('home:home')
+                return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
+
+            _, form = self.deleteField(request, form)
+            return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
