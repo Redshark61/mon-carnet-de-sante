@@ -229,8 +229,8 @@ form {
 .form__list {
   list-style: none;
   background: #007120;
-  -webkit-box-shadow: 4px 4px 7px rgba(0, 113, 32, 0);
-          box-shadow: 4px 4px 7px rgba(0, 113, 32, 0);
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 113, 32, 0);
+          box-shadow: 4px 4px 10px rgba(0, 113, 32, 0);
   border-radius: 14px;
   color: #e7ffee;
   border-radius: 0.4rem;
@@ -319,8 +319,8 @@ button.btn *:not(input) {
 a.btn[class*="--dark-green"],
 button.btn[class*="--dark-green"] {
   background: #007120;
-  -webkit-box-shadow: 4px 4px 7px #007120;
-          box-shadow: 4px 4px 7px #007120;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 113, 32, 0.4);
+          box-shadow: 4px 4px 10px rgba(0, 113, 32, 0.4);
   border-radius: 14px;
   color: #e7ffee;
 }
@@ -333,8 +333,8 @@ button.btn[class*="--dark-green"]:hover {
 a.btn[class*="--light-green"],
 button.btn[class*="--light-green"] {
   background: #e7ffee;
-  -webkit-box-shadow: 4px 4px 7px #007120;
-          box-shadow: 4px 4px 7px #007120;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 113, 32, 0.4);
+          box-shadow: 4px 4px 10px rgba(0, 113, 32, 0.4);
   color: #007120;
 }
 
@@ -431,8 +431,8 @@ button.btn.btn--small *:not(input) {
   height: 2rem;
   text-align: center;
   background: #007120;
-  -webkit-box-shadow: 4px 4px 7px #007120;
-          box-shadow: 4px 4px 7px #007120;
+  -webkit-box-shadow: 4px 4px 10px #007120;
+          box-shadow: 4px 4px 10px #007120;
   border-radius: 14px;
   color: #e7ffee;
   border-radius: 50%;
@@ -773,10 +773,11 @@ button.btn.btn--small *:not(input) {
 }
 
 body {
-  background-color: #a5ffbe;
-  background-image: url("../img/Desktop - 2.png");
+  background-color: #f0f3ff;
+  background-image: url("../img/bg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: -10vh;
 }
 
 body[class*="no-bg"] {

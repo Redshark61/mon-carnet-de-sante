@@ -4,7 +4,7 @@ button.btn {
 	@include button;
 
 	&[class*="--dark-green"] {
-		@include btn-dark-green;
+		@include btn-dark-green($opacity: 0.4);
 
 		&:hover {
 			background: $hover-dark-green;
@@ -12,7 +12,7 @@ button.btn {
 	}
 
 	&[class*="--light-green"] {
-		@include btn-light-green;
+		@include btn-light-green($opacity: 0.4);
 
 		&:hover {
 			background: $hover-light-green;

@@ -1,80 +1,81 @@
 body {
-    background-color: #a5ffbe;
-    background-image: url("../img/Desktop\ -\ 2.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+	background-color: $light-blue;
+	background-image: url("../img/bg.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: -10vh;
 
-    &[class*="no-bg"] {
-        background-image: none;
-    }
+	&[class*="no-bg"] {
+		background-image: none;
+	}
 
-    @include media-min($phone) {
-        background-image: none;
-        height: 100vh;
-    }
+	@include media-min($phone) {
+		background-image: none;
+		height: 100vh;
+	}
 }
 
 .mb-10 {
-    margin-bottom: 10vh;
+	margin-bottom: 10vh;
 }
 
 .mt-5 {
-    margin-top: 5vh;
+	margin-top: 5vh;
 }
 
 .mt-10 {
-    margin-top: 10vh;
+	margin-top: 10vh;
 }
 
 aside {
-    padding: 1vw;
-    background-color: $light-purple;
-    height: 100%;
-    transition: all 0.5s ease;
+	padding: 1vw;
+	background-color: $light-purple;
+	height: 100%;
+	transition: all 0.5s ease;
 
-    @include media-min($phone) {
-        position:fixed;
-        width: 70vw;
-        z-index: 1;
-        padding: 5vw;
-        padding-top: $button-nav-size + 1rem;
-        transform:translateX(-100%);
+	@include media-min($phone) {
+		position: fixed;
+		width: 70vw;
+		z-index: 1;
+		padding: 5vw;
+		padding-top: $button-nav-size + 1rem;
+		transform: translateX(-100%);
 
-        &.nav--open {
-            transform: translateX(0);
-        }
-    }
+		&.nav--open {
+			transform: translateX(0);
+		}
+	}
 }
 
-main{
-    z-index: 0;
+main {
+	z-index: 0;
 }
 
 .icon {
-    max-height: 35px;
-    max-height: 35px;
+	max-height: 35px;
+	max-height: 35px;
 }
 
-.back-button{
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: $button-nav-size;
-    aspect-ratio: 1;
-    background-color: $light-purple;
-    border-radius: 0 0 20px 0;
-    border: 1px solid black;
+.back-button {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: $button-nav-size;
+	aspect-ratio: 1;
+	background-color: $light-purple;
+	border-radius: 0 0 20px 0;
+	border: 1px solid black;
 
-    .line{
-        width: 70%;
-        height: 3px;
-        background-color: black;
-        margin: $button-nav-size/6 auto;
-    }
+	.line {
+		width: 70%;
+		height: 3px;
+		background-color: black;
+		margin: $button-nav-size/6 auto;
+	}
 
-    @include media-min($phone) {
-        display: block;
-        z-index: 2; 
-    }
+	@include media-min($phone) {
+		display: block;
+		z-index: 2;
+	}
 }
