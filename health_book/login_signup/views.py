@@ -115,10 +115,12 @@ class SignupView(View):
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 3:
                 location = form.save(commit=False)
-                location.postal_code = request.POST['postal_code']
+                location.user = request.user
                 location.save()
-                request.user.address = location
-                request.user.save()
+                # location.postal_code = request.POST['postal_code']
+                # location.save()
+                # request.user.address = location
+                # request.user.save()
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 4:
                 treatments = {key: value for key, value in request.POST.items()
