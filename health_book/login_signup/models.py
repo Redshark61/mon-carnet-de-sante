@@ -90,6 +90,9 @@ class UserDisease(models.Model):
     disease = models.ForeignKey(Diseases, on_delete=models.CASCADE)
     isCurrent = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.user} {self.disease}"
+
 
 class Doctor(models.Model):
 

@@ -1,0 +1,42 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %} Maladies {% endblock title %}
+
+{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
+{% block content %}
+
+{% include '_nav_home.html' %}
+
+<main class="grid__7">
+	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+
+	<div class="flex--row flex--space-evenly mt-10">
+		<section>
+			<h2 class="text-center">Maladies</h2>
+			{% comment %} {% if disease_list %} {% endcomment %}
+			{% for disease in object_list %}
+			<div class="card card--row card--dotted-line mt-5">
+				<h3>{{disease.disease}}</h3>
+				<div class="flex flex--col">
+					<p class="sm-subheader">Jusqu'au</p>
+					<h3>INDETERMINÉ</h3>
+				</div>
+			</div>
+			{% endfor %}
+			{% comment %} {% else %}
+			<div class="alert alert--neutral">
+				<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+			</div> {% endcomment %}
+
+			{% comment %} {% endif %} {% endcomment %}
+
+		</section>
+
+	</div>
+</main>
+{% endblock content	 %}
+
+{% block script %}
+<script src="{% static '/js/nav-button.js' %}"></script>
+{% endblock script %}
