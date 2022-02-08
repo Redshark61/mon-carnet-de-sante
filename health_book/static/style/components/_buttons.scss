@@ -11,6 +11,14 @@ button.btn {
 		}
 	}
 
+	&[class*="--warning"] {
+		background-color: rgb(255, 166, 0);
+
+		&:hover {
+			background: rgba(255, 166, 0, 0.4);
+		}
+	}
+
 	&[class*="--light-green"] {
 		@include btn-light-green($opacity: 0.4);
 

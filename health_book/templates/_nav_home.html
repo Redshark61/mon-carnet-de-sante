@@ -9,7 +9,7 @@
 
 <aside class="grid__3 flex--col btn-group--3 js-nav">
   <div class="btn-group flex--col">
-    <a href="#" class="flex--center btn btn--light-green">
+    <a href="{% url 'home:settings' %}" class="flex--center btn btn--light-green">
       <img src="{% static '/img/gear.svg'%}" alt="">
       Paramètre</a>
     <a href="{% url 'logout' %}" class="flex--center btn btn--light-green">
@@ -28,7 +28,7 @@
       class="flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'diseases'%}link--active{% endif %}">
       <img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
 
-    <a href="#"
+    <a href="{% url 'home:treatments' %}"
       class="flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
       <img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
 

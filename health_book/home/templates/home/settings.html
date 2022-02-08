@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %} Paramètres {% endblock title %}
+
+{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
+{% block content %}
+
+{% include '_nav_home.html' %}
+
+<main class="grid__7">
+	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+
+	<div class="flex--row flex--space-evenly mt-10">
+		<section>
+			<h2 class="text-center">Paramètres</h2>
+
+			<form action="" method="post">
+				{% csrf_token %}
+				{% for field in form %}
+				<div class="form__group">
+					<label for="{{field.name}}">
+						{% if field.label != 'Username' %}
+						{{field.label}}
+						{% else %}
+						{% if is_medical %}
+						Code RPPS
+						{% else %}
+						Code de sécurité sociale
+						{% endif %}
+						{% endif %}
+					</label>
+					{{field}}
+				</div>
+				{% endfor %}
+
+
+				<div class="flex flex--row">
+					<button type="submit" value="edit" class="btn btn--light-green mt-5">Modifier</button>
+					<button type="submit" value="delete" class="btn btn--warning mt-5">Supprimer</button>
+				</div>
+			</form>
+
+		</section>
+
+	</div>
+</main>
+{% endblock content	 %}
+
+{% block script %}
+<script src="{% static '/js/nav-button.js' %}"></script>
+{% endblock script %}

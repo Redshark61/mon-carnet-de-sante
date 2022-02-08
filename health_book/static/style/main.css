@@ -330,6 +330,16 @@ button.btn[class*="--dark-green"]:hover {
   background: #1c532c;
 }
 
+a.btn[class*="--warning"],
+button.btn[class*="--warning"] {
+  background-color: #ffa600;
+}
+
+a.btn[class*="--warning"]:hover,
+button.btn[class*="--warning"]:hover {
+  background: rgba(255, 166, 0, 0.4);
+}
+
 a.btn[class*="--light-green"],
 button.btn[class*="--light-green"] {
   background: #e7ffee;

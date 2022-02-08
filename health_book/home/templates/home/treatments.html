@@ -13,11 +13,11 @@
 
 	<div class="flex--row flex--space-evenly mt-10">
 		<section>
-			<h2 class="text-center">Maladies</h2>
+			<h2 class="text-center">Traitements</h2>
 			{% if object_list %}
-			{% for disease in object_list %}
+			{% for treatment in object_list %}
 			<div class="card card--row card--dotted-line mt-5">
-				<h3>{{disease.disease}}</h3>
+				<h3>{{treatment.name}}</h3>
 				<div class="flex flex--col">
 					<p class="sm-subheader">Jusqu'au</p>
 					<h3>INDETERMINÉ</h3>
