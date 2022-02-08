@@ -19,11 +19,13 @@
 
 <h1>Inscription</h1>
 
-{% if not is_valid %}
-<p style="color:red">Probleme</p>
-{% endif %}
 
-<form action="" method="post">
+<form action="" method="post" novalidate>
+  {% if not is_valid %}
+  <div class="alert alert--error alert--max">
+    <h3>Le formulaire est incorrect</h3>
+  </div>
+  {% endif %}
   {% csrf_token %}
 
   {% if is_medical %}

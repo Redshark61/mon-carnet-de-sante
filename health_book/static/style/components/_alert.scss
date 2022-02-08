@@ -1,6 +1,6 @@
 .alert {
 	width: 80%;
-	margin: 0 auto;
+	margin: 2rem auto;
 	padding: 2rem;
 	border-radius: 14px;
 
@@ -22,5 +22,9 @@
 	&.alert--warning {
 		margin-top: 5vh;
 		background: rgb(255, 166, 0);
+	}
+
+	&.alert--max {
+		width: 100%;
 	}
 }

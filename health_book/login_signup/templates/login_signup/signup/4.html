@@ -21,6 +21,11 @@
 
 <h1>Informations de santé</h1>
 <form action="" method="post" novalidate>
+    {% if not is_valid %}
+    <div class="alert alert--error alert--max">
+        <h3>Le formulaire est incorrect</h3>
+    </div>
+    {% endif %}
 
     {% csrf_token %}
 
