@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views import View
 from django.views.generic.list import ListView
@@ -57,3 +57,29 @@ class SettingsView(View):
         }
 
         return render(request, self.template_name, context)
+
+    def post(self, request):
+        # check whether the button clicked had the value delete or not
+        print(request.POST)
+        if request.POST.get('button') == 'delete':
+            return redirect('home:delete')
+        else:
+            form = self.form(request.POST, instance=self.request.user)
+            if form.is_valid():
+                form.save()
+                return render(request, self.template_name, {'user': request.user})
+            return render(request, self.template_name, {'form': form})
+
+
+class DeleteView(View):
+    template_name = 'home/delete.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        if request.POST.get('button') == 'delete':
+            request.user.delete()
+            return redirect('index')
+        else:
+            return redirect('home:settings')

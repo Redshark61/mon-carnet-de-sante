@@ -70,7 +70,7 @@ class CustomUser(AbstractUser):
     treatments = models.ManyToManyField(Treatment, related_name="User_treatment")
 
     def __str__(self):
-        return f"{self.username}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class TrustedPerson(models.Model):
@@ -101,7 +101,7 @@ class Doctor(models.Model):
     job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f"{self.user.username}"
+        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class Appointment(models.Model):

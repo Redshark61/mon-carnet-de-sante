@@ -6,24 +6,24 @@ class Connection1(forms.Form):
 
     first_name = forms.CharField(max_length=100,
                                  widget=forms.TextInput(attrs={
-                                     'class': 'form__control btn btn--dark-green',
+                                     'class': 'form__control  btn--dark-green',
                                      'placeholder': 'First Name'
                                  }))
     last_name = forms.CharField(max_length=100,
                                 widget=forms.TextInput(attrs={
-                                    'class': 'form__control btn btn--dark-green',
+                                    'class': 'form__control  btn--dark-green',
                                     'placeholder': 'First Name'
                                 }))
     mail = forms.CharField(widget=forms.EmailInput(attrs={
-        'class': 'form__control btn btn--dark-green',
+        'class': 'form__control  btn--dark-green',
         'placeholder': 'exemple@gmail.com'
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form__control btn btn--dark-green',
+        'class': 'form__control  btn--dark-green',
         'autocomplete': 'false',
     }))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form__control btn btn--dark-green',
+        'class': 'form__control  btn--dark-green',
         'autocomplete': 'false',
     }))
 
@@ -35,9 +35,9 @@ class Connection2(forms.ModelForm):
         fields = ['gender', 'birth_date']
         widgets = {
             'gender': forms.Select(attrs={
-                'class': 'form__control btn btn--dark-green'
+                'class': 'form__control  btn--dark-green'
             }),
-            'birth_date': forms.DateInput(attrs={'class': 'form__control btn btn--dark-green', 'type': 'date'})
+            'birth_date': forms.DateInput(attrs={'class': 'form__control  btn--dark-green', 'type': 'date'})
         }
 
 
@@ -52,7 +52,7 @@ class Connection3(forms.ModelForm):
                 'list': 'city--list'
             }),
             'address': forms.TextInput(attrs={
-                'class': 'form__control btn btn--dark-green js-input-address',
+                'class': 'form__control  btn--dark-green js-input-address',
                 'placeholder': '12 bis rue des sources'
             })
         }
@@ -109,14 +109,14 @@ class Connection6(forms.ModelForm):
 class LoginForm(forms.Form):
 
     id_code = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form__control btn btn--dark-green js-security-code',
+        attrs={'class': 'form__control js-security-code',
                'placeholder': '0-00-00-00-000-000 0'}))
 
     rpps_code = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'form__control btn btn--dark-green',
+        attrs={'class': 'form__control',
                'placeholder': '0123456789012'}))
 
     password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'form__control btn btn--dark-green',
+        attrs={'class': 'form__control',
                'autocomplete': 'false',
                'placeholder': 'password'}))

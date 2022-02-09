@@ -7,4 +7,5 @@ urlpatterns = [
     path('diseases/', views.DiseasesView.as_view(), name="diseases"),
     path('treatments/', views.TreatmentsView.as_view(), name="treatments"),
     path('settings/', views.SettingsView.as_view(), name="settings"),
+    path('settings/delete', views.DeleteView.as_view(), name="delete"),
 ]

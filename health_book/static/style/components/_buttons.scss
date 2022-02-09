@@ -1,54 +1,54 @@
-a.btn,
-button.btn {
+.btn {
 	border: none;
 	@include button;
+}
 
-	&[class*="--dark-green"] {
-		@include btn-dark-green($opacity: 0.4);
+.btn--light-green {
+	@include btn-light-green($opacity: 0.4);
+
+	&:hover {
+		background: $hover-light-green;
+	}
+}
+
+.btn--warning {
+	background-color: rgb(255, 166, 0);
+	box-shadow: 4px 4px 5px rgba(255, 166, 0, 0.4);
+
+	&:hover {
+		background: rgba(255, 166, 0, 0.4);
+	}
+}
+
+.btn--dim-orange {
+	@include btn-dim-orange;
+
+	&[class*="--empty"] {
+		background: none;
+		box-shadow: none;
+		color: $dim-orange;
 
 		&:hover {
-			background: $hover-dark-green;
-		}
-	}
-
-	&[class*="--warning"] {
-		background-color: rgb(255, 166, 0);
-
-		&:hover {
-			background: rgba(255, 166, 0, 0.4);
-		}
-	}
-
-	&[class*="--light-green"] {
-		@include btn-light-green($opacity: 0.4);
-
-		&:hover {
-			background: $hover-light-green;
-		}
-	}
-
-	&[class*="--dim-orange"] {
-		@include btn-dim-orange;
-
-		&[class*="--empty"] {
+			text-decoration: underline;
 			background: none;
-			box-shadow: none;
-			color: $dim-orange;
-
-			&:hover {
-				text-decoration: underline;
-				background: none;
-			}
-		}
-
-		&:hover {
-			background: $hover-light-green;
 		}
 	}
 
-	&.btn--small {
-		@include button(0.5rem);
-		width: fit-content;
+	&:hover {
+		background: $hover-light-green;
+	}
+}
+
+.btn--small {
+	@include button(0.5rem);
+	width: fit-content;
+}
+
+.btn--dark-green {
+	@include btn-dark-green($opacity: 0.4);
+
+	&:hover {
+		background: $hover-dark-green;
 	}
 }
 
