@@ -69,6 +69,10 @@ class CustomUser(AbstractUser):
     diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
     treatments = models.ManyToManyField(Treatment, related_name="User_treatment")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._meta.get_field('username').validators = []
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

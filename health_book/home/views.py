@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
 from login_signup.models import Treatment
 from login_signup.models import UserDisease
-from . import forms
+from .forms import UserForm
 
 
 @method_decorator(login_required(login_url='index'), name="get")
@@ -46,29 +46,36 @@ class TreatmentsView(ListView):
 
 class SettingsView(View):
     template_name = 'home/settings.html'
-    form = forms.UserForm
 
     def get(self, request):
-        form = self.form(instance=self.request.user)
+        form = UserForm(instance=request.user)
+
         context = {
             'user': request.user,
             'form': form,
-            'is_medical': request.COOKIES.get('is_medical')
+            'is_medical': request.COOKIES.get('is_medical'),
+            'is_valid': True
         }
 
         return render(request, self.template_name, context)
 
     def post(self, request):
         # check whether the button clicked had the value delete or not
-        print(request.POST)
         if request.POST.get('button') == 'delete':
             return redirect('home:delete')
         else:
-            form = self.form(request.POST, instance=self.request.user)
+            form = UserForm(request.POST, instance=request.user)
+            print(form.errors)
+            print(form.cleaned_data)
+            print(request.POST)
             if form.is_valid():
                 form.save()
-                return render(request, self.template_name, {'user': request.user})
-            return render(request, self.template_name, {'form': form})
+                return redirect('home:settings')
+            context = {
+                'form': form,
+                'is_valid': False
+            }
+            return render(request, self.template_name, context)
 
 
 class DeleteView(View):

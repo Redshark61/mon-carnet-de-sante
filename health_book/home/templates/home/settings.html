@@ -16,6 +16,13 @@
 			<h2 class="text-center">Paramètres</h2>
 
 			<form action="" method="post">
+
+				{% if not is_valid %}
+				<div class="alert alert--error alert--max">
+					<h3>Le formulaire est incorrect</h3>
+				</div>
+				{% endif %}
+
 				{% csrf_token %}
 				{% for field in form %}
 				<div class="form__group">

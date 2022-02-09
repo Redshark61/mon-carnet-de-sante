@@ -1,21 +1,23 @@
+from mimetypes import init
 from django import forms
-from login_signup.models import CustomUser, Doctor
+from login_signup.models import CustomUser
 
 
 class UserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username',
-                  'email',
-                  'gender',
-                  'first_name',
-                  'last_name',
-                  'main_doctor',
-                  #   'parent1',
-                  #   'parent2',
-                  'birth_date',
-                  )
+        fields = (
+            'username',
+            'email',
+            'gender',
+            'first_name',
+            'last_name',
+            'main_doctor',
+            #   'parent1',
+            #   'parent2',
+            'birth_date',
+        )
         labels = {
             'username': 'Nom d\'utilisateur',
             'email': 'Adresse email',
@@ -59,3 +61,7 @@ class UserForm(forms.ModelForm):
                 'type': 'date'
             })
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].validators = []
