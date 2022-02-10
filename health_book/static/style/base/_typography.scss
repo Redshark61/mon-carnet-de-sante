@@ -1,29 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 body {
-    font-family: 'Merriweather', serif;
+	font-family: "Merriweather", serif;
+}
+
+input,
+button,
+select,
+a {
+	font-family: "Heebo", sans-serif;
 }
 
 h1 {
-    color: $light-purple;
-    text-align: center;
-    font-size: clamp(2rem, 5vw, 3.5rem);
+	color: $light-purple;
+	text-align: center;
+	font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h2,
+h3,
+p {
+	font-family: "Heebo", sans-serif;
+	font-weight: 400;
 }
 
 input {
-    font-size: clamp(1.5rem, 1, 2.5rem);
+	font-size: clamp(1.5rem, 1, 2.5rem);
 }
 
 .text-center {
-    text-align: center;
+	text-align: center;
 }
 
-.sm-subheader{
-    font-size: 0.7rem;
-    opacity: 0.7;
+.sm-subheader {
+	font-size: 0.7rem;
+	opacity: 0.7;
 }
 
-.md-subheader{
-    opacity: 0.7;
+.md-subheader {
+	opacity: 0.7;
 }

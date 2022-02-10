@@ -30,12 +30,12 @@
 
 		&:hover {
 			text-decoration: underline;
-			background: none;
 		}
 	}
 
 	&:hover {
-		background: $hover-light-green;
+		text-decoration: underline;
+		color: $hover-light-green;
 	}
 }
 
