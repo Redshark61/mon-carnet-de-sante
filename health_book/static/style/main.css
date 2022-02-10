@@ -756,6 +756,12 @@ form {
   background: rgba(255, 0, 0, 0.719);
 }
 
+.alert.alert--error ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+
 .alert.alert--warning {
   margin-top: 5vh;
   background: #ffa600;

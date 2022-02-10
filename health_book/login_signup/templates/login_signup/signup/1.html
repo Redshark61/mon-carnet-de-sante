@@ -24,6 +24,12 @@
   {% if not is_valid %}
   <div class="alert alert--error alert--max">
     <h3>Le formulaire est incorrect</h3>
+
+    <ul>
+      {% for error in errors %}
+      <li>{{error}}</li>
+      {% endfor %}
+    </ul>
   </div>
   {% endif %}
   {% csrf_token %}
@@ -31,13 +37,11 @@
   {% if is_medical %}
   <div class="form__group">
     <label for="code_id">RPPS</label>
-    <input type="text" name="code_id" id="code_id" class="form__control  btn--dark-green" placeholder="01234567891"
-      required>
+    <input type="text" name="code_id" id="code_id" class="form__control  " placeholder="01234567891" required>
   </div>
   <div class="form__group">
     <label for="job">Spécialité</label>
-    <input type="text" name="job" id="job" class="form__control  btn--dark-green" placeholder="Cardiologie" required
-      list='job--list'>
+    <input type="text" name="job" id="job" class="form__control  " placeholder="Cardiologie" required list='job--list'>
     <datalist id='job--list'>
       {% for job in jobs %}
       <option value="{{job}}">
@@ -47,7 +51,7 @@
   {% else %}
   <div class="form__group">
     <label for="code_id">Code de sécurité sociale</label>
-    <input type="text" name="code_id" id="code_id" class="form__control  btn--dark-green js-security-code"
+    <input type="text" name="code_id" id="code_id" class="form__control   js-security-code"
       placeholder="0-12-34-56-789-123 45" required>
   </div>
   {% endif %}

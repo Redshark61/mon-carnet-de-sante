@@ -6,24 +6,24 @@ class Connection1(forms.Form):
 
     first_name = forms.CharField(max_length=100,
                                  widget=forms.TextInput(attrs={
-                                     'class': 'form__control  btn--dark-green',
+                                     'class': 'form__control  ',
                                      'placeholder': 'First Name'
                                  }))
     last_name = forms.CharField(max_length=100,
                                 widget=forms.TextInput(attrs={
-                                    'class': 'form__control  btn--dark-green',
+                                    'class': 'form__control  ',
                                     'placeholder': 'First Name'
                                 }))
     mail = forms.CharField(widget=forms.EmailInput(attrs={
-        'class': 'form__control  btn--dark-green',
+        'class': 'form__control  ',
         'placeholder': 'exemple@gmail.com'
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form__control  btn--dark-green',
+        'class': 'form__control  ',
         'autocomplete': 'false',
     }))
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
-        'class': 'form__control  btn--dark-green',
+        'class': 'form__control  ',
         'autocomplete': 'false',
     }))
 
@@ -35,9 +35,9 @@ class Connection2(forms.ModelForm):
         fields = ['gender', 'birth_date']
         widgets = {
             'gender': forms.Select(attrs={
-                'class': 'form__control  btn--dark-green'
+                'class': 'form__control  '
             }),
-            'birth_date': forms.DateInput(attrs={'class': 'form__control  btn--dark-green', 'type': 'date'})
+            'birth_date': forms.DateInput(attrs={'class': 'form__control  ', 'type': 'date'})
         }
 
 
@@ -52,7 +52,7 @@ class Connection3(forms.ModelForm):
                 'list': 'city--list'
             }),
             'address': forms.TextInput(attrs={
-                'class': 'form__control  btn--dark-green js-input-address',
+                'class': 'form__control   js-input-address',
                 'placeholder': '12 bis rue des sources'
             })
         }
