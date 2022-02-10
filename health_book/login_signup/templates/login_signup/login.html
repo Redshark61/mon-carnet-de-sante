@@ -19,10 +19,13 @@
 
 
 <h1>Connexion</h1>
-{% if not is_valid %}
-<p style="color:red;">Incorrect !</p>
-{% endif %}
 <form action="" method="post">
+    {% if not is_valid %}
+    <div class="alert alert--error alert--max">
+        <h3>Le formulaire est incorrect</h3>
+    </div>
+    {% endif %}
+
     {% csrf_token %}
 
     {% for field in form %}

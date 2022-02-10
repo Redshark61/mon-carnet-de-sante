@@ -8,4 +8,6 @@ urlpatterns = [
     path('treatments/', views.TreatmentsView.as_view(), name="treatments"),
     path('settings/', views.SettingsView.as_view(), name="settings"),
     path('settings/delete', views.DeleteView.as_view(), name="delete"),
+    path('settings/password', views.ChangePasswordView.as_view(), name="password_change"),
+    path('settings/password_success', views.passwordSuccess, name="password_success"),
 ]

@@ -1,6 +1,6 @@
-from mimetypes import init
 from django import forms
 from login_signup.models import CustomUser
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 class UserForm(forms.ModelForm):
@@ -65,3 +65,37 @@ class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].validators = []
+
+
+class PasswordChangingForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label='Ancien mot de passe',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form__control ',
+            'placeholder': 'Ancien mot de passe'
+        }),
+        strip=False,
+        required=True
+    )
+    new_password1 = forms.CharField(
+        label='Nouveau mot de passe',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form__control ',
+            'placeholder': 'Nouveau mot de passe'
+        }),
+        strip=False,
+        required=True
+    )
+    new_password2 = forms.CharField(
+        label='Confirmer le nouveau mot de passe',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form__control ',
+            'placeholder': 'Confirmer le nouveau mot de passe'
+        }),
+        strip=False,
+        required=True
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ('old_password', 'new_password1', 'new_password2')

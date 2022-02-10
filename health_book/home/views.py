@@ -1,11 +1,13 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
 from login_signup.models import Treatment
 from login_signup.models import UserDisease
-from .forms import UserForm
+from .forms import UserForm, PasswordChangingForm
 
 
 @method_decorator(login_required(login_url='index'), name="get")
@@ -90,3 +92,13 @@ class DeleteView(View):
             return redirect('index')
         else:
             return redirect('home:settings')
+
+
+class ChangePasswordView(PasswordChangeView):
+    form_class = PasswordChangingForm
+    template_name = 'home/change_password.html'
+    success_url = reverse_lazy('home:password_success')
+
+
+def passwordSuccess(request):
+    return render(request, 'home/password_success.html')
