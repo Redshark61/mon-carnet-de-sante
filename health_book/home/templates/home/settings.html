@@ -41,12 +41,12 @@
 				</div>
 				{% endfor %}
 
-				<div class="flex flex--row mb-10">
-					<div class="flex flex--col smaller">
-						<button type="submit" name="button" value="edit" class="btn btn--light-green mt-5">Modifier</button>
-						<a href="{% url 'home:password_change' %}" class="btn btn--light-green mt-5">Modifier le motde passe</a>
+				<div class="flex flex--row mb-10 mt-5">
+					<div class="flex flex--col smaller btn-group">
+						<button type="submit" name="button" value="edit" class="btn btn--light-green">Modifier</button>
+						<a href="{% url 'home:password_change' %}" class="btn btn--light-green">Modifier le motde passe</a>
 					</div>
-					<button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Supprimer</button>
+					<button type="submit" name="button" value="delete" class="btn btn--warning smaller">Supprimer</button>
 				</div>
 			</form>
 

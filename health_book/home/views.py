@@ -5,8 +5,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic.list import ListView
 from django.utils.decorators import method_decorator
-from login_signup.models import Treatment
-from login_signup.models import UserDisease
+from login_signup.models import Treatment, Appointment, UserDisease
 from .forms import UserForm, PasswordChangingForm
 
 
@@ -15,8 +14,11 @@ class HomeView(View):
     template_name = 'home/home.html'
 
     def get(self, request):
+        appointment = Appointment.objects.filter(user=request.user)
+        print(appointment)
         context = {
-            'user': request.user
+            'user': request.user,
+            'appointments': appointment,
         }
 
         return render(request, self.template_name, context)
@@ -102,3 +104,15 @@ class ChangePasswordView(PasswordChangeView):
 
 def passwordSuccess(request):
     return render(request, 'home/password_success.html')
+
+
+class AppointmentsView(ListView):
+    model = Appointment
+    template_name = 'home/appointments.html'
+
+    def get_queryset(self):
+        queryset = super(AppointmentsView, self).get_queryset()
+        print(queryset)
+        userAppointments = queryset.filter(user=self.request.user)
+        print(userAppointments)
+        return userAppointments

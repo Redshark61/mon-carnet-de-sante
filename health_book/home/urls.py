@@ -10,4 +10,5 @@ urlpatterns = [
     path('settings/delete', views.DeleteView.as_view(), name="delete"),
     path('settings/password', views.ChangePasswordView.as_view(), name="password_change"),
     path('settings/password_success', views.passwordSuccess, name="password_success"),
+    path('appointments/', views.AppointmentsView.as_view(), name="appointments"),
 ]

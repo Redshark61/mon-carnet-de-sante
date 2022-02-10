@@ -1,0 +1,46 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Rendez-vous {% endblock title %}
+
+{% block content %}
+
+<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+
+<div class="flex--row flex--space-evenly mt-10">
+	<section>
+		<h2 class="text-center">Traitements</h2>
+		{% if object_list %}
+		{% for appointment in object_list %}
+		<div class="card card--col mt-5">
+			<h3 class="md-subheader">{{appointment.doctor}}</h3>
+			<div class="card__content">
+				<p class="sm-subheader">Lieu</p>
+				<h3>{{appointment.location}}</h3>
+			</div>
+			<div class="card__content">
+				<p class="sm-subheader">Date</p>
+				<h3>{{appointment.date}}</h3>
+			</div>
+			<div class="card__content">
+				<p class="sm-subheader">Heure</p>
+				<h3>{{appointment.time}}</h3>
+			</div>
+		</div>
+		{% endfor %}
+		{% else %}
+
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Tu n'as aucun rendez-vous de prévu 💤</h3>
+		</div>
+
+		{% endif %}
+
+	</section>
+
+</div>
+{% endblock content	 %}
+
+{% block script %}
+<script src="{% static '/js/nav-button.js' %}"></script>
+{% endblock script %}

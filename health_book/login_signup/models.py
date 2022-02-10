@@ -37,10 +37,10 @@ class Location(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=100)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.address}, {self.city} {self.postal_code}"
+        return f"{self.address}, {self.city}, {self.postal_code}"
 
 
 class Treatment(models.Model):
@@ -116,6 +116,10 @@ class Appointment(models.Model):
     time = models.TimeField()
     name = models.CharField(max_length=100)
     description = models.TextField()
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.user} {self.doctor} {self.date} {self.time}"
 
 
 class Prescription(models.Model):

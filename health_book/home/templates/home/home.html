@@ -38,25 +38,30 @@
 		<section>
 			<h2 class="text-center">Rendez-vous</h2>
 
+			{% if appointments %}
+			{% for appointment in appointments %}
 			<div class="card card--col mt-5">
-				<h3 class="md-subheader">Dr Martin</h3>
+				<h3 class="md-subheader">{{appointment.doctor}}</h3>
 				<div class="card__content">
 					<p class="sm-subheader">Lieu</p>
-					<h3>75 b rue d'Alençon, 61250 Condé-sur-Sarthe</h3>
+					<h3>{{appointment.location}}</h3>
 				</div>
 				<div class="card__content">
 					<p class="sm-subheader">Date</p>
-					<h3>12/05/2023</h3>
+					<h3>{{appointment.date}}</h3>
 				</div>
 				<div class="card__content">
 					<p class="sm-subheader">Heure</p>
-					<h3>12h50</h3>
+					<h3>{{appointment.time}}</h3>
 				</div>
 			</div>
-
+			{% endfor %}
+			{% else %}
 			<div class="alert alert--neutral">
 				<h3 class="alert__header">Tu n'as aucun rendez-vous de prévu 💤</h3>
 			</div>
+			{% endif %}
+
 
 		</section>
 	</div>
