@@ -35,7 +35,7 @@
             required>
         <datalist id="doctor--list">
             {% for doctor in doctors %}
-            <option value="{{doctor.user.first_name}} - {{doctor.user.last_name}}">
+            <option value="{{doctor}}">
                 {% endfor %}
         </datalist>
     </div>

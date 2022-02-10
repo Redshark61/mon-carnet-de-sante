@@ -129,10 +129,6 @@ class SignupView(View):
                 location = form.save(commit=False)
                 location.user = request.user
                 location.save()
-                # location.postal_code = request.POST['postal_code']
-                # location.save()
-                # request.user.address = location
-                # request.user.save()
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 4:
                 treatments = {key: value for key, value in request.POST.items()
@@ -147,8 +143,11 @@ class SignupView(View):
                     disease = Diseases.objects.get(name=diseases[disease])
                     request.user.diseases.add(disease)
 
-                doctor_first_name, doctor_last_name = request.POST['doctor'].split(' - ')
-                main_doctor = CustomUser.objects.get(first_name=doctor_first_name, last_name=doctor_last_name)
+                doctor_first_name, doctor_last_name = request.POST['doctor'].split()
+                doctor_user = CustomUser.objects.get(
+                    first_name=doctor_first_name, last_name=doctor_last_name)
+
+                main_doctor = Doctor.objects.get(user=doctor_user)
                 request.user.main_doctor = main_doctor
                 request.user.save()
                 return redirect('login_signup:signup', nextNumber)

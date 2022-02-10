@@ -51,6 +51,16 @@ class Treatment(models.Model):
         return f"{self.name}"
 
 
+class Doctor(models.Model):
+
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rpps = models.ForeignKey(RPPS, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+
+
 class CustomUser(AbstractUser):
 
     class Genders(models.TextChoices):
@@ -59,7 +69,7 @@ class CustomUser(AbstractUser):
 
     mail = models.EmailField(null=True)
     gender = models.CharField(max_length=1, choices=Genders.choices, null=True)
-    main_doctor = models.ForeignKey("self", on_delete=models.SET_NULL,
+    main_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,
                                     null=True, related_name="User_main_doctor")
     parent1 = models.ForeignKey("self", on_delete=models.SET_NULL, null=True,
                                 blank=True, related_name="User_parent1")
@@ -96,16 +106,6 @@ class UserDisease(models.Model):
 
     def __str__(self):
         return f"{self.user} {self.disease}"
-
-
-class Doctor(models.Model):
-
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rpps = models.ForeignKey(RPPS, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True)
-
-    def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}"
 
 
 class Appointment(models.Model):
