@@ -1,14 +1,21 @@
 from django.urls import path
-from home import views
+from .views.appointmentsView import AppointmentsView
+from .views.deleteView import DeleteView
+from .views.diseaseView import DiseasesView
+from .views.homeView import HomeView
+from .views.passwordSuccess import passwordSuccess
+from .views.settingsView import SettingsView
+from .views.treatmentView import TreatmentsView
+from .views.changePasswordView import ChangePasswordView
 
 app_name = 'home'
 urlpatterns = [
-    path('', views.HomeView.as_view(), name="home"),
-    path('diseases/', views.DiseasesView.as_view(), name="diseases"),
-    path('treatments/', views.TreatmentsView.as_view(), name="treatments"),
-    path('settings/', views.SettingsView.as_view(), name="settings"),
-    path('settings/delete', views.DeleteView.as_view(), name="delete"),
-    path('settings/password', views.ChangePasswordView.as_view(), name="password_change"),
-    path('settings/password_success', views.passwordSuccess, name="password_success"),
-    path('appointments/', views.AppointmentsView.as_view(), name="appointments"),
+    path('', HomeView.as_view(), name="home"),
+    path('diseases/', DiseasesView.as_view(), name="diseases"),
+    path('treatments/', TreatmentsView.as_view(), name="treatments"),
+    path('settings/', SettingsView.as_view(), name="settings"),
+    path('settings/delete', DeleteView.as_view(), name="delete"),
+    path('settings/password', ChangePasswordView.as_view(), name="password_change"),
+    path('settings/password_success', passwordSuccess, name="password_success"),
+    path('appointments/', AppointmentsView.as_view(), name="appointments"),
 ]

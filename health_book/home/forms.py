@@ -1,5 +1,5 @@
 from django import forms
-from login_signup.models import CustomUser
+from login_signup.models.customUser import CustomUser
 from django.contrib.auth.forms import PasswordChangeForm
 
 

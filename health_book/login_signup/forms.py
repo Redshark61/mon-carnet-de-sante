@@ -1,5 +1,7 @@
 from django import forms
-from login_signup.models import CustomUser, Location, TrustedPerson
+from login_signup.models.customUser import CustomUser
+from login_signup.models.location import Location
+from login_signup.models.trustedUser import TrustedPerson
 
 
 class Connection1(forms.Form):

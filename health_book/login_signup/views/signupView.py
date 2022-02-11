@@ -1,47 +1,15 @@
-from django.contrib.auth import authenticate, login as loginUser
+from django.views import View
+from login_signup.models.job import Job
+from login_signup.models.doctor import Doctor
+from login_signup.models.rpps import RPPS
+from login_signup.models.customUser import CustomUser
+from login_signup.models.diseases import Diseases
+from login_signup.models.treatment import Treatment
+from django.shortcuts import redirect, render
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.shortcuts import redirect, render
-from django.views import View
-from login_signup.models import Job, Doctor, RPPS, CustomUser, Diseases, Treatment
+from django.contrib.auth import login as loginUser
 from login_signup.forms import *
-# Create your views here.
-
-
-class IndexView(View):
-    template_name = 'login_signup/index.html'
-
-    def render_to_response(self, context, **response_kwargs):
-        response = super(IndexView, self).render_to_response(context, **response_kwargs)
-        response.set_cookie('medical', False)
-        return response
-
-    def get(self, request):
-        response = render(request, self.template_name)
-        response.set_cookie('medical', False)
-
-        return response
-
-    def redirect_to_signup(self, request):
-        person, direction = request.POST.get('button').split("&")
-        print(person, direction)
-
-        if person == 'personal':
-            response = redirect('login') if direction == 'login' else redirect('login_signup:signup', 1)
-            response.set_cookie('medical', False)
-            return response
-
-        if person == 'medical':
-            response = redirect('login') if direction == 'login' else redirect(
-                'login_signup:signup', 1)
-            response.set_cookie('medical', True)
-            return response
-
-        return redirect('login_signup:index')
-
-    def post(self, request):
-        resonse = self.redirect_to_signup(request)
-        return resonse
 
 
 class SignupView(View):
@@ -174,45 +142,3 @@ class SignupView(View):
             print("invalid form : " + str(form.errors))
             context['is_valid'] = False
             return render(request, f'login_signup/signup/{self.number}.html', context)
-
-
-class LoginView(IndexView):
-    template_name = 'login_signup/login.html'
-    form = LoginForm
-
-    @staticmethod
-    def deleteField(request, form):
-        if request.COOKIES['medical'] == 'True':
-            del form.fields['id_code']
-            return 'rpps_code', form
-
-        del form.fields['rpps_code']
-        return 'id_code', form
-
-    def get(self, request):
-        form = self.form()
-        _, form = self.deleteField(request, form)
-        return render(request, self.template_name, {'form': form, 'is_valid': True})
-
-    def post(self, request):
-        form = self.form(request.POST)
-        username, form = self.deleteField(request, form)
-
-        inputs = [input for input in request.POST]
-        if 'login' in inputs:
-            print("its login")
-            print(request.POST.get('button'))
-            response = super().redirect_to_signup(request)
-            return response
-        else:
-
-            if form.is_valid():
-                user = authenticate(
-                    username=form.cleaned_data[username], password=form.cleaned_data['password'])
-                if user is not None:
-                    loginUser(request, user)
-                    return redirect('home:home')
-                return render(request, 'login_signup/login.html', {'form': form, 'is_valid': False})
-
-            _, form = self.deleteField(request, form)
-            return render(request, 'login_signup/login.html', {'is_valid': False, 'form': form})
