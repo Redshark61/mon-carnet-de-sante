@@ -16,9 +16,12 @@
 
 	&[class*="--center"] {
 		align-items: center;
-		justify-content: center;
 	}
 
+	&[class*="--center-all"] {
+		align-items: center;
+		justify-content: center;
+	}
 	&[class*="--space-around"] {
 		justify-content: space-around;
 	}

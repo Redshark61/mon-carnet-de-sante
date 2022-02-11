@@ -7,33 +7,33 @@
 </div>
 
 
-<aside class="grid__3 flex--col btn-group--3 js-nav">
-  <div class="btn-group flex--col">
-    <a href="{% url 'home:settings' %}" class="flex--center btn btn--light-green">
+<aside class="grid__3 flex flex--col btn-group--3 js-nav">
+  <div class="btn-group flex flex--col">
+    <a href="{% url 'home:settings' %}" class="flex flex--center btn btn--light-green">
       <img src="{% static '/img/gear.svg'%}" alt="">
       Paramètre</a>
-    <a href="{% url 'logout' %}" class="flex--center btn btn--light-green">
+    <a href="{% url 'logout' %}" class="flex flex--center btn btn--light-green">
       <img src="{% static '/img/leave.svg'%}" alt="">
       Se déconnecter</a>
   </div>
 
-  <div class="flex--col">
+  <div class="flex flex--col">
     {% with request.path as url_name %}
 
     <a href="{% url 'home:home' %}"
-      class="flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home:home' %}link--active{% endif %}">
+      class="flex flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home:home' %}link--active{% endif %}">
       <img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
 
     <a href="{% url 'home:diseases' %}"
-      class="flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'diseases'%}link--active{% endif %}">
+      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'diseases'%}link--active{% endif %}">
       <img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
 
     <a href="{% url 'home:treatments' %}"
-      class="flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
+      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
       <img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
 
     <a href="{% url 'home:appointments' %}"
-      class="flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'appointments'%}link--active{% endif %}">
+      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'appointments'%}link--active{% endif %}">
       <img src="{% static '/img/calendar.svg'%}" alt="">Rendez-vous</a>
 
     {% endwith %}
