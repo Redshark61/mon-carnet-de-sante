@@ -1,34 +1,33 @@
-*[class*="flex"] {
-    display: flex;
-    word-break: break-word;
+.flex {
+	display: flex;
+	word-break: break-word;
 
-    &[class*="--col"] {
-        flex-direction: column;
-    }
+	&[class*="--col"] {
+		flex-direction: column;
+	}
 
-    &[class*="--row"] {
-        flex-direction: row;
+	&[class*="--row"] {
+		flex-direction: row;
 
-        @include media-min($phone) {
-            flex-direction: column;
-        }
-    }
+		@include media-min($phone) {
+			flex-direction: column;
+		}
+	}
 
-    &[class*="--center"] {
-        align-items: center;
-    }
+	&[class*="--center"] {
+		align-items: center;
+		justify-content: center;
+	}
 
-    &[class*="--space-around"] {
-        justify-content: space-around;
-    }
+	&[class*="--space-around"] {
+		justify-content: space-around;
+	}
 
-    &[class*="--space-between"] {
-        justify-content: space-between;
-    }
+	&[class*="--space-between"] {
+		justify-content: space-between;
+	}
 
-    &[class*="--space-evenly"] {
-        justify-content: space-evenly;
-    }
-	
-
+	&[class*="--space-evenly"] {
+		justify-content: space-evenly;
+	}
 }
