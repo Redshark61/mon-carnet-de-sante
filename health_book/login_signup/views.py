@@ -93,6 +93,12 @@ class SignupView(View):
         if form.is_valid() or (self.number == 4 and request.POST.get('doctor') != '') or self.number == 5:
             if self.number == 1:
                 password = form.cleaned_data['password']
+                confirm_password = form.cleaned_data['confirm_password']
+                username = request.POST['code_id']
+
+                if username == '':
+                    context['is_valid'] = False
+                    return render(request, f'login_signup/signup/{self.number}.html', context)
                 # check if the password is valid
                 error = ''
                 try:
@@ -101,6 +107,10 @@ class SignupView(View):
                     error = e.messages
                     context['is_valid'] = False
                     context['errors'] = error
+                    return render(request, f'login_signup/signup/{self.number}.html', context)
+                if password != confirm_password:
+                    context['is_valid'] = False
+                    context['errors'] = ['Les mots de passe ne correspondent pas']
                     return render(request, f'login_signup/signup/{self.number}.html', context)
                 user = CustomUser.objects.create_user(
                     username=request.POST['code_id'],
