@@ -788,6 +788,10 @@ form {
   margin: 2rem 0 0;
 }
 
+.alert.alert--error ul:not(.no-m) {
+  margin: 0;
+}
+
 .alert.alert--warning {
   margin-top: 5vh;
   background: #ffa600;
