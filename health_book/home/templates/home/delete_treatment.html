@@ -1,0 +1,17 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Supprimer un traitement {% endblock title %}
+
+{% block content %}
+
+<h1>Veux-tu vraiment supprimer '{{treatment.name}}'</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="flex flex--row">
+    <button type="submit" name="button" value="cancel" class="btn btn--light-green mt-5 smaller">Annuler</button>
+    <button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Supprimer</button>
+  </div>
+</form>
+{% endblock content %}

@@ -9,18 +9,28 @@
 {% include '_nav_home.html' %}
 
 <main class="grid__7">
-	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+	<h1>Mes traitements</h1>
 
-	<div class="flex flex--row--space-evenly mt-10">
+	<div class="flex flex--row--space-evenly">
 		<section>
-			<h2 class="text-center">Traitements</h2>
+			<div class="flex flex--row--center-all mb-10">
+				<a href="{% url 'home:add_treatment' %}" class="btn btn--light-green">Ajouter un traitement</a>
+			</div>
+
 			{% if object_list %}
 			{% for treatment in object_list %}
-			<div class="card card--row card--dotted-line mt-5">
-				<h3>{{treatment.name}}</h3>
-				<div class="flex flex--col">
-					<p class="sm-subheader">Jusqu'au</p>
-					<h3>INDETERMINÉ</h3>
+			<div class="flex flex--row mt-5 flex--center-all">
+
+				<div class="card card--row card--dotted-line">
+					<h3>{{treatment.name}}</h3>
+					<div class="flex flex--col">
+						<p class="sm-subheader">Jusqu'au</p>
+						<h3>INDETERMINÉ</h3>
+					</div>
+				</div>
+
+				<div class="card card--delete">
+					<a href="{% url 'home:delete_treatment' treatment.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
 				</div>
 			</div>
 			{% endfor %}

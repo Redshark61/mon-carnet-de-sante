@@ -9,6 +9,8 @@ from .views.treatmentView import TreatmentsView
 from .views.changePasswordView import ChangePasswordView
 from .views.addDisease import AddDisease
 from .views.deleteDisease import DeleteDisease
+from .views.addTreatment import AddTreatment
+from .views.deleteTreatment import DeleteTreatment
 
 app_name = 'home'
 urlpatterns = [
@@ -22,4 +24,6 @@ urlpatterns = [
     path('appointments/', AppointmentsView.as_view(), name="appointments"),
     path('add_disease/', AddDisease.as_view(), name="add_disease"),
     path('delete_disease/<int:pk>', DeleteDisease.as_view(), name="delete_disease"),
+    path('add_treatment/', AddTreatment.as_view(), name="add_treatment"),
+    path('delete_treatment/<int:pk>', DeleteTreatment.as_view(), name="delete_treatment"),
 ]
