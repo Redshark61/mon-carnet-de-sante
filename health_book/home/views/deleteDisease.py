@@ -7,13 +7,18 @@ class DeleteDisease(View):
     template_name = 'home/delete_disease.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        id = kwargs.get('pk')
+        to_be_deleted_disease = UserDisease.objects.get(id=id)
+        context = {
+            'disease': to_be_deleted_disease
+        }
+        return render(request, self.template_name, context)
 
-    def post(self, request, *args, **kwargs):
+    @staticmethod
+    def post(request, *args, **kwargs):
         id = kwargs.get('pk')
         if request.POST.get('button') == 'delete':
             to_be_deleted_disease = UserDisease.objects.get(id=id)
             to_be_deleted_disease.delete()
             return redirect('home:home')
-        else:
-            return redirect('home:settings')
+        return redirect('home:settings')
