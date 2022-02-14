@@ -1,0 +1,25 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Ajouter une maladie {% endblock title %}
+
+{% block content %}
+
+<form action="" method="post">
+  {% csrf_token %}
+
+  {% for field in form %}
+  <div class="form__group">
+    {{ field.label }}
+    {% if field.errors %}
+    <div class="alert alert--error alert--max no-m">
+      {{ field.errors }}
+    </div>
+    {% endif %}
+    {{ field}}
+  </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn--light-green mt-5">Ajouter</button>
+</form>
+{% endblock content %}

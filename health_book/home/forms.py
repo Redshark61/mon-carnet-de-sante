@@ -1,5 +1,6 @@
 from django import forms
 from login_signup.models.customUser import CustomUser
+from login_signup.models.diseases import Diseases
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -99,3 +100,13 @@ class PasswordChangingForm(PasswordChangeForm):
     class Meta:
         model = CustomUser
         fields = ('old_password', 'new_password1', 'new_password2')
+
+
+class AddDiseaseForm(forms.Form):
+    disease = forms.ModelChoiceField(
+        queryset=Diseases.objects.all(),
+        widget=forms.Select(attrs={
+            'class': 'form__control ',
+        }),
+        required=True
+    )

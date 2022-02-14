@@ -4,6 +4,16 @@ from login_signup.models import appointment, customUser, diseases, doctor, job, 
 # from login_signup.models import *
 
 
+class CustomDiseasesAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
+    list_display = ('id',)
+
+
+class CustomUserDiseasesAdmin(admin.ModelAdmin):
+    readonly_fields = ('id',)
+    list_display = ('id', '__str__')
+
+
 class CustomUserAdmin(UserAdmin):
     fieldsets = (
         *UserAdmin.fieldsets,  # original form fieldsets, expanded
@@ -43,7 +53,7 @@ class CustomLocationAdmin(admin.ModelAdmin):
 
 
 # Register your models here.
-admin.site.register(diseases.Diseases)
+admin.site.register(diseases.Diseases, CustomDiseasesAdmin)
 admin.site.register(rpps.RPPS, CustomRPPSAdmin)
 admin.site.register(job.Job)
 admin.site.register(location.Location, CustomLocationAdmin)
@@ -51,5 +61,5 @@ admin.site.register(doctor.Doctor, CustomDoctorAdmin)
 admin.site.register(customUser.CustomUser, CustomUserAdmin)
 admin.site.register(treatment.Treatment)
 admin.site.register(trustedUser.TrustedPerson)
-admin.site.register(userDisease.UserDisease)
+admin.site.register(userDisease.UserDisease, CustomUserDiseasesAdmin)
 admin.site.register(appointment.Appointment)

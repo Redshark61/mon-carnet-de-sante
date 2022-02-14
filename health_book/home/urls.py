@@ -7,6 +7,8 @@ from .views.passwordSuccess import passwordSuccess
 from .views.settingsView import SettingsView
 from .views.treatmentView import TreatmentsView
 from .views.changePasswordView import ChangePasswordView
+from .views.addDisease import AddDisease
+from .views.deleteDisease import DeleteDisease
 
 app_name = 'home'
 urlpatterns = [
@@ -18,4 +20,6 @@ urlpatterns = [
     path('settings/password', ChangePasswordView.as_view(), name="password_change"),
     path('settings/password_success', passwordSuccess, name="password_success"),
     path('appointments/', AppointmentsView.as_view(), name="appointments"),
+    path('add_disease/', AddDisease.as_view(), name="add_disease"),
+    path('delete_disease/<int:pk>', DeleteDisease.as_view(), name="delete_disease"),
 ]

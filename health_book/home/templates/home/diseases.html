@@ -9,18 +9,27 @@
 {% include '_nav_home.html' %}
 
 <main class="grid__7">
-	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+	<h1>Maladies</h1>
 
-	<div class="flex flex--row--space-evenly mt-10">
+	<div class="flex flex--row--space-evenly mt-5">
 		<section>
-			<h2 class="text-center">Maladies</h2>
+			<div class="flex flex--row--center-all mb-10">
+				<a href="{% url 'home:add_disease' %}" class="btn btn--light-green">Ajouter une maladie</a>
+			</div>
+
 			{% if object_list %}
 			{% for disease in object_list %}
-			<div class="card card--row card--dotted-line mt-5">
-				<h3>{{disease.disease}}</h3>
-				<div class="flex flex--col">
-					<p class="sm-subheader">Jusqu'au</p>
-					<h3>INDETERMINÉ</h3>
+			<div class="flex flex--row">
+				<div class="card card--row card--dotted-line mt-5">
+					<h3>{{disease.disease}}</h3>
+					<div class="flex flex--col">
+						<p class="sm-subheader">Jusqu'au</p>
+						<h3>INDETERMINÉ</h3>
+					</div>
+				</div>
+
+				<div class="card">
+					<a href="{% url 'home:delete_disease' disease.id %}">Supprimer</a>
 				</div>
 			</div>
 			{% endfor %}
