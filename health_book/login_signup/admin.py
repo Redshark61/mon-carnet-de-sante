@@ -6,7 +6,7 @@ from login_signup.models import appointment, customUser, diseases, doctor, job, 
 
 class CustomDiseasesAdmin(admin.ModelAdmin):
     readonly_fields = ('id',)
-    list_display = ('id',)
+    list_display = ('id', '__str__')
 
 
 class CustomUserDiseasesAdmin(admin.ModelAdmin):
