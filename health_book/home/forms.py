@@ -1,6 +1,6 @@
 from django import forms
 from login_signup.models.customUser import CustomUser
-from login_signup.models.diseases import Diseases
+from login_signup.models import diseases, treatment
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -104,7 +104,17 @@ class PasswordChangingForm(PasswordChangeForm):
 
 class AddDiseaseForm(forms.Form):
     disease = forms.ModelChoiceField(
-        queryset=Diseases.objects.all(),
+        queryset=diseases.Diseases.objects.all(),
+        widget=forms.Select(attrs={
+            'class': 'form__control ',
+        }),
+        required=True
+    )
+
+
+class AddTreatmentForm(forms.Form):
+    treatment = forms.ModelChoiceField(
+        queryset=treatment.Treatment.objects.all(),
         widget=forms.Select(attrs={
             'class': 'form__control ',
         }),
