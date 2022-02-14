@@ -5,6 +5,9 @@ from login_signup.models.trustedUser import TrustedPerson
 
 
 class Connection1(forms.Form):
+    """
+    Form to create a new user
+    """
 
     first_name = forms.CharField(max_length=100,
                                  widget=forms.TextInput(attrs={
@@ -31,6 +34,9 @@ class Connection1(forms.Form):
 
 
 class Connection2(forms.ModelForm):
+    """
+    Form to add the gender and the birth date
+    """
 
     class Meta:
         model = CustomUser
@@ -39,11 +45,17 @@ class Connection2(forms.ModelForm):
             'gender': forms.Select(attrs={
                 'class': 'form__control  '
             }),
-            'birth_date': forms.DateInput(attrs={'class': 'form__control  ', 'type': 'date'})
+            'birth_date': forms.DateInput(attrs={
+                'class': 'form__control  ', 'type': 'date'
+            })
         }
 
 
 class Connection3(forms.ModelForm):
+    """
+    Form to add the location
+    """
+
     class Meta:
         model = Location
         fields = ['city', 'address']
@@ -61,10 +73,16 @@ class Connection3(forms.ModelForm):
 
 
 class Connection4(forms.Form):
+    """
+    Unused because its made by hand in `login_signup/templates/4.html`
+    """
     pass
 
 
 class Connection5(forms.ModelForm):
+    """
+    Form to add the trusted person
+    """
 
     class Meta:
         model = TrustedPerson
@@ -90,6 +108,9 @@ class Connection5(forms.ModelForm):
 
 
 class Connection6(forms.ModelForm):
+    """
+    Form to add parents
+    """
 
     class Meta:
         model = CustomUser
@@ -109,6 +130,9 @@ class Connection6(forms.ModelForm):
 
 
 class LoginForm(forms.Form):
+    """
+    Form to log in
+    """
 
     id_code = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form__control js-security-code',

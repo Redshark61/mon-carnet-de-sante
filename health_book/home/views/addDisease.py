@@ -4,6 +4,8 @@ from home import forms
 
 
 class AddDisease(View):
+    """Add a disease to the user"""
+
     template_name = 'home/add_disease.html'
     form = forms.AddDiseaseForm
 
@@ -14,6 +16,8 @@ class AddDisease(View):
     def post(self, request):
         form = self.form(request.POST)
         if form.is_valid():
+
+            # Add a disease to the user
             disease = form.cleaned_data['disease']
             self.request.user.diseases.add(disease)
             return redirect('home:diseases')

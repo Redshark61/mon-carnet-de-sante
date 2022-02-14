@@ -4,6 +4,7 @@ from home import forms
 
 
 class AddTreatment(View):
+    """Add a treatment to the user"""
     template_name = 'home/add_treatment.html'
     form = forms.AddTreatmentForm
 

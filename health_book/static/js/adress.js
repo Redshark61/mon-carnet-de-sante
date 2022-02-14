@@ -3,9 +3,11 @@ const inputAdress = document.querySelector(".js-input-address");
 const loading = document.querySelector(".js-loader");
 
 getCities().then((value) => {
+	// Add the cities dictionary to the input data
 	inputAdress.line = value;
 });
 
+// Disable the <ENTER> key
 window.addEventListener("keydown", (event) => {
 	if (event.key == "Enter") {
 		event.preventDefault();
@@ -17,6 +19,7 @@ inputAdress.addEventListener("keyup", async function (e) {
 	if (e.keyCode === 13) {
 		// Cancel the default action, if needed
 		e.preventDefault();
+
 		// Add the loading animation
 		loading.classList.add("active");
 		loading.classList.remove("done");
@@ -34,6 +37,11 @@ inputAdress.addEventListener("keyup", async function (e) {
 	}
 });
 
+/**
+ *
+ * @param {Object} lines The name of cities
+ * @returns {Boolean} true if the address is correct in the cities
+ */
 async function validate(lines) {
 	return new Promise(async (resolve) => {
 		// replace spaces with +
@@ -48,14 +56,17 @@ async function validate(lines) {
 		value = value.replace(/[ôö]/g, "o");
 		value = value.replace(/[ùûü]/g, "u");
 
+		// Get the postcode and pass all the cities
 		let postcode = getPostCode(lines);
 		console.log(postcode);
 
+		// Create an hidden input to send the postcode to the form
 		cityElement = document.createElement("input");
 		cityElement.type = "hidden";
 		cityElement.name = "postal_code";
 		cityElement.value = postcode;
 		document.querySelector("form").appendChild(cityElement);
+
 		// Use the government API to check if the adress is valid
 		const url = `https://api-adresse.data.gouv.fr/search/?q=${value}&postcode=${postcode}&limit=1`;
 		console.log(url);
@@ -63,9 +74,8 @@ async function validate(lines) {
 		fetch(url)
 			.then((response) => response.json())
 			.then((data) => {
-				const p = document.createElement("p");
 				let properties = data.features[0].properties;
-				console.log(properties.score);
+				// properties.score is the confidence of the adress : 1 is sure this is the good adress, 0 is not sure
 				resolve(true ? properties.score > 0.7 : false);
 			});
 	});
@@ -73,8 +83,8 @@ async function validate(lines) {
 
 /**
  *
- * @param {Array} lines
- * @returns {int} postcode
+ * @param {Array} lines List of cities
+ * @returns {Int} postcode
  */
 function getPostCode(lines) {
 	let postcode = 0;
@@ -95,7 +105,7 @@ function getPostCode(lines) {
 /**
  *
  * @returns {Promise} lines
- * @description Get the cities from the csv api
+ * @description Get the cities name from the csv api
  */
 async function getCities() {
 	const url =

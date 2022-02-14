@@ -3,12 +3,16 @@ from login_signup.models.appointment import Appointment
 
 
 class AppointmentsView(ListView):
+    """
+    Display the appointments for the current user
+    """
     model = Appointment
     template_name = 'home/appointments.html'
 
     def get_queryset(self):
-        queryset = super(AppointmentsView, self).get_queryset()
-        print(queryset)
+        """
+        We want to display the appointments for the current user
+        """
+        queryset = super().get_queryset()
         userAppointments = queryset.filter(user=self.request.user)
-        print(userAppointments)
         return userAppointments

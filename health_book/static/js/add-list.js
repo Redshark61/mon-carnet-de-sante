@@ -4,7 +4,9 @@ const list = document.querySelectorAll(".js-list");
 const input = document.querySelectorAll(".js-input");
 const deleteButton = document.querySelectorAll(".js-delete");
 let item = document.querySelectorAll(".js-item");
+
 let increment = 0;
+
 // Create an eventListener for each add button
 add.forEach(function (element, key) {
 	element.addEventListener("click", (e) => {
@@ -12,6 +14,12 @@ add.forEach(function (element, key) {
 	});
 });
 
+/**
+ *
+ * @param {Event} e the event
+ * @param {Int} key the index of the add button pressed
+ * @description Create a new element in the list and an hidden input in the form
+ */
 function createElement(e, key) {
 	// Get the vlaue of the input
 	const inputValue = input[key].value;
@@ -26,17 +34,19 @@ function createElement(e, key) {
 
 		newElement.classList.add("form__item");
 		newElement.classList.add("js-item");
-		content.classList.add("form__element");
-		deleteButton.classList.add("form__delete");
-		deleteButton.classList.add("js-delete");
 
-		deleteButton.textContent = "❌";
+		content.classList.add("form__element");
 		content.textContent = inputValue;
 
+		deleteButton.classList.add("form__delete");
+		deleteButton.classList.add("js-delete");
+		deleteButton.textContent = "❌";
+
+		// Add the new element to the list
 		newElement.appendChild(content);
 		newElement.appendChild(deleteButton);
 
-		// Add the new list item to the list
+		// Add the new li to the ul
 		list[key].appendChild(newElement);
 
 		// Empty the input
@@ -45,16 +55,22 @@ function createElement(e, key) {
 		// Create an hidden input with the input value as value
 		const hiddenInput = document.createElement("input");
 		hiddenInput.setAttribute("type", "hidden");
+
 		itemType = e.target.previousElementSibling.id.slice(0, -6);
 		hiddenInput.setAttribute("name", itemType + "_" + increment);
 		hiddenInput.setAttribute("value", inputValue);
 		document.querySelector("form").appendChild(hiddenInput);
 		increment++;
+
 		// Add the eventListener to the delete button
 		deleteButton.addEventListener("click", deleteItem);
 	}
 }
 
+/**
+ *
+ * @param {Event} e z event
+ */
 function deleteItem(e) {
 	// Get the parent element of the delete button and remove it
 	e.target.parentNode.remove();
