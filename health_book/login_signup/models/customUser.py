@@ -38,3 +38,8 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        permissions = (
+            ("can_use_medical_stuff", "Can use medical stuff"),
+        )

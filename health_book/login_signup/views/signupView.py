@@ -6,6 +6,7 @@ from login_signup.models.customUser import CustomUser
 from login_signup.models.diseases import Diseases
 from login_signup.models.treatment import Treatment
 from django.shortcuts import redirect, render
+from django.contrib.auth.models import Permission
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth import login as loginUser
@@ -116,6 +117,9 @@ class SignupView(View):
                     last_name=form.cleaned_data['last_name'],
                     role="PATIENT" if isMedical == 'False' else "MEDICAL_USER"
                 )
+                if isMedical == 'True':
+                    permission = Permission.objects.get(codename='can_use_medical_stuff')
+                    user.user_permissions.add(permission)
                 user.save()
 
                 # If the user is a medical user, we create the Doctor object
