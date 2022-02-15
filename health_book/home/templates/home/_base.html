@@ -14,7 +14,31 @@
   </head>
 
   <body class="grid home no-bg">
-    {% include '_nav_home.html' %}
+    <div class="back-button js-nav-button">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+
+
+    <aside class="grid__3 flex flex--col btn-group--3 js-nav">
+      <div class="btn-group flex flex--col">
+        <a href="{% url 'home:settings' %}" class="flex flex--center btn btn--light-green">
+          <img src="{% static '/img/gear.svg'%}" alt="">
+          Paramètre</a>
+        <a href="{% url 'logout' %}" class="flex flex--center btn btn--light-green">
+          <img src="{% static '/img/leave.svg'%}" alt="">
+          Se déconnecter</a>
+      </div>
+
+      <div class="flex flex--col">
+        {% with request.path as url_name %}
+
+        {% include '_nav_home.html' %}
+        {% endwith %}
+
+      </div>
+    </aside>
     <main class="grid__7">
       {% block content %}{% endblock content %}
     </main>

@@ -1,42 +1,24 @@
 {% load static %}
 
-<div class="back-button js-nav-button">
-  <div class="line"></div>
-  <div class="line"></div>
-  <div class="line"></div>
-</div>
 
+<a href="{% url 'home:home' %}"
+  class="flex flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home:home' %}link--active{% endif %}">
+  <img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
 
-<aside class="grid__3 flex flex--col btn-group--3 js-nav">
-  <div class="btn-group flex flex--col">
-    <a href="{% url 'home:settings' %}" class="flex flex--center btn btn--light-green">
-      <img src="{% static '/img/gear.svg'%}" alt="">
-      Paramètre</a>
-    <a href="{% url 'logout' %}" class="flex flex--center btn btn--light-green">
-      <img src="{% static '/img/leave.svg'%}" alt="">
-      Se déconnecter</a>
-  </div>
+<a href="{% url 'home:diseases' %}"
+  class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'diseases'%}link--active{% endif %}">
+  <img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
 
-  <div class="flex flex--col">
-    {% with request.path as url_name %}
+<a href="{% url 'home:treatments' %}"
+  class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
+  <img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
 
-    <a href="{% url 'home:home' %}"
-      class="flex flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home:home' %}link--active{% endif %}">
-      <img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
+<a href="{% url 'home:appointments' %}"
+  class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'appointments'%}link--active{% endif %}">
+  <img src="{% static '/img/calendar.svg'%}" alt="">Rendez-vous</a>
 
-    <a href="{% url 'home:diseases' %}"
-      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'diseases'%}link--active{% endif %}">
-      <img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
-
-    <a href="{% url 'home:treatments' %}"
-      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
-      <img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
-
-    <a href="{% url 'home:appointments' %}"
-      class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'appointments'%}link--active{% endif %}">
-      <img src="{% static '/img/calendar.svg'%}" alt="">Rendez-vous</a>
-
-    {% endwith %}
-
-  </div>
-</aside>
+{% if perms.login_signup.can_use_medical_stuff %}
+<a href="{% url 'home:diseases' %}"
+  class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == button.urlName %}link--active{% endif %}">
+  <img src="{% static '/img/calendar.svg' %}" alt="">Ordonnances</a>
+{% endif %}

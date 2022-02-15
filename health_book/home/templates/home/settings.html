@@ -1,59 +1,54 @@
-{% extends '_base.html' %}
+{% extends 'home/_base.html' %}
 {% load static %}
 
 {% block title %} Paramètres {% endblock title %}
 
-{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
 {% block content %}
 
-{% include '_nav_home.html' %}
+<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
-<main class="grid__7">
-	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+<div class=" flex flex--row--space-evenly mt-10">
+	<section>
+		<h2 class="text-center">Paramètres</h2>
 
-	<div class=" flex flex--row--space-evenly mt-10">
-		<section>
-			<h2 class="text-center">Paramètres</h2>
+		<form action="" method="post">
 
-			<form action="" method="post">
+			{% if not is_valid %}
+			<div class="alert alert--error alert--max">
+				<h3>Le formulaire est incorrect</h3>
+			</div>
+			{% endif %}
 
-				{% if not is_valid %}
-				<div class="alert alert--error alert--max">
-					<h3>Le formulaire est incorrect</h3>
+			{% csrf_token %}
+			{% for field in form %}
+			<div class="form__group">
+				<label for="{{field.name}}">
+					{% if field.label != 'Username' %}
+					{{field.label}}
+					{% else %}
+					{% if is_medical %}
+					Code RPPS
+					{% else %}
+					Code de sécurité sociale
+					{% endif %}
+					{% endif %}
+				</label>
+				{{field}}
+			</div>
+			{% endfor %}
+
+			<div class="flex flex--row mb-10 mt-5">
+				<div class="flex flex--col smaller btn-group">
+					<button type="submit" name="button" value="edit" class="btn btn--light-green">Modifier</button>
+					<a href="{% url 'home:password_change' %}" class="btn btn--light-green">Modifier le motde passe</a>
 				</div>
-				{% endif %}
+				<button type="submit" name="button" value="delete" class="btn btn--warning smaller">Supprimer</button>
+			</div>
+		</form>
 
-				{% csrf_token %}
-				{% for field in form %}
-				<div class="form__group">
-					<label for="{{field.name}}">
-						{% if field.label != 'Username' %}
-						{{field.label}}
-						{% else %}
-						{% if is_medical %}
-						Code RPPS
-						{% else %}
-						Code de sécurité sociale
-						{% endif %}
-						{% endif %}
-					</label>
-					{{field}}
-				</div>
-				{% endfor %}
+	</section>
 
-				<div class="flex flex--row mb-10 mt-5">
-					<div class="flex flex--col smaller btn-group">
-						<button type="submit" name="button" value="edit" class="btn btn--light-green">Modifier</button>
-						<a href="{% url 'home:password_change' %}" class="btn btn--light-green">Modifier le motde passe</a>
-					</div>
-					<button type="submit" name="button" value="delete" class="btn btn--warning smaller">Supprimer</button>
-				</div>
-			</form>
-
-		</section>
-
-	</div>
-</main>
+</div>
 {% endblock content	 %}
 
 {% block script %}

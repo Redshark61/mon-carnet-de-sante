@@ -1,23 +1,19 @@
-{% extends '_base.html' %}
+{% extends 'home/_base.html' %}
 {% load static %}
 
 {% block title %} Maladies {% endblock title %}
 
-{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
 {% block content %}
 
-{% include '_nav_home.html' %}
 
-<main class="grid__7">
-  <h1>Veux-tu vraiment supprimer ton compte ?</h1>
+<h1>Veux-tu vraiment supprimer ton compte ?</h1>
 
-  <form action="" method="post">
-    {% csrf_token %}
-    <div class="flex flex--row">
-      <button type="submit" name="button" value="cancel" class="btn btn--light-green mt-5 smaller">Annuler</button>
-      <button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Supprimer</button>
-    </div>
-  </form>
-</main>
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="flex flex--row">
+    <button type="submit" name="button" value="cancel" class="btn btn--light-green mt-5 smaller">Annuler</button>
+    <button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Supprimer</button>
+  </div>
+</form>
 
 {% endblock content %}

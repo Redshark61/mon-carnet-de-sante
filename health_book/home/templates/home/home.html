@@ -1,75 +1,70 @@
-{% extends '_base.html' %}
+{% extends 'home/_base.html' %}
 {% load static %}
 
 {% block title %} Acceuil {% endblock title %}
 
-{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
 {% block content %}
 
-{% include '_nav_home.html' %}
+<h1>
+	{% if user.role == 'MEDICAL_USER' %}
+	👨🏼‍⚕️
+	{% endif %}
+	Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
-<main class="grid__7">
-	<h1>
-		{% if user.role == 'MEDICAL_USER' %}
-		👨🏼‍⚕️
+<div class="flex flex--row--space-evenly mt-10">
+	<section>
+		<h2 class="text-center">Traitements</h2>
+		{% if user.treatments.all %}
+		{% for treatment in user.treatments.all %}
+		<div class="card card--row card--dotted-line mt-5">
+			<h3>{{treatment}}</h3>
+			<div class="flex flex--col">
+				<p class="sm-subheader">Jusqu'au</p>
+				<h3>INDETERMINÉ</h3>
+			</div>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+		</div>
+
 		{% endif %}
-		Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
-	<div class="flex flex--row--space-evenly mt-10">
-		<section>
-			<h2 class="text-center">Traitements</h2>
-			{% if user.treatments.all %}
-			{% for treatment in user.treatments.all %}
-			<div class="card card--row card--dotted-line mt-5">
-				<h3>{{treatment}}</h3>
-				<div class="flex flex--col">
-					<p class="sm-subheader">Jusqu'au</p>
-					<h3>INDETERMINÉ</h3>
-				</div>
+	</section>
+
+	<div class="middle-line"></div>
+
+	<section>
+		<h2 class="text-center">Rendez-vous</h2>
+
+		{% if appointments %}
+		{% for appointment in appointments %}
+		<div class="card card--col mt-5">
+			<h3 class="md-subheader">{{appointment.doctor}}</h3>
+			<div class="card__content">
+				<p class="sm-subheader">Lieu</p>
+				<h3>{{appointment.location}}</h3>
 			</div>
-			{% endfor %}
-			{% else %}
-			<div class="alert alert--neutral">
-				<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+			<div class="card__content">
+				<p class="sm-subheader">Date</p>
+				<h3>{{appointment.date}}</h3>
 			</div>
-
-			{% endif %}
-
-		</section>
-
-		<div class="middle-line"></div>
-
-		<section>
-			<h2 class="text-center">Rendez-vous</h2>
-
-			{% if appointments %}
-			{% for appointment in appointments %}
-			<div class="card card--col mt-5">
-				<h3 class="md-subheader">{{appointment.doctor}}</h3>
-				<div class="card__content">
-					<p class="sm-subheader">Lieu</p>
-					<h3>{{appointment.location}}</h3>
-				</div>
-				<div class="card__content">
-					<p class="sm-subheader">Date</p>
-					<h3>{{appointment.date}}</h3>
-				</div>
-				<div class="card__content">
-					<p class="sm-subheader">Heure</p>
-					<h3>{{appointment.time}}</h3>
-				</div>
+			<div class="card__content">
+				<p class="sm-subheader">Heure</p>
+				<h3>{{appointment.time}}</h3>
 			</div>
-			{% endfor %}
-			{% else %}
-			<div class="alert alert--neutral">
-				<h3 class="alert__header">Tu n'as aucun rendez-vous de prévu 💤</h3>
-			</div>
-			{% endif %}
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Tu n'as aucun rendez-vous de prévu 💤</h3>
+		</div>
+		{% endif %}
 
 
-		</section>
-	</div>
-</main>
+	</section>
+</div>
 {% endblock content	 %}
 
 {% block script %}

@@ -1,50 +1,45 @@
-{% extends '_base.html' %}
+{% extends 'home/_base.html' %}
 {% load static %}
 
 {% block title %} Maladies {% endblock title %}
 
-{% block bodyClass %}class="grid home no-bg"{% endblock bodyClass %}
 {% block content %}
 
-{% include '_nav_home.html' %}
+<h1>Mes maladies</h1>
 
-<main class="grid__7">
-	<h1>Mes maladies</h1>
+<div class="flex flex--row--space-evenly mt-5">
+	<section>
+		<div class="flex flex--row--center-all mb-10">
+			<a href="{% url 'home:add_disease' %}" class="btn btn--light-green">Ajouter une maladie</a>
+		</div>
 
-	<div class="flex flex--row--space-evenly mt-5">
-		<section>
-			<div class="flex flex--row--center-all mb-10">
-				<a href="{% url 'home:add_disease' %}" class="btn btn--light-green">Ajouter une maladie</a>
-			</div>
+		{% if object_list %}
+		{% for disease in object_list %}
+		<div class="flex flex--row mt-5 flex--center-all">
 
-			{% if object_list %}
-			{% for disease in object_list %}
-			<div class="flex flex--row mt-5 flex--center-all">
-
-				<div class="card card--row card--dotted-line">
-					<h3>{{disease.disease}}</h3>
-					<div class="flex flex--col">
-						<p class="sm-subheader">Jusqu'au</p>
-						<h3>INDETERMINÉ</h3>
-					</div>
-				</div>
-
-				<div class="card card--delete">
-					<a href="{% url 'home:delete_disease' disease.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
+			<div class="card card--row card--dotted-line">
+				<h3>{{disease.disease}}</h3>
+				<div class="flex flex--col">
+					<p class="sm-subheader">Jusqu'au</p>
+					<h3>INDETERMINÉ</h3>
 				</div>
 			</div>
-			{% endfor %}
-			{% else %}
-			<div class="alert alert--neutral">
-				<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+
+			<div class="card card--delete">
+				<a href="{% url 'home:delete_disease' disease.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
 			</div>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+		</div>
 
-			{% endif %}
+		{% endif %}
 
-		</section>
+	</section>
 
-	</div>
-</main>
+</div>
 {% endblock content	 %}
 
 {% block script %}
