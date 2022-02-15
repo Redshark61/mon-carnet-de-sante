@@ -113,7 +113,9 @@ class SignupView(View):
                     email=form.cleaned_data['mail'],
                     password=form.cleaned_data['password'],
                     first_name=form.cleaned_data['first_name'],
-                    last_name=form.cleaned_data['last_name'])
+                    last_name=form.cleaned_data['last_name'],
+                    role="PATIENT" if isMedical == 'False' else "MEDICAL_USER"
+                )
                 user.save()
 
                 # If the user is a medical user, we create the Doctor object
@@ -176,7 +178,10 @@ class SignupView(View):
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 5:
                 # add the trusted person to the user
-                trustedPerson = form.save(commit=False)
+                try:
+                    trustedPerson = form.save(commit=False)
+                except ValueError:
+                    return redirect('login_signup:signup', nextNumber)
                 trustedPerson.user = request.user
                 trustedPerson.save()
                 return redirect('login_signup:signup', nextNumber)

@@ -31,6 +31,7 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+    list_display = ('id', '__str__', 'role')
 
 
 class CustomDoctorAdmin(admin.ModelAdmin):

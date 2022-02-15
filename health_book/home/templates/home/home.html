@@ -9,7 +9,11 @@
 {% include '_nav_home.html' %}
 
 <main class="grid__7">
-	<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+	<h1>
+		{% if user.role == 'MEDICAL_USER' %}
+		👨🏼‍⚕️
+		{% endif %}
+		Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
 	<div class="flex flex--row--space-evenly mt-10">
 		<section>

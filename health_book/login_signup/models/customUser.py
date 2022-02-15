@@ -7,6 +7,14 @@ from login_signup.models.treatment import Treatment
 
 class CustomUser(AbstractUser):
 
+    MEDICAL_USER = "MEDICAL_USER"
+    PATIENT = "PATIENT"
+
+    ROLE_CHOICES = (
+        (MEDICAL_USER, "Medical User"),
+        (PATIENT, "Patient"),
+    )
+
     class Genders(models.TextChoices):
         MASCULIN = "M"
         FEMININ = "F"
@@ -22,6 +30,7 @@ class CustomUser(AbstractUser):
     birth_date = models.DateField(null=True)
     diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
     treatments = models.ManyToManyField(Treatment, related_name="User_treatment")
+    role = models.CharField(max_length=12, choices=ROLE_CHOICES, default=PATIENT, verbose_name="Rôle")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
