@@ -42,15 +42,15 @@ class CustomRPPSAdmin(admin.ModelAdmin):
     list_display = ('rpps', 'firstname', 'lastname')
 
 
-class CustomAppointmentAdmin(admin.StackedInline):
-    model = appointment.Appointment
-    # Limit the number of appointments to 1
-    max_num = 1
+# class CustomAppointmentAdmin(admin.StackedInline):
+#     model = appointment.Appointment
+#     # Limit the number of appointments to 1
+#     max_num = 1
 
 
 class CustomLocationAdmin(admin.ModelAdmin):
     list_display = ('user', 'address', 'city', 'postal_code')
-    inlines = [CustomAppointmentAdmin]
+    # inlines = [CustomAppointmentAdmin]
 
 
 # Register your models here.

@@ -1,6 +1,6 @@
 from django import forms
 from login_signup.models.customUser import CustomUser
-from login_signup.models import diseases, treatment
+from login_signup.models import diseases, treatment, appointment
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -120,3 +120,46 @@ class AddTreatmentForm(forms.Form):
         }),
         required=True
     )
+
+
+class AddAppointmentForm(forms.ModelForm):
+    # appointment = forms.ModelChoiceField(
+    #     queryset=CustomUser.objects.all(),
+    #     widget=forms.Select(attrs={
+    #         'class': 'form__control ',
+    #         'type': 'input'
+    #     }),
+    #     required=True
+    # )
+
+    class Meta:
+        model = appointment.Appointment
+        fields = '__all__'
+
+        widgets = {
+            'date': forms.DateInput(attrs={
+                'type': 'date'
+            }),
+            'time': forms.TimeInput(attrs={
+                'type': 'time'
+            }),
+            'doctor': forms.Select(attrs={
+                'placeholder': 'Bob Dupont'
+            }),
+            'user': forms.Select(attrs={
+                'placeholder': 'Lucie Leclerc'
+            }),
+            'name': forms.TextInput(attrs={
+                'placeholder': 'Rendez-vous de routine'
+            }),
+            'location': forms.TextInput(attrs={
+                'placeholder': '9 rue de la source, Alençon'
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form__control ',
+            })

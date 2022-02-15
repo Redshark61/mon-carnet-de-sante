@@ -5,11 +5,12 @@
 
 {% block content %}
 
-<h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
+<h1>Mes rendez-vous</h1>
 
 <div class="flex flex--row--space-evenly mt-10">
 	<section>
-		<h2 class="text-center">Traitements</h2>
+		{{create_appointment|safe}}
+
 		{% if object_list %}
 		{% for appointment in object_list %}
 		<div class="card card--col mt-5">

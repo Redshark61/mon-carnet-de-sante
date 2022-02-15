@@ -11,6 +11,7 @@ from .views.addDisease import AddDisease
 from .views.deleteDisease import DeleteDisease
 from .views.addTreatment import AddTreatment
 from .views.deleteTreatment import DeleteTreatment
+from .views.addAppointment import AddAppointment
 
 app_name = 'home'
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     path('delete_disease/<int:pk>', DeleteDisease.as_view(), name="delete_disease"),
     path('add_treatment/', AddTreatment.as_view(), name="add_treatment"),
     path('delete_treatment/<int:pk>', DeleteTreatment.as_view(), name="delete_treatment"),
+    path('add_appointment/', AddAppointment.as_view(), name="add_appointment"),
 ]
