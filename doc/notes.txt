@@ -1,0 +1,5 @@
+https://countriesnow.space/api/v0.1/countries/states
+https://raw.githubusercontent.com/Rudloff/french-postal-codes-api/master/insee.csv
+
+https://adresse.data.gouv.fr/api-doc/adresse
+https://api-adresse.data.gouv.fr/search/?q=75+rue+d+alencon
