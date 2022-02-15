@@ -11,6 +11,7 @@ modalInputs.forEach((modalInput) => {
 		currentPath = window.location.pathname;
 		e.preventDefault();
 
+		// way to know if the modal is send from the login page or not
 		if (currentPath == "/login/") {
 			hiddentInput = document.createElement("input");
 			hiddentInput.setAttribute("type", "hidden");
