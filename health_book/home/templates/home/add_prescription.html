@@ -1,4 +1,5 @@
 {% extends 'home/_base.html' %}
+{% load static %}
 
 {% block title %}Ajouter une ordonnance{% endblock title %}
 
@@ -21,3 +22,7 @@
 </form>
 
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/form-control.js' %}"></script>
+{% endblock script %}

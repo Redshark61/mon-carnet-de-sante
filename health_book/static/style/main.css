@@ -13,6 +13,10 @@ html {
   min-height: 100vh;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 body {
   font-family: "Merriweather", serif;
 }
@@ -153,6 +157,17 @@ form {
 
 .form__group:first-child {
   margin-top: 1rem;
+}
+
+.form__group--checkbox {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1rem;
 }
 
 .form__control {
