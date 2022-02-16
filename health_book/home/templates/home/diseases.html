@@ -28,6 +28,9 @@
 			<div class="card card--delete">
 				<a href="{% url 'home:delete_disease' disease.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
 			</div>
+			<div class="card card--edit">
+				<a href="{% url 'home:edit_disease' disease.id %}"><img src="{% static 'img/pen.svg' %}" alt=""></a>
+			</div>
 		</div>
 		{% endfor %}
 		{% else %}
