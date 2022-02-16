@@ -6,6 +6,7 @@ from .views.homeView import HomeView
 from .views.passwordSuccess import passwordSuccess
 from .views.settingsView import SettingsView
 from .views.treatmentView import TreatmentsView
+from .views.editTreatment import EditTreatment
 from .views.changePasswordView import ChangePasswordView
 from .views.addDisease import AddDisease
 from .views.editDisease import EditDisease
@@ -30,6 +31,7 @@ urlpatterns = [
     path('disease/delete/<int:pk>', DeleteDisease.as_view(), name="delete_disease"),
     path('disease/edit/<int:pk>', EditDisease.as_view(), name="edit_disease"),
     path('treatment/add', AddTreatment.as_view(), name="add_treatment"),
+    path('treatment/edit/<int:pk>', EditTreatment.as_view(), name="edit_treatment"),
     path('delete_treatment/<int:pk>', DeleteTreatment.as_view(), name="delete_treatment"),
     path('appointment/add', AddAppointment.as_view(), name="add_appointment"),
     path('prescription/', PrescriptionView.as_view(), name="prescription"),
