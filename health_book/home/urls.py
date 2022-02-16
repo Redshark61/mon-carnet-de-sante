@@ -12,6 +12,8 @@ from .views.deleteDisease import DeleteDisease
 from .views.addTreatment import AddTreatment
 from .views.deleteTreatment import DeleteTreatment
 from .views.addAppointment import AddAppointment
+from .views.prescriptionView import PrescriptionView
+from .views.addPrescriptionView import AddPrescriptionView
 
 app_name = 'home'
 urlpatterns = [
@@ -23,9 +25,11 @@ urlpatterns = [
     path('settings/password', ChangePasswordView.as_view(), name="password_change"),
     path('settings/password_success', passwordSuccess, name="password_success"),
     path('appointments/', AppointmentsView.as_view(), name="appointments"),
-    path('add_disease/', AddDisease.as_view(), name="add_disease"),
+    path('disease/add', AddDisease.as_view(), name="add_disease"),
     path('delete_disease/<int:pk>', DeleteDisease.as_view(), name="delete_disease"),
-    path('add_treatment/', AddTreatment.as_view(), name="add_treatment"),
+    path('treatment/add', AddTreatment.as_view(), name="add_treatment"),
     path('delete_treatment/<int:pk>', DeleteTreatment.as_view(), name="delete_treatment"),
-    path('add_appointment/', AddAppointment.as_view(), name="add_appointment"),
+    path('appointment/add', AddAppointment.as_view(), name="add_appointment"),
+    path('prescription/', PrescriptionView.as_view(), name="prescription"),
+    path('prescription/add', AddPrescriptionView.as_view(), name="prescription_add"),
 ]

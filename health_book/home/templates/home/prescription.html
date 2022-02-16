@@ -1,0 +1,14 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Ordonnance{% endblock title %}
+
+{% block content %}
+<h1>Vos ordonnances</h1>
+
+{% if perms.login_signup.can_use_medical_stuff %}
+<div class="flex flex--row--center-all mb-10">
+  <a href="{% url 'home:prescription_add' %}" class="btn btn--light-green">Ajouter une ordonnance</a>
+</div>
+
+{% endif %}
+{% endblock content %}
