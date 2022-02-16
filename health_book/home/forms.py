@@ -123,14 +123,6 @@ class AddTreatmentForm(forms.Form):
 
 
 class AddAppointmentForm(forms.ModelForm):
-    # appointment = forms.ModelChoiceField(
-    #     queryset=CustomUser.objects.all(),
-    #     widget=forms.Select(attrs={
-    #         'class': 'form__control ',
-    #         'type': 'input'
-    #     }),
-    #     required=True
-    # )
 
     class Meta:
         model = appointment.Appointment

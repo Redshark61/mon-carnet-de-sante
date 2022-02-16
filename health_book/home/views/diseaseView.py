@@ -1,5 +1,6 @@
 from django.views.generic.list import ListView
 from login_signup.models.userDisease import UserDisease
+from login_signup.models.prescription import Prescription
 
 
 class DiseasesView(ListView):
@@ -10,7 +11,12 @@ class DiseasesView(ListView):
         """
         Display the diseases for the current user
         """
-        queryset = super(DiseasesView, self).get_queryset()
+        queryset = super().get_queryset()
         userDiseases = queryset.filter(user=self.request.user)
         print(userDiseases)
         return userDiseases
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
+        return context
