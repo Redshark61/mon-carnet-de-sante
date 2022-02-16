@@ -32,7 +32,7 @@
       </div>
 
       <div class="flex flex--col">
-        {% with request.path as url_name %}
+        {% with request.resolver_match.url_name as url_name %}
 
         {% include '_nav_home.html' %}
         {% endwith %}
