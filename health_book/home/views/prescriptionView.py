@@ -1,21 +1,24 @@
-from django.shortcuts import render, redirect
-from django.views import View
+from django.views.generic import ListView
+from login_signup.models import prescription
+from login_signup.models.doctor import Doctor
 
 
-class PrescriptionView(View):
+class PrescriptionView(ListView):
     """
     View for the prescription
     """
     template_name = 'home/prescription.html'
+    model = prescription.Prescription
 
-    def get(self, request):
+    def get_queryset(self):
         """
-        Display the prescription
+        We want to display the appointments for the current user
         """
-        return render(request, self.template_name)
-
-    def post(self, request):
-        """
-        Save the prescription
-        """
-        return redirect('home:prescription')
+        queryset = super().get_queryset()
+        if self.request.user.has_perm('login_signup.can_use_medical_stuff'):
+            print("Doctor")
+            doctor = Doctor.objects.get(user=self.request.user)
+            userPrescription = queryset.filter(doctor=doctor)
+        else:
+            userPrescription = queryset.filter(user=self.request.user)
+        return userPrescription

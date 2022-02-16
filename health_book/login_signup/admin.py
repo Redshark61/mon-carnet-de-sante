@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from login_signup.models import appointment, customUser, diseases, doctor, job, location, rpps, treatment, trustedUser, userDisease
-# from login_signup.models import *
+# from login_signup.models import appointment, customUser, diseases, doctor, job, location, rpps, treatment, trustedUser, userDisease
+from login_signup.models import *
 
 
 class CustomDiseasesAdmin(admin.ModelAdmin):
@@ -42,6 +42,10 @@ class CustomRPPSAdmin(admin.ModelAdmin):
     list_display = ('rpps', 'firstname', 'lastname')
 
 
+# class CustomPrescriptionAdmin(admin.ModelAdmin):
+#     list_display = ('rpps', 'firstname', 'lastname')
+
+
 # class CustomAppointmentAdmin(admin.StackedInline):
 #     model = appointment.Appointment
 #     # Limit the number of appointments to 1
@@ -64,3 +68,4 @@ admin.site.register(treatment.Treatment)
 admin.site.register(trustedUser.TrustedPerson)
 admin.site.register(userDisease.UserDisease, CustomUserDiseasesAdmin)
 admin.site.register(appointment.Appointment)
+admin.site.register(prescription.Prescription)

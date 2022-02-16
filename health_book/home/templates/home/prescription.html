@@ -11,4 +11,31 @@
 </div>
 
 {% endif %}
+
+
+{% for prescription in object_list %}
+<div class="flex flex--row mt-5 flex--center-all">
+  <div class="card card--col mt-5">
+    <h3 class="md-subheader">{{prescription.user}}</h3>
+    <div class="card__content">
+      <p class="sm-subheader">Maladie</p>
+      <h3>{{prescription.diseases}}</h3>
+    </div>
+    <div class="card__content">
+      <p class="sm-subheader">Traitements</p>
+      <h3>{{prescription.treatment}}</h3>
+    </div>
+    <div class="card__content">
+      <p class="sm-subheader">Date de fin</p>
+      {% if prescription.is_permanent %}
+      <h3>PERMANENT</h3>
+      {% else %}
+
+      <h3>{{prescription.end_date}}</h3>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endfor %}
 {% endblock content %}
