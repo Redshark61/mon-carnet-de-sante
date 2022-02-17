@@ -41,9 +41,6 @@ class PrescriptionView(ListView):
             userPrescription = queryset.filter(user=self.request.user)
 
         for prescription in userPrescription:
-            print(prescription.end_date)
-            print(datetime.date.today())
-            print(prescription.end_date < datetime.date.today())
             if prescription.end_date < datetime.date.today():
                 prescription.is_active = False
                 prescription.save()
@@ -51,7 +48,6 @@ class PrescriptionView(ListView):
                 prescription.is_active = True
                 prescription.save()
 
-        print("in queryset", self.isFilter)
         if not self.isFilter:
             userPrescription = userPrescription.filter(is_active=True)
 

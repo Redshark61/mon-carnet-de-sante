@@ -1,6 +1,7 @@
 from django.views.generic.edit import FormView
 from django.shortcuts import render
 from home import forms
+from django.urls import reverse_lazy
 
 
 class AddAppointment(FormView):
@@ -10,7 +11,7 @@ class AddAppointment(FormView):
 
     template_name = 'home/add_appointment.html'
     form_class = forms.AddAppointmentForm
-    success_url = 'home:appointments'
+    success_url = reverse_lazy('home:appointments')
 
     def form_valid(self, form):
         """

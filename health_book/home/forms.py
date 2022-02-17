@@ -127,6 +127,7 @@ class AddAppointmentForm(forms.ModelForm):
     class Meta:
         model = appointment.Appointment
         fields = '__all__'
+        exclude = ('is_active',)
 
         widgets = {
             'date': forms.DateInput(attrs={
