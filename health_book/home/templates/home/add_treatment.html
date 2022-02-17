@@ -8,6 +8,14 @@
 <form action="" method="post">
   {% csrf_token %}
 
+  {% if perms.login_signup.can_use_medical_stuff %}
+  <div class="form__group">
+    <label for="name">Nom du traitement</label>
+    <input type="text" class="form__control" id="name" name="treatment" placeholder="Nom du traitement">
+  </div>
+  {% else %}
+
+
   {% for field in form %}
   <div class="form__group">
     {{ field.label }}
@@ -19,7 +27,11 @@
     {{ field}}
   </div>
   {% endfor %}
+  {% endif %}
 
-  <button type="submit" class="btn btn--light-green mt-5">Ajouter</button>
+  <div class="flex flex--col btn-group">
+    <button type="submit" class="btn btn--light-green mt-5">Ajouter</button>
+    <a href="{% url 'home:treatments' %}" class="btn btn--dark-green btn--small">Précédent</a>
+  </div>
 </form>
 {% endblock content %}

@@ -20,4 +20,5 @@ class TreatmentsView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
+        context['treatments'] = Treatment.objects.all()
         return context

@@ -1,7 +1,7 @@
 {% extends 'home/_base.html' %}
 {% load static %}
 
-{% block title %} Maladies {% endblock title %}
+{% block title %} Traitement {% endblock title %}
 
 {% block content %}
 
@@ -11,8 +11,22 @@
 <div class="flex flex--row--space-evenly">
 	<section>
 		<div class="flex flex--row--center-all mb-10">
+			{% if perms.login_signup.can_use_medical_stuff %}
+			<a href="{% url 'home:add_treatment' %}" class="btn btn--light-green">Créer un traitement</a>
+			{% else %}
 			<a href="{% url 'home:add_treatment' %}" class="btn btn--light-green">Ajouter un traitement</a>
+			{% endif %}
+
 		</div>
+
+
+		{% if perms.login_signup.can_use_medical_stuff %}
+		<div class="grid grid--wrap grid--5 mt-5">
+			{% for treatment in treatments %}
+			<h3 class="card flex flex--center-all grid__element">{{ treatment}}</h3>
+			{% endfor %}
+		</div>
+		{% else %}
 
 		{% if object_list or prescription %}
 		{% for treatment in object_list %}
@@ -53,6 +67,7 @@
 				<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
 			</div>
 
+			{% endif %}
 			{% endif %}
 
 	</section>

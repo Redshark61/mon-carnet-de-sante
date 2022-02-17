@@ -1,6 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from home import forms
+from login_signup.models.treatment import Treatment
 
 
 class AddTreatment(View):
@@ -14,8 +15,15 @@ class AddTreatment(View):
 
     def post(self, request):
         form = self.form(request.POST)
-        if form.is_valid():
-            treatment = form.cleaned_data['treatment']
-            self.request.user.treatments.add(treatment)
+        hasPerm = request.user.has_perm('login_signup.can_use_medical_stuff')
+
+        if form.is_valid() or (hasPerm and request.POST.get('treatment', False)):
+
+            if hasPerm:
+                treatment = request.POST.get('treatment')
+                Treatment.objects.create(name=treatment)
+            else:
+                treatment = form.cleaned_data['treatment']
+                self.request.user.treatments.add(treatment)
             return redirect('home:treatments')
         return render(request, self.template_name, {'form': form})

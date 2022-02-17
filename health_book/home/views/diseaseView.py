@@ -5,6 +5,10 @@ from login_signup.models.diseases import Diseases
 
 
 class DiseasesView(ListView):
+    """
+    Display the diseases for the current user
+    """
+
     model = UserDisease
     template_name = 'home/diseases.html'
 

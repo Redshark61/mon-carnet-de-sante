@@ -21,3 +21,8 @@ main.grid__7 {
 	grid-auto-rows: minmax(100px, auto);
 	gap: 1rem;
 }
+
+.grid__element {
+	// Make the span on column fit the width of the element
+	grid-column: span 2;
+}
