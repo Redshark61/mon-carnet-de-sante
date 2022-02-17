@@ -1,0 +1,28 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Maladies {% endblock title %}
+
+{% block content %}
+
+<h1>Mes patients</h1>
+
+<div class="flex flex--row--space-evenly mt-5">
+  <section>
+    {% if perms.login_signup.can_use_medical_stuff %}
+    <div class="grid grid--wrap grid--5 mt-5">
+      {% for patient in object_list %}
+      <div class="card flex flex--col flex--center grid__element">
+        <h3>{{ patient }}</h3>
+        <a href="#">Voir les infos</a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static '/js/nav-button.js' %}"></script>
+{% endblock script %}
