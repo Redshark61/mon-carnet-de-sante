@@ -6,19 +6,21 @@
 {% block content %}
 
 <h1>Mes rendez-vous</h1>
-<form action="" method="post">
+<form action="" method="post" class="btn-group">
 	{% csrf_token %}
-	<div class="form__group">
-		<label for="displayPast">Ordonnances passé</label>
-		<input type="checkbox" class="form__control" name="displayPast" id="displayPast"
-			{% if isFilter %}checked{% endif %}>
+	<div class="flex flex--row btn-group">
+		<div class="form__group">
+			<label for="displayPast">Ordonnances passé</label>
+			<input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+				{% if isFilter %}checked{% endif %}>
+		</div>
+		<button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
 	</div>
-	<button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+	{{create_appointment|safe}}
 </form>
 
 <div class="flex flex--row--space-evenly mt-10">
 	<section>
-		{{create_appointment|safe}}
 
 		{% if object_list %}
 		{% for appointment in object_list %}
