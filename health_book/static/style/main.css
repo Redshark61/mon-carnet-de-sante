@@ -174,7 +174,7 @@ form {
   border: none;
   text-decoration: none;
   text-align: left;
-  color: white;
+  color: #fff;
   font-size: min(3vw,0.7rem);
   font-weight: bold;
   padding: 0.7rem 1.4rem;
@@ -327,7 +327,7 @@ form {
   border: none;
   text-decoration: none;
   text-align: center;
-  color: white;
+  color: #fff;
   font-size: min(3vw,1rem);
   font-weight: bold;
   padding: 1rem 2rem;
@@ -401,16 +401,16 @@ form {
 .btn--small {
   text-decoration: none;
   text-align: center;
-  color: white;
-  font-size: min(3vw,0.5rem);
+  color: inherit;
+  font-size: min(3vw,0.7rem);
   font-weight: bold;
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.4rem;
   -webkit-transition: -webkit-box-shadow 0.3s ease-in-out;
   transition: -webkit-box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out;
   transition: box-shadow 0.3s ease-in-out, -webkit-box-shadow 0.3s ease-in-out;
   cursor: pointer;
-  border-radius: 0.375rem;
+  border-radius: 0.525rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;

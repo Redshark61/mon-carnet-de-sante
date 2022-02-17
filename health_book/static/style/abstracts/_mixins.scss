@@ -38,10 +38,10 @@
 		inset 4px 4px 9px #a8baf8;
 }
 
-@mixin button($size: 1rem, $position: center) {
+@mixin button($size: 1rem, $position: center, $color: #fff) {
 	text-decoration: none;
 	text-align: $position;
-	color: white;
+	color: $color;
 	font-size: #{"min(3vw,#{$size})"};
 	font-weight: bold;
 	padding: $size 2 * $size;
