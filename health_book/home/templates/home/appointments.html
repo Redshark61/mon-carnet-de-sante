@@ -14,7 +14,7 @@
 		{% if object_list %}
 		{% for appointment in object_list %}
 		<div class="card card--col mt-5">
-			<h3 class="md-subheader">{{appointment.doctor}}</h3>
+			<h3 class="md-subheader">{{appointment.doctor}} - {{appointment.doctor.job}}</h3>
 			<div class="card__content">
 				<p class="sm-subheader">Lieu</p>
 				<h3>{{appointment.location}}</h3>
