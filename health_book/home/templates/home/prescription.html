@@ -1,9 +1,19 @@
 {% extends 'home/_base.html' %}
+{% load static %}
 
 {% block title %}Ordonnance{% endblock title %}
 
 {% block content %}
 <h1>Vos ordonnances</h1>
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="form__group">
+    <label for="displayPast">Ordonnances passé</label>
+    <input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+      {% if isFilter %}checked{% endif %}>
+  </div>
+  <button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+</form>
 
 {% if perms.login_signup.can_use_medical_stuff %}
 <div class="flex flex--row--center-all mb-10">
@@ -39,3 +49,7 @@
 </div>
 {% endfor %}
 {% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/form-control.js' %}"></script>
+{% endblock script %}

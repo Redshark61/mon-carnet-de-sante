@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.views.generic.list import ListView
 from login_signup.models.appointment import Appointment
 from login_signup.models.doctor import Doctor
@@ -37,4 +38,17 @@ class AppointmentsView(ListView):
             userAppointments = queryset.filter(doctor=doctor)
         else:
             userAppointments = queryset.filter(user=self.request.user)
+
+        userAppointments = userAppointments.filter(is_active=True)
+
+        # Set is_active to false if the date of the appointment is in the past
+        for appointment in userAppointments:
+            print(appointment.date)
+            print(datetime.date.today())
+            if appointment.date < datetime.date.today():
+                appointment.is_active = False
+                appointment.save()
+
+        userAppointments = userAppointments.filter(is_active=True)
+
         return userAppointments

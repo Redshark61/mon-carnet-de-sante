@@ -42,19 +42,12 @@ class CustomRPPSAdmin(admin.ModelAdmin):
     list_display = ('rpps', 'firstname', 'lastname')
 
 
-# class CustomPrescriptionAdmin(admin.ModelAdmin):
-#     list_display = ('rpps', 'firstname', 'lastname')
-
-
-# class CustomAppointmentAdmin(admin.StackedInline):
-#     model = appointment.Appointment
-#     # Limit the number of appointments to 1
-#     max_num = 1
-
-
 class CustomLocationAdmin(admin.ModelAdmin):
     list_display = ('user', 'address', 'city', 'postal_code')
-    # inlines = [CustomAppointmentAdmin]
+
+
+class CustomPrescriptionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'doctor', 'treatment')
 
 
 # Register your models here.
@@ -68,4 +61,4 @@ admin.site.register(treatment.Treatment)
 admin.site.register(trustedUser.TrustedPerson)
 admin.site.register(userDisease.UserDisease, CustomUserDiseasesAdmin)
 admin.site.register(appointment.Appointment)
-admin.site.register(prescription.Prescription)
+admin.site.register(prescription.Prescription, CustomPrescriptionAdmin)
