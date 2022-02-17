@@ -11,6 +11,7 @@ class Prescription(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Patient')
     treatment = models.ForeignKey(Treatment, on_delete=models.SET_NULL, null=True, verbose_name='Traitement')
     diseases = models.ForeignKey(Diseases, on_delete=models.SET_NULL, null=True, verbose_name='Maladie')
-    prescription = models.TextField(verbose_name='Informations complémentaire')
+    prescription = models.TextField(verbose_name='Informations complémentaire', blank=True, null=True)
     end_date = models.DateField(null=True, blank=True, verbose_name='Date de fin')
     is_permanent = models.BooleanField(default=False, verbose_name='Est-ce permanent')
+    is_active = models.BooleanField(default=False)
