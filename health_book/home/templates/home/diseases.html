@@ -18,9 +18,9 @@
 		</div>
 
 		{% if perms.login_signup.can_use_medical_stuff %}
-		<div class="flex flex--col mt-5 flex--center-all">
+		<div class="grid grid--wrap grid--5 mt-5">
 			{% for disease in diseases %}
-			<h3>{{ disease}}</h3>
+			<h3 class="card flex flex--center-all">{{ disease}}</h3>
 			{% endfor %}
 		</div>
 		{% else %}

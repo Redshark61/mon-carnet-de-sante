@@ -323,6 +323,13 @@ form {
   }
 }
 
+.grid--wrap {
+  -ms-grid-columns: (1fr)[10];
+      grid-template-columns: repeat(10, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 1rem;
+}
+
 .btn {
   border: none;
   text-decoration: none;
