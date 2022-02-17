@@ -1,5 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect
+from login_signup.models.diseases import Diseases
 from home import forms
 
 
@@ -15,10 +16,15 @@ class AddDisease(View):
 
     def post(self, request):
         form = self.form(request.POST)
-        if form.is_valid():
+        hasPerm = request.user.has_perm('login_signup.can_use_medical_stuff')
+        if form.is_valid() or (hasPerm and request.POST.get('disease', False)):
 
+            if hasPerm:
+                disease = request.POST.get('disease')
+                Diseases.objects.create(name=disease)
             # Add a disease to the user
-            disease = form.cleaned_data['disease']
-            self.request.user.diseases.add(disease)
+            else:
+                disease = form.cleaned_data['disease']
+                self.request.user.diseases.add(disease)
             return redirect('home:diseases')
         return render(request, self.template_name, {'form': form})

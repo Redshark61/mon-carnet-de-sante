@@ -1,6 +1,7 @@
 from django.views.generic.list import ListView
 from login_signup.models.userDisease import UserDisease
 from login_signup.models.prescription import Prescription
+from login_signup.models.diseases import Diseases
 
 
 class DiseasesView(ListView):
@@ -19,4 +20,5 @@ class DiseasesView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
+        context['diseases'] = Diseases.objects.all()
         return context
