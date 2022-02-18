@@ -1,0 +1,20 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}{{patient}}{% endblock title %}
+
+{% block content %}
+<h1>{{patient}}</h1>
+
+<div class="grid grid--wrap grid--5 grid--center">
+  <a href="{% url 'home:patient_view' patient.id %}" class="btn btn--light-green grid__element m-i-auto">Retour</a>
+</div>
+
+<div class="grid grid--wrap grid--5 mt-5">
+  {% for treatment in treatments %}
+  <div class="card flex flex--col flex--center-all grid__element">
+    <h3>{{treatment}}</h3>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
