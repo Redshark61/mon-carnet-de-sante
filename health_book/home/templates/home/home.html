@@ -14,7 +14,7 @@
 <div class="flex flex--row--space-evenly mt-10">
 	<section>
 		<h2 class="text-center">Traitements</h2>
-		{% if user.treatments.all %}
+		{% if user.treatments.all or prescriptions %}
 		{% for treatment in user.treatments.all %}
 		<div class="card card--row card--dotted-line mt-5">
 			<h3>{{treatment}}</h3>
@@ -23,6 +23,16 @@
 				<h3>INDETERMINÉ</h3>
 			</div>
 		</div>
+		{% endfor %}
+		{% for prescription in prescriptions %}
+		<div class="card card--row card--dotted-line mt-5">
+			<h3>{{prescription.treatment}}</h3>
+			<div class="flex flex--col">
+				<p class="sm-subheader">Jusqu'au</p>
+				<h3>{{prescription.end_date}}</h3>
+			</div>
+		</div>
+
 		{% endfor %}
 		{% else %}
 		<div class="alert alert--neutral">
