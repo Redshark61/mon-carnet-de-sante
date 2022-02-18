@@ -43,6 +43,7 @@
 			<div class="card card--delete">
 				<a href="{% url 'home:delete_treatment' treatment.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
 			</div>
+
 			<div class="card card--edit">
 				<a href="{% url 'home:edit_treatment' treatment.id %}"><img src="{% static 'img/pen.svg' %}" alt=""></a>
 			</div>
@@ -61,21 +62,25 @@
 				</div>
 
 			</div>
+
 			<div class="card card--delete hidden">
 				<a href="#"><img src="{% static 'img/delete.svg' %}" alt="" /></a>
 			</div>
+
 			<div class="card card--edit hidden">
 				<a href="#"><img src="{% static 'img/pen.svg' %}" alt="" /></a>
 			</div>
 
-			{% endfor %}
-			{% else %}
-			<div class="alert alert--neutral">
-				<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
-			</div>
+		</div>
 
-			{% endif %}
-			{% endif %}
+		{% endfor %}
+		{% else %}
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+		</div>
+
+		{% endif %}
+		{% endif %}
 
 	</section>
 
