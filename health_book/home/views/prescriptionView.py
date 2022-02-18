@@ -41,7 +41,7 @@ class PrescriptionView(ListView):
             userPrescription = queryset.filter(user=self.request.user)
 
         for prescription in userPrescription:
-            if prescription.end_date < datetime.date.today():
+            if not prescription.is_permanent and (prescription.end_date < datetime.date.today()):
                 prescription.is_active = False
                 prescription.save()
             else:
