@@ -90,10 +90,16 @@ input {
   }
 }
 
-.flex[class*="--center"] {
+.flex .flex--center {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.flex.flex--center-j {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .flex[class*="--center-all"] {
@@ -303,6 +309,10 @@ form {
       grid-template-columns: repeat(10, 1fr);
 }
 
+.grid > a {
+  width: 80%;
+}
+
 .grid__3 {
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
@@ -332,6 +342,15 @@ form {
 
 .grid__element {
   grid-column: span 2;
+}
+
+.grid--center {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .btn {
@@ -930,6 +949,14 @@ body[class*="no-bg"] {
   margin-bottom: 10vh;
 }
 
+.mb-5 {
+  margin-bottom: 5vh;
+}
+
+.mb-3 {
+  margin-bottom: 3vh;
+}
+
 .mt-5 {
   margin-top: 5vh;
 }
@@ -999,5 +1026,13 @@ main {
 
 .link--active {
   outline: 2px dotted black;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.m-i-auto {
+  margin-inline: auto;
 }
 /*# sourceMappingURL=main.css.map */
