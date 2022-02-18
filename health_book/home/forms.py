@@ -163,10 +163,15 @@ class AddPrescriptionForm(forms.ModelForm):
     class Meta:
         model = prescription.Prescription
         fields = '__all__'
+        exclude = ('is_active',)
         widgets = {
             'end_date': forms.DateInput(attrs={
                 'type': 'date'
             }),
+        }
+
+        labels = {
+            'prescription_scan': "Scan de l'ordonnance",
         }
 
     def __init__(self, *args, **kwargs):
