@@ -14,7 +14,7 @@
       {% for patient in object_list %}
       <div class="card flex flex--col flex--center grid__element">
         <h3>{{ patient }}</h3>
-        <a href="#">Voir les infos</a>
+        <a href="{% url 'home:patient_view' patient.id %}">Voir les infos</a>
       </div>
       {% endfor %}
     </div>
