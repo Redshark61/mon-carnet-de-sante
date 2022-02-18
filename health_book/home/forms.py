@@ -1,6 +1,6 @@
 from django import forms
 from login_signup.models.customUser import CustomUser
-from login_signup.models import diseases, treatment, appointment
+from login_signup.models import diseases, treatment, appointment, prescription
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -123,18 +123,11 @@ class AddTreatmentForm(forms.Form):
 
 
 class AddAppointmentForm(forms.ModelForm):
-    # appointment = forms.ModelChoiceField(
-    #     queryset=CustomUser.objects.all(),
-    #     widget=forms.Select(attrs={
-    #         'class': 'form__control ',
-    #         'type': 'input'
-    #     }),
-    #     required=True
-    # )
 
     class Meta:
         model = appointment.Appointment
         fields = '__all__'
+        exclude = ('is_active',)
 
         widgets = {
             'date': forms.DateInput(attrs={
@@ -155,6 +148,30 @@ class AddAppointmentForm(forms.ModelForm):
             'location': forms.TextInput(attrs={
                 'placeholder': '9 rue de la source, Alençon'
             }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form__control ',
+            })
+
+
+class AddPrescriptionForm(forms.ModelForm):
+
+    class Meta:
+        model = prescription.Prescription
+        fields = '__all__'
+        exclude = ('is_active',)
+        widgets = {
+            'end_date': forms.DateInput(attrs={
+                'type': 'date'
+            }),
+        }
+
+        labels = {
+            'prescription_scan': "Scan de l'ordonnance",
         }
 
     def __init__(self, *args, **kwargs):

@@ -6,15 +6,30 @@
 {% block content %}
 
 <h1>Mes rendez-vous</h1>
+<form action="" method="post" class="btn-group">
+	{% csrf_token %}
+	<div class="flex flex--row btn-group">
+		<div class="form__group">
+			<label for="displayPast">Rendez-vous passé</label>
+			<input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+				{% if isFilter %}checked{% endif %}>
+		</div>
+		<button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+	</div>
+	{{create_appointment|safe}}
+</form>
 
 <div class="flex flex--row--space-evenly mt-10">
 	<section>
-		{{create_appointment|safe}}
 
 		{% if object_list %}
 		{% for appointment in object_list %}
 		<div class="card card--col mt-5">
-			<h3 class="md-subheader">{{appointment.doctor}}</h3>
+			{% if perms.login_signup.can_use_medical_stuff %}
+			<h3 class="md-subheader">Avec {{appointment.user}}</h3>
+			{% else %}
+			<h3 class="md-subheader">{{appointment.doctor}} - {{appointment.doctor.job}}</h3>
+			{% endif %}
 			<div class="card__content">
 				<p class="sm-subheader">Lieu</p>
 				<h3>{{appointment.location}}</h3>
@@ -43,5 +58,5 @@
 {% endblock content	 %}
 
 {% block script %}
-<script src="{% static '/js/nav-button.js' %}"></script>
+<script src="{% static 'js/form-control.js' %}" type="text/javascript"></script>
 {% endblock script %}

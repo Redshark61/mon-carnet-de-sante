@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from login_signup.models.appointment import Appointment
+from login_signup.models.prescription import Prescription
+from login_signup.models.doctor import Doctor
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -13,10 +15,15 @@ class HomeView(View):
     template_name = 'home/home.html'
 
     def get(self, request):
-        appointment = Appointment.objects.filter(user=request.user)
+        if request.user.has_perm('login_signup.can_use_medical_stuff'):
+            me = Doctor.objects.get(user=request.user)
+            appointment = Appointment.objects.filter(doctor=me, is_active=True)
+        else:
+            appointment = Appointment.objects.filter(user=request.user, is_active=True)
         context = {
             'user': request.user,
             'appointments': appointment,
         }
+        context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
 
         return render(request, self.template_name, context)

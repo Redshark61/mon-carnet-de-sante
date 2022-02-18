@@ -40,7 +40,7 @@
 }
 
 .btn--small {
-	@include button(0.5rem);
+	@include button(0.7rem, $color: inherit);
 	width: fit-content;
 }
 

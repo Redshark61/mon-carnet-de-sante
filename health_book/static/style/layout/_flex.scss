@@ -14,8 +14,12 @@
 		}
 	}
 
-	&[class*="--center"] {
+	.flex--center {
 		align-items: center;
+	}
+
+	&.flex--center-j {
+		justify-content: center;
 	}
 
 	&[class*="--center-all"] {

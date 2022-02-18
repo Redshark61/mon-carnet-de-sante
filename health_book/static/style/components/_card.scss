@@ -13,6 +13,18 @@
 	}
 }
 
+.card--edit {
+	width: auto;
+	height: 100%;
+	background-color: $dark-blue;
+	margin-left: 1rem;
+
+	img {
+		width: 45px;
+		height: 45px;
+	}
+}
+
 .card--delete {
 	width: auto;
 	height: 100%;

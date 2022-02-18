@@ -12,6 +12,7 @@ class Appointment(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     location = models.CharField(max_length=100, verbose_name="Lieu")
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.user} {self.doctor} {self.date} {self.time}"

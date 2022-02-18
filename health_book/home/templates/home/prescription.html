@@ -1,0 +1,63 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %}Ordonnance{% endblock title %}
+
+{% block content %}
+<h1>Vos ordonnances</h1>
+<form action="" method="post" class="btn-group">
+  {% csrf_token %}
+  <div class="flex flex--row btn-group">
+    <div class="form__group">
+      <label for="displayPast">Ordonnances passé</label>
+      <input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+        {% if isFilter %}checked{% endif %}>
+    </div>
+    <button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+  </div>
+  {% if perms.login_signup.can_use_medical_stuff %}
+  <div class="flex flex--row--center-all mb-10">
+    <a href="{% url 'home:prescription_add' %}" class="btn btn--light-green">Ajouter une ordonnance</a>
+  </div>
+</form>
+
+{% endif %}
+
+
+{% for prescription in object_list %}
+<div class="flex flex--row mt-5 flex--center-all">
+  <div class="card card--row card--dotted-line mt-5">
+    <div class="flex flex--col">
+      <h3 class="md-subheader mb-3">{{prescription.user}}</h3>
+      <div class="mb-3">
+        <p class="sm-subheader">Maladie</p>
+        <h3>{{prescription.diseases}}</h3>
+      </div>
+      <div class="mb-3">
+        <p class="sm-subheader">Traitements</p>
+        <h3>{{prescription.treatment}}</h3>
+      </div>
+      <div class="mb-3">
+        <p class="sm-subheader">Date de fin</p>
+        {% if prescription.is_permanent %}
+        <h3>PERMANENT</h3>
+        {% else %}
+        <h3>{{prescription.end_date}}</h3>
+        {% endif %}
+      </div>
+    </div>
+    <div>
+      {{prescription.prescription}}
+      {% if prescription.prescription_scan %}
+      <img src="{{prescription.prescription_scan.url}}" alt="" class="img-prescription">
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endfor %}
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/form-control.js' %}"></script>
+{% endblock script %}
