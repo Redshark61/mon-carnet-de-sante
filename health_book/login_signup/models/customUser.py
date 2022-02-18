@@ -19,7 +19,6 @@ class CustomUser(AbstractUser):
         MASCULIN = "M"
         FEMININ = "F"
 
-    mail = models.EmailField(null=True)
     gender = models.CharField(max_length=1, choices=Genders.choices, null=True)
     main_doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,
                                     null=True, related_name="User_main_doctor")
