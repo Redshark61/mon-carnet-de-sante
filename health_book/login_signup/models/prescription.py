@@ -15,3 +15,4 @@ class Prescription(models.Model):
     end_date = models.DateField(null=True, blank=True, verbose_name='Date de fin')
     is_permanent = models.BooleanField(default=False, verbose_name='Est-ce permanent')
     is_active = models.BooleanField(default=False)
+    prescription_scan = models.ImageField(upload_to='prescription_scan', blank=True, null=True)

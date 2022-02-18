@@ -123,6 +123,9 @@ STATICFILES_DIRS = (
 AUTH_USER_MODEL = 'login_signup.CustomUser'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 LOGOUT_REDIRECT_URL = 'index'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
 # mimetypes.add_type("text/css", ".css", True)
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
