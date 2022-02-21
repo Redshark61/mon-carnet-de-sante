@@ -1,0 +1,22 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Éditer le rendez-vous{% endblock title %}
+
+{% block content %}
+
+<h1>Éditer le rendez-vous</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+
+  {% for field in form %}
+  {{field.errors}}
+  <div class="form__group">
+    <label for="{{field.auto_id}}">{{field.label}}</label>
+    {{field}}
+  </div>
+
+  {% endfor %}
+  <button type="submit" class="btn btn--light-green mt-5">Sauvegarder</button>
+</form>
+{% endblock content %}

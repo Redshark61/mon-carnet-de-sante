@@ -48,19 +48,18 @@ class AppointmentsView(ListView):
         else:
             userAppointments = queryset.filter(user=self.request.user)
 
-        # userAppointments = userAppointments.filter(is_active=True)
-
-        # Set is_active to false if the date of the appointment is in the past
-
-        for appointment in userAppointments:
-            if appointment.date < datetime.date.today():
-                appointment.is_active = False
-                appointment.save()
-            else:
-                appointment.is_active = True
-                appointment.save()
-
         if not self.isFilter:
             userAppointments = userAppointments.filter(is_active=True)
+            # userAppointments = userAppointments.filter(is_active=True)
+
+            # Set is_active to false if the date of the appointment is in the past
+
+            for appointment in userAppointments:
+                if appointment.date < datetime.date.today():
+                    appointment.is_active = False
+                    appointment.save()
+                else:
+                    appointment.is_active = True
+                    appointment.save()
 
         return userAppointments
