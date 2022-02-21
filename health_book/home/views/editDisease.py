@@ -7,7 +7,7 @@ from home import forms
 
 class EditDisease(View):
     form = forms.AddDiseaseForm
-    template_name = 'home/edit_disease.html'
+    template_name = 'home/diseases/edit_disease.html'
 
     def get(self, request, **kwargs):
         id = kwargs['pk']

@@ -7,7 +7,7 @@ from home import forms
 class AddDisease(View):
     """Add a disease to the user"""
 
-    template_name = 'home/add_disease.html'
+    template_name = 'home/diseases/add_disease.html'
     form = forms.AddDiseaseForm
 
     def get(self, request):

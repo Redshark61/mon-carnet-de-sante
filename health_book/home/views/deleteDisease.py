@@ -7,7 +7,7 @@ class DeleteDisease(View):
     """
     Delete the disease from the user
     """
-    template_name = 'home/delete_disease.html'
+    template_name = 'home/diseases/delete_disease.html'
 
     def get(self, request, *args, **kwargs):
         """

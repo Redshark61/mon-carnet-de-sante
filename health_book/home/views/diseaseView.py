@@ -10,7 +10,7 @@ class DiseasesView(ListView):
     """
 
     model = UserDisease
-    template_name = 'home/diseases.html'
+    template_name = 'home/diseases/diseases.html'
 
     def get_queryset(self):
         """
