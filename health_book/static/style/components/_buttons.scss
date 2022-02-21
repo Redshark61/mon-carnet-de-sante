@@ -1,6 +1,15 @@
 .btn {
 	border: none;
 	@include button;
+
+	@include media-min($phone) {
+		@include button($size: 0.7rem);
+
+		> img {
+			height: 25px;
+			aspect-ratio: 1;
+		}
+	}
 }
 
 .btn--light-green {
