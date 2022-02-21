@@ -1,0 +1,16 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Restorer {{appointment.name}}{% endblock title %}
+
+{% block content %}
+<h1>Veux-tu restorer '{{appointment.name}}' avec {{appointment.user}} ?</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="flex flex--row">
+    <a href="{% url 'home:appointments' %}" class="btn btn--light-green mt-5 smaller">Annuler</a>
+    <button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Restorer</button>
+  </div>
+</form>
+
+{% endblock content %}
