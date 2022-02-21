@@ -130,9 +130,11 @@ class AddAppointmentForm(forms.ModelForm):
         exclude = ('is_active',)
 
         widgets = {
-            'date': forms.DateInput(attrs={
-                'type': 'date'
-            }),
+            'date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'type': 'date'
+                }),
             'time': forms.TimeInput(attrs={
                 'type': 'time'
             }),
@@ -165,9 +167,11 @@ class AddPrescriptionForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('is_active',)
         widgets = {
-            'end_date': forms.DateInput(attrs={
-                'type': 'date'
-            }),
+            'end_date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'type': 'date'
+                }),
         }
 
         labels = {
