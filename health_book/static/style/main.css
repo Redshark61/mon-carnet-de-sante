@@ -679,6 +679,26 @@ form {
           align-items: center;
 }
 
+.card--col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card--col > .card {
+  height: auto;
+}
+
 .card--dotted-line::after {
   content: "";
   position: absolute;
@@ -963,6 +983,10 @@ body[class*="no-bg"] {
 
 .mt-10 {
   margin-top: 10vh;
+}
+
+.mr-5 {
+  margin-right: 5vh;
 }
 
 aside {
