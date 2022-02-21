@@ -4,7 +4,7 @@ from login_signup.models.appointment import Appointment
 
 
 class DeleteAppointementView(View):
-    template_name = 'home/deleteAppointement.html'
+    template_name = 'home/appointments/deleteAppointement.html'
 
     def get(self, request, **kwargs):
         appointment = Appointment.objects.get(id=kwargs['pk'])
@@ -19,4 +19,4 @@ class DeleteAppointementView(View):
         appointment.is_active = False
         appointment.save()
         print(appointment.is_active)
-        return render(request, 'home/deleteAppointementSuccess.html')
+        return render(request, 'home/appointments/deleteAppointementSuccess.html')

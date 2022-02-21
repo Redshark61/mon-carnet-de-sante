@@ -7,7 +7,7 @@ from home.forms import AddAppointmentForm
 class EditAppointementView(UpdateView):
     model = appointment.Appointment
     form_class = AddAppointmentForm
-    template_name = 'home/editAppointment.html'
+    template_name = 'home/appointments/editAppointment.html'
 
     def get_success_url(self):
         return reverse_lazy('home:appointments')

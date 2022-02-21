@@ -10,7 +10,7 @@ class AppointmentsView(ListView):
     Display the appointments for the current user
     """
     model = Appointment
-    template_name = 'home/appointments.html'
+    template_name = 'home/appointments/appointments.html'
     isFilter = False
 
     def post(self, request, *args, **kwargs):

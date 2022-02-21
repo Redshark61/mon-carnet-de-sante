@@ -9,7 +9,7 @@ class AddAppointment(FormView):
     Add an appointment to the user
     """
 
-    template_name = 'home/add_appointment.html'
+    template_name = 'home/appointment/add_appointment.html'
     form_class = forms.AddAppointmentForm
     success_url = reverse_lazy('home:appointments')
 

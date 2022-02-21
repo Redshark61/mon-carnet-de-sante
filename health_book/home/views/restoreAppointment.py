@@ -4,7 +4,7 @@ from login_signup.models.appointment import Appointment
 
 
 class RestoreAppointementView(View):
-    template_name = 'home/restoreAppointement.html'
+    template_name = 'home/appointments/restoreAppointement.html'
 
     def get(self, request, **kwargs):
         appointment = Appointment.objects.get(id=kwargs['pk'])
@@ -18,4 +18,4 @@ class RestoreAppointementView(View):
         appointment = Appointment.objects.get(id=kwargs['pk'])
         appointment.is_active = True
         appointment.save()
-        return render(request, 'home/restoreAppointementSuccess.html')
+        return render(request, 'home/appointments/restoreAppointementSuccess.html')
