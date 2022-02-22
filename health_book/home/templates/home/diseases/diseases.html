@@ -7,6 +7,18 @@
 
 <h1>Mes maladies</h1>
 
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="flex flex--row btn-group">
+    <div class="form__group">
+      <label for="displayPast">Maladies passé</label>
+      <input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+        {% if isFilter %}checked{% endif %}>
+    </div>
+    <button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+  </div>
+</form>
+
 <div class="flex flex--row--space-evenly mt-5">
   <section>
     <div class="flex flex--row--center-all mb-10">
@@ -79,4 +91,5 @@
 
 {% block script %}
 <script src="{% static '/js/nav-button.js' %}"></script>
+<script src="{% static '/js/form-control.js' %}"></script>
 {% endblock script %}

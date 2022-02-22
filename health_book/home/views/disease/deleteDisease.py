@@ -29,6 +29,7 @@ class DeleteDisease(View):
         id = kwargs.get('pk')
         if request.POST.get('button') == 'delete':
             to_be_deleted_disease = UserDisease.objects.get(id=id)
-            to_be_deleted_disease.delete()
+            to_be_deleted_disease.is_active = False
+            to_be_deleted_disease.save()
             return redirect('home:home')
         return redirect('home:settings')
