@@ -50,8 +50,6 @@ class AppointmentsView(ListView):
 
         if not self.isFilter:
             userAppointments = userAppointments.filter(is_active=True)
-            # userAppointments = userAppointments.filter(is_active=True)
-
             # Set is_active to false if the date of the appointment is in the past
 
             for appointment in userAppointments:
