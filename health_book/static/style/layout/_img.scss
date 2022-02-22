@@ -2,3 +2,19 @@
 	height: 50vh;
 	display: block;
 }
+
+.profile-picture {
+	img {
+		height: 100%;
+		position: absolute;
+		inset: 0;
+	}
+}
+
+.square-container {
+	position: relative;
+	height: 20vh;
+	border-radius: 50%;
+	aspect-ratio: 1;
+	overflow: hidden;
+}

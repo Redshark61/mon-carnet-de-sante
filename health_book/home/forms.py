@@ -18,6 +18,7 @@ class UserForm(forms.ModelForm):
             #   'parent1',
             #   'parent2',
             'birth_date',
+            'profile_picture'
         )
         labels = {
             'username': 'Nom d\'utilisateur',
@@ -39,33 +40,26 @@ class UserForm(forms.ModelForm):
                 'class': 'form__control ',
                 'placeholder': 'example@gmail.com'
             }),
-            'gender': forms.Select(attrs={
-                'class': 'form__control ',
-            }),
-            'first_name': forms.TextInput(attrs={
-                'class': 'form__control '
-            }),
-            'last_name': forms.TextInput(attrs={
-                'class': 'form__control '
-            }),
-            'main_doctor': forms.Select(attrs={
-                'class': 'form__control ',
-            }),
             # 'parent1': forms.Select(attrs={
             #     'class': 'form__control '
             # }),
             # 'parent2': forms.Select(attrs={
             #     'class': 'form__control '
             # }),
-            'birth_date': forms.DateInput(attrs={
-                'class': 'form__control ',
+            'birth_date': forms.DateInput(format=('%Y-%m-%d'), attrs={
                 'type': 'date'
-            })
+            }),
+            'profile_picture': forms.FileInput()
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].validators = []
+
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form__control '
+            })
 
 
 class PasswordChangingForm(PasswordChangeForm):

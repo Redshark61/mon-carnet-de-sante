@@ -30,6 +30,7 @@ class CustomUser(AbstractUser):
     diseases = models.ManyToManyField(Diseases, through="UserDisease", related_name="User_disease")
     treatments = models.ManyToManyField(Treatment, related_name="User_treatment")
     role = models.CharField(max_length=12, choices=ROLE_CHOICES, default=PATIENT, verbose_name="Rôle")
+    profile_picture = models.ImageField(upload_to='profile_pictures', null=True, blank=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

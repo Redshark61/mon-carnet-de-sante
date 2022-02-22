@@ -45,9 +45,11 @@ class Connection2(forms.ModelForm):
             'gender': forms.Select(attrs={
                 'class': 'form__control  '
             }),
-            'birth_date': forms.DateInput(attrs={
-                'class': 'form__control  ', 'type': 'date'
-            })
+            'birth_date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'class': 'form__control  ', 'type': 'date'
+                })
         }
 
 

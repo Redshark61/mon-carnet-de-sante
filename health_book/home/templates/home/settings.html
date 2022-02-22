@@ -7,11 +7,21 @@
 
 <h1>Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
+<div class="flex flex--col flex--center-all profile-picture">
+	<div class="square-container">
+		{% if user.profile_picture %}
+		<img src="{{user.profile_picture.url}}" alt="">
+		{% else %}
+		<img src="/media/profile_pictures/placeholder.png" alt="">
+		{% endif %}
+	</div>
+</div>
+
 <div class=" flex flex--row--space-evenly mt-10">
 	<section>
 		<h2 class="text-center">Paramètres</h2>
 
-		<form action="" method="post">
+		<form action="" method="post" enctype="multipart/form-data">
 
 			{% if not is_valid %}
 			<div class="alert alert--error alert--max">
