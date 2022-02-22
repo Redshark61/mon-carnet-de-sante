@@ -370,6 +370,11 @@ form {
           align-items: center;
 }
 
+.detail__img-prescription {
+  height: 50vh;
+  display: block;
+}
+
 .btn {
   border: none;
   text-decoration: none;

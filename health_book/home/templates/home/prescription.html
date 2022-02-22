@@ -19,9 +19,9 @@
   <div class="flex flex--row--center-all mb-10">
     <a href="{% url 'home:prescription_add' %}" class="btn btn--light-green">Ajouter une ordonnance</a>
   </div>
+  {% endif %}
 </form>
 
-{% endif %}
 
 
 {% for prescription in object_list %}
@@ -47,10 +47,15 @@
       </div>
     </div>
     <div>
-      {{prescription.prescription}}
-      {% if prescription.prescription_scan %}
-      <img src="{{prescription.prescription_scan.url}}" alt="" class="img-prescription">
-      {% endif %}
+
+      <div class="flex flex--col btn-group">
+        {{prescription.prescription}}
+        {% if prescription.prescription_scan %}
+        <img src="{{prescription.prescription_scan.url}}" alt="" class="img-prescription">
+        {% endif %}
+        <a href="{% url 'home:prescription_detail' prescription.id%}">Voir plus</a>
+      </div>
+
     </div>
   </div>
 

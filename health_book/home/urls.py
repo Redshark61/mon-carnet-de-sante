@@ -23,6 +23,7 @@ from .views.patientTreatmentsView import PatientTreatmentsView
 from .views.deleteAppointementView import DeleteAppointementView
 from .views.editAppointementView import EditAppointementView
 from .views.restoreAppointment import RestoreAppointementView
+from .views.detailPrescriptionView import DetailPrescriptionView
 
 app_name = 'home'
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     ### Prescription ###
     path('prescription/', PrescriptionView.as_view(), name="prescription"),
     path('prescription/add', AddPrescriptionView.as_view(), name="prescription_add"),
+    path('prescription/detail/<int:pk>', DetailPrescriptionView.as_view(), name="prescription_detail"),
     ### Patients ###
     path('patients', PatientsView.as_view(), name="patients_view"),
     path('patient/<int:pk>', PatientView.as_view(), name="patient_view"),
