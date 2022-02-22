@@ -28,5 +28,7 @@ class DeleteTreatment(View):
         id = kwargs.get('pk')
         if request.POST.get('button') == 'delete':
             treatment = Treatment.objects.get(id=id)
-            self.request.user.treatments.remove(treatment)
+            treatment = self.request.user.treatments.get(name=treatment)
+            treatment.is_active = False
+            treatment.save()
         return redirect('home:treatments')

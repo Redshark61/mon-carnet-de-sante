@@ -47,7 +47,7 @@
 				</div>
 			</div>
 
-			<div class="card--col mr-5">
+			<div class="card--col mr-5 {% if not perms.login_signup.can_use_medical_stuff %}hidden{% endif %}">
 				<div class="card card--delete">
 					{% if not appointment.is_active %}
 					<a href="{% url 'home:restore_appointment' appointment.id %}" title="Restaurer">

@@ -8,7 +8,19 @@
 
 <h1>Mes traitements</h1>
 
-<div class="flex flex--row--space-evenly">
+<form action="" method="post">
+	{% csrf_token %}
+	<div class="flex flex--row btn-group">
+		<div class="form__group">
+			<label for="displayPast">Traitements passé</label>
+			<input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+				{% if isFilter %}checked{% endif %}>
+		</div>
+		<button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+	</div>
+</form>
+
+<div class="flex flex--row--space-evenly mt-10">
 	<section>
 		<div class="flex flex--row--center-all mb-10">
 			{% if perms.login_signup.can_use_medical_stuff %}
@@ -40,6 +52,8 @@
 				</div>
 			</div>
 
+			{% if treatment.is_active %}
+
 			<div class="card card--delete">
 				<a href="{% url 'home:delete_treatment' treatment.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
 			</div>
@@ -47,6 +61,16 @@
 			<div class="card card--edit">
 				<a href="{% url 'home:edit_treatment' treatment.id %}"><img src="{% static 'img/pen.svg' %}" alt=""></a>
 			</div>
+			{% else %}
+			<div class="card card--delete hidden">
+				<a href="{% url 'home:delete_treatment' treatment.id %}"><img src="{% static 'img/delete.svg' %}" alt=""></a>
+			</div>
+
+			<div class="card card--edit hidden">
+				<a href="{% url 'home:edit_treatment' treatment.id %}"><img src="{% static 'img/pen.svg' %}" alt=""></a>
+			</div>
+
+			{% endif %}
 
 		</div>
 		{% endfor %}
@@ -89,4 +113,5 @@
 
 {% block script %}
 <script src="{% static '/js/nav-button.js' %}"></script>
+<script src="{% static '/js/form-control.js' %}"></script>
 {% endblock script %}
