@@ -23,44 +23,78 @@
 </form>
 
 
+<div class="flex flex--row--space-evenly mt-10">
+  <section>
+    {% for prescription in object_list %}
+    <div class="flex flex--row mt-5">
 
-{% for prescription in object_list %}
-<div class="flex flex--row mt-5 flex--center-all">
-  <div class="card card--row card--dotted-line mt-5">
-    <div class="flex flex--col">
-      <h3 class="md-subheader mb-3">{{prescription.user}}</h3>
-      <div class="mb-3">
-        <p class="sm-subheader">Maladie</p>
-        <h3>{{prescription.diseases}}</h3>
+      <div class="card card--row card--dotted-line">
+
+        <div class="flex flex--col">
+
+          <h3 class="md-subheader mb-3">{{prescription.user}}</h3>
+
+          <div class="mb-3">
+            <p class="sm-subheader">Maladie</p>
+            <h3>{{prescription.diseases}}</h3>
+          </div>
+
+          <div class="mb-3">
+            <p class="sm-subheader">Traitements</p>
+            <h3>{{prescription.treatment}}</h3>
+          </div>
+
+          <div class="mb-3">
+            <p class="sm-subheader">Date de fin</p>
+            {% if prescription.is_permanent %}
+            <h3>PERMANENT</h3>
+            {% else %}
+            <h3>{{prescription.end_date}}</h3>
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="flex flex--col btn-group">
+            {{prescription.prescription}}
+            {% if prescription.prescription_scan %}
+            <img src="{{prescription.prescription_scan.url}}" alt="" class="img-prescription">
+            {% endif %}
+            <a href="{% url 'home:prescription_detail' prescription.id%}">Voir plus</a>
+          </div>
+
+        </div>
+
       </div>
-      <div class="mb-3">
-        <p class="sm-subheader">Traitements</p>
-        <h3>{{prescription.treatment}}</h3>
+
+      <div class="card--col mr-5">
+
+        <div class="card card--delete">
+          {% if not prescription.is_active %}
+          <a href="#" title="Restaurer">
+            <img src="{% static 'img/backup.svg' %}" alt="" />
+          </a>
+          {% else %}
+          <a href="{% url 'home:prescription_delete' prescription.id %}" title="Supprimer">
+            <img src="{% static 'img/delete.svg' %}" alt="" />
+          </a>
+          {% endif %}
+        </div>
+
+        <div class="card card--edit">
+          <a href="#" title="Éditer">
+            <img src="{% static 'img/pen.svg' %}" alt="" />
+          </a>
+        </div>
+
       </div>
-      <div class="mb-3">
-        <p class="sm-subheader">Date de fin</p>
-        {% if prescription.is_permanent %}
-        <h3>PERMANENT</h3>
-        {% else %}
-        <h3>{{prescription.end_date}}</h3>
-        {% endif %}
-      </div>
+
     </div>
-    <div>
-
-      <div class="flex flex--col btn-group">
-        {{prescription.prescription}}
-        {% if prescription.prescription_scan %}
-        <img src="{{prescription.prescription_scan.url}}" alt="" class="img-prescription">
-        {% endif %}
-        <a href="{% url 'home:prescription_detail' prescription.id%}">Voir plus</a>
-      </div>
-
-    </div>
-  </div>
-
+    {% endfor %}
+  </section>
 </div>
-{% endfor %}
 {% endblock content %}
 
 {% block script %}

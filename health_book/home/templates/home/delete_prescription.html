@@ -1,0 +1,17 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Supprimer une ordonnance {% endblock title %}
+
+{% block content %}
+
+<h1>Veux-tu vraiment supprimer l'ordonnance de '{{prescription.doctor}}'</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="flex flex--row">
+    <a href="{% url 'home:prescription' %}" class="btn btn--light-green mt-5 smaller">Annuler</a>
+    <button type="submit" name="button" value="delete" class="btn btn--warning mt-5 smaller">Supprimer</button>
+  </div>
+</form>
+{% endblock content %}
