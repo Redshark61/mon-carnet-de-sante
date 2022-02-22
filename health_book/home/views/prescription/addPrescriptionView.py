@@ -8,7 +8,7 @@ class AddPrescriptionView(FormView):
     View for the prescription
     """
 
-    template_name = 'home/add_prescription.html'
+    template_name = 'home/prescription/add_prescription.html'
     form_class = forms.AddPrescriptionForm
     success_url = reverse_lazy('home:prescription')
 

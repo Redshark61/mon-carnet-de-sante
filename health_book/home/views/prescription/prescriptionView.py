@@ -8,7 +8,7 @@ class PrescriptionView(ListView):
     """
     View for the prescription
     """
-    template_name = 'home/prescription.html'
+    template_name = 'home/prescription/prescription.html'
     model = prescription.Prescription
     isFilter = False
 

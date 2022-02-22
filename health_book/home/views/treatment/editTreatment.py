@@ -6,7 +6,7 @@ from login_signup.models.treatment import Treatment
 
 class EditTreatment(View):
     form = forms.AddTreatmentForm
-    template_name = 'home/edit_treatment.html'
+    template_name = 'home/treatment/edit_treatment.html'
 
     def get(self, request, **kwargs):
         id = kwargs['pk']

@@ -6,7 +6,7 @@ from login_signup.models.treatment import Treatment
 
 class AddTreatment(View):
     """Add a treatment to the user"""
-    template_name = 'home/add_treatment.html'
+    template_name = 'home/treatment/add_treatment.html'
     form = forms.AddTreatmentForm
 
     def get(self, request):

@@ -7,7 +7,7 @@ class DeleteTreatment(View):
     """
     Delete the treatment from the user
     """
-    template_name = 'home/delete_treatment.html'
+    template_name = 'home/treatment/delete_treatment.html'
 
     def get(self, request, *args, **kwargs):
         """

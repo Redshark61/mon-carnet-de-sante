@@ -9,7 +9,7 @@ class TreatmentsView(ListView):
     """
 
     model = Treatment
-    template_name = 'home/treatments.html'
+    template_name = 'home/treatment/treatments.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()

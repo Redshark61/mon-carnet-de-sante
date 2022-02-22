@@ -4,5 +4,5 @@ from login_signup.models.customUser import CustomUser
 
 class PatientView(DetailView):
     model = CustomUser
-    template_name = 'home/patient.html'
+    template_name = 'home/patient/patient.html'
     context_object_name = 'patient'

@@ -4,7 +4,7 @@ from login_signup.models.prescription import Prescription
 
 
 class DeletePrescriptionView(View):
-    template_name = 'home/delete_prescription.html'
+    template_name = 'home/prescription/delete_prescription.html'
 
     def get(self, request, **kwargs):
         prescription = Prescription.objects.get(id=kwargs['pk'])
@@ -17,4 +17,4 @@ class DeletePrescriptionView(View):
         prescription = Prescription.objects.get(id=kwargs['pk'])
         prescription.is_active = False
         prescription.save()
-        return render(request, 'home/delete_prescription_success.html')
+        return render(request, 'home/prescription/delete_prescription_success.html')

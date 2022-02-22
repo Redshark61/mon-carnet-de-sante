@@ -5,7 +5,7 @@ from login_signup.models.prescription import Prescription
 
 class PatientDiseasesView(DetailView):
     model = CustomUser
-    template_name = 'home/patient_diseases.html'
+    template_name = 'home/patient/patient_diseases.html'
     context_object_name = 'patient'
 
     def get_context_data(self, **kwargs):

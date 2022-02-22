@@ -5,7 +5,7 @@ from login_signup.models.doctor import Doctor
 
 class PatientsView(ListView):
     model = CustomUser
-    template_name = 'home/patients.html'
+    template_name = 'home/patient/patients.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
