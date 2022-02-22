@@ -69,11 +69,13 @@
 
       </div>
 
+      {% if perms.login_signup.can_use_medical_stuff %}
+
       <div class="card--col mr-5">
 
         <div class="card card--delete">
           {% if not prescription.is_active %}
-          <a href="#" title="Restaurer">
+          <a href="{% url 'home:prescription_restore' prescription.id%}" title="Restaurer">
             <img src="{% static 'img/backup.svg' %}" alt="" />
           </a>
           {% else %}
@@ -84,12 +86,13 @@
         </div>
 
         <div class="card card--edit">
-          <a href="#" title="Éditer">
+          <a href="{% url 'home:prescription_edit' prescription.id %}" title="Éditer">
             <img src="{% static 'img/pen.svg' %}" alt="" />
           </a>
         </div>
 
       </div>
+      {% endif %}
 
     </div>
     {% endfor %}

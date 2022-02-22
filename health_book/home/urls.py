@@ -2,7 +2,7 @@ from django.urls import path
 from home.views.disease import addDisease, deleteDisease, diseaseView, editDisease
 from home.views.appointment import addAppointment, deleteAppointementView, appointmentsView, editAppointementView, restoreAppointment
 from home.views.treatment import addTreatment, deleteTreatment, treatmentView, editTreatment
-from home.views.prescription import addPrescriptionView, deletePrescriptionView, prescriptionView, detailPrescriptionView
+from home.views.prescription import addPrescriptionView, deletePrescriptionView, prescriptionView, detailPrescriptionView, editPrescriptionView, restorePrescriptionView
 from home.views.patient import patientsView, patientView, patientDiseasesView, patientTreatmentsView
 from .views.deleteView import DeleteView
 from .views.homeView import HomeView
@@ -38,6 +38,10 @@ urlpatterns = [
          detailPrescriptionView.DetailPrescriptionView.as_view(), name="prescription_detail"),
     path('prescription/delete/<int:pk>',
          deletePrescriptionView.DeletePrescriptionView.as_view(), name="prescription_delete"),
+    path('prescription/edit/<int:pk>',
+         editPrescriptionView.EditPrescriptionView.as_view(), name="prescription_edit"),
+    path('prescription/restore/<int:pk>',
+         restorePrescriptionView.RestorePrescriptionView.as_view(), name="prescription_restore"),
     ### Patients ###
     path('patients', patientsView.PatientsView.as_view(), name="patients_view"),
     path('patient/<int:pk>', patientView.PatientView.as_view(), name="patient_view"),
