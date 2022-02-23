@@ -1,0 +1,16 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Blouqer{% endblock title %}
+
+{% block content %}
+<h1>Bloquer {{userToBlock}}</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  <div class="form__group btn-group">
+    <label for="reason">Veux-tu le bloquer ?</label>
+    <button type="submit" class="btn btn--warning">Oui</button>
+    <a href="{% url 'home:messages' %}" class="btn btn--light-green btn--small">Retour</a>
+  </div>
+</form>
+{% endblock content %}

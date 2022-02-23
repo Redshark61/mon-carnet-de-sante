@@ -22,6 +22,7 @@ class MessageView(View):
         context = {
             'messages': messages,
             'userChat': user,
+            'slug': slug,
         }
 
         return render(request, self.template_name, context)

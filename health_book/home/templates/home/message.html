@@ -8,7 +8,7 @@
 
 
 <h1>Messages avec <a href="{% url 'home:patient_view' userChat.id %}">{{userChat}}</a></h1>
-
+<a href="{% url 'home:block' slug %}">Bloquer cet utilisateur</a>
 
 {% for message in messages %}
 <div class="chat" data-position="{% if user == message.sender %}right{% else %}left{% endif %}">

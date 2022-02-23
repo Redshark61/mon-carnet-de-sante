@@ -1,5 +1,6 @@
 from django.views.generic.edit import FormView
 from django.shortcuts import redirect
+from django.db.models import Q
 from login_signup.models import customUser, message, doctor
 from home.forms import CreateNewMessageForm
 
@@ -21,7 +22,8 @@ class MessagesView(FormView):
             user = doctor.Doctor.objects.get(user=self.request.user)
             messages = message.Message.objects.filter(doctor=user)
             userName = messages.values_list('user', flat=True)
-            userNames = customUser.CustomUser.objects.filter(id__in=userName)
+            userNames = customUser.CustomUser.objects.filter(
+                Q(id__in=userName) & ~Q(blocked_user__in=[self.request.user]))
             slugName = [(f"{name.first_name} {name.last_name}").replace(' ', '-') for name in userNames]
         else:
             messages = message.Message.objects.filter(user=self.request.user)

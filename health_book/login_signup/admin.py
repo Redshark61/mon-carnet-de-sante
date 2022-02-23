@@ -19,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         *UserAdmin.fieldsets,  # original form fieldsets, expanded
         (                      # new fieldset added on to the bottom
-            'Custom Field',  # heading
+            'Extra field',  # heading
             {
                 'fields': (
                     'gender',
@@ -27,7 +27,8 @@ class CustomUserAdmin(UserAdmin):
                     'parent2',
                     'main_doctor',
                     'birth_date',
-                    'treatments'
+                    'treatments',
+                    'blocked_user',
                 ),
             },
         ),
