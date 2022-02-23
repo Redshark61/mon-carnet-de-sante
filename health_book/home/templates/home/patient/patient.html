@@ -41,7 +41,7 @@
       <a href="{% url 'home:patient_diseases_view' patient.id %}" class="btn btn--light-green">Voir ses maladies</a>
       <a href="{% url 'home:patient_treatments_view' patient.id %}" class="btn btn--light-green">Voir ses
         traitements</a>
-      <a href="#" class="btn btn--light-green">Chat</a>
+      <a href="{% url 'home:message' slug%}" class="btn btn--light-green">Chat</a>
     </div>
     </d>
   </div>

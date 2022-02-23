@@ -7,7 +7,7 @@
 {% block content %}
 
 
-<h1>Messages avec {{userChat}}</h1>
+<h1>Messages avec <a href="{% url 'home:patient_view' userChat.id %}">{{userChat}}</a></h1>
 
 
 {% for message in messages %}
