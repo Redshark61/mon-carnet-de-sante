@@ -43,7 +43,7 @@ nav {
 	padding: 1vw;
 	background-color: $light-purple;
 	height: 100%;
-	transition: all 0.5s ease;
+	transition: transform 0.5s ease;
 
 	@include media-min($phone) {
 		position: fixed;
