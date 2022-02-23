@@ -178,3 +178,28 @@ class AddPrescriptionForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form__control ',
             })
+
+
+class CreateNewMessageForm(forms.Form):
+    destination = forms.ModelChoiceField(
+        queryset=CustomUser.objects.all(),
+        widget=forms.Select(attrs={
+            'class': 'form__control ',
+        }),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['destination'].label = 'Destinataire'
+        if user.has_perm('login_signup.can_use_medical_stuff'):
+            self.fields['destination'].queryset = CustomUser.objects.filter(
+                is_superuser=False,
+                role="PATIENT"
+            )
+        else:
+            self.fields['destination'].queryset = CustomUser.objects.filter(
+                is_superuser=False,
+                role="MEDICAL_USER"
+            )

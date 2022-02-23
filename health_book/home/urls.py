@@ -10,10 +10,14 @@ from .views.homeView import HomeView
 from .views.passwordSuccess import passwordSuccess
 from .views.settingsView import SettingsView
 from .views.changePasswordView import ChangePasswordView
+from .views.messagesView import MessagesView
+from .views.messageView import MessageView
 
 app_name = 'home'
 urlpatterns = [
     path('', login_required(HomeView.as_view(), redirect_field_name=None), name="home"),
+    path('message/', login_required(MessagesView.as_view(), redirect_field_name=None), name="messages"),
+    path('message/<str:slug>', login_required(MessageView.as_view(), redirect_field_name=None), name="message"),
     ### Disease ###
     path('diseases/', login_required(diseaseView.DiseasesView.as_view(), redirect_field_name=None), name="diseases"),
     path('disease/add', login_required(addDisease.AddDisease.as_view(),

@@ -60,6 +60,10 @@ input {
   opacity: 0.7;
 }
 
+.bold {
+  font-weight: 500;
+}
+
 .flex {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -144,6 +148,17 @@ form {
           align-items: stretch;
   margin-inline: auto;
   margin-top: 2rem;
+}
+
+form.flex.flex--row button[type="submit"] {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+form > textarea {
+  width: 80%;
+  resize: none;
 }
 
 .form__group {
@@ -955,6 +970,91 @@ form {
 
 .alert.alert--max {
   width: 100%;
+}
+
+.chat {
+  position: relative;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2rem;
+  margin: 3rem 0;
+  color: white;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+}
+
+.chat h2 {
+  position: absolute;
+  top: -1.3rem;
+  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-weight: bold;
+  color: #555;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.chat[data-position="left"] {
+  background-color: #007120;
+  border-radius: 0 14px 14px 0;
+}
+
+.chat[data-position="left"] h2 {
+  left: 1rem;
+}
+
+.chat[data-position="left"]::after {
+  content: "";
+  position: absolute;
+  background-color: #007120;
+  bottom: -1.9rem;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  z-index: -1;
+}
+
+.chat[data-position="left"]::before {
+  content: "";
+  position: absolute;
+  background-color: #f0f3ff;
+  bottom: -2.5rem;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  border-top-left-radius: 50%;
+}
+
+.chat[data-position="right"] {
+  background-color: #1b348b;
+  margin-left: auto;
+  border-radius: 14px 0 0 14px;
+}
+
+.chat[data-position="right"] h2 {
+  right: 1rem;
+}
+
+.chat[data-position="right"]::after {
+  content: "";
+  position: absolute;
+  background-color: #1b348b;
+  bottom: -1.9rem;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  z-index: -1;
+}
+
+.chat[data-position="right"]::before {
+  content: "";
+  position: absolute;
+  background-color: #f0f3ff;
+  bottom: -2.5rem;
+  right: 0px;
+  width: 40px;
+  height: 40px;
+  border-top-right-radius: 50%;
 }
 
 .login {
