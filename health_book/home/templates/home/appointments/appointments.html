@@ -1,0 +1,89 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Rendez-vous {% endblock title %}
+
+{% block content %}
+
+<h1>Mes rendez-vous</h1>
+<form action="" method="post" class="btn-group">
+	{% csrf_token %}
+	<div class="flex flex--row btn-group">
+		<div class="form__group">
+			<label for="displayPast">Rendez-vous passé</label>
+			<input type="checkbox" class="form__control" name="displayPast" id="displayPast"
+				{% if isFilter %}checked{% endif %}>
+		</div>
+		<button type="submit" class="btn btn--light-green btn--small">Filtrer</button>
+	</div>
+	{{create_appointment|safe}}
+</form>
+
+<div class="flex flex--row--space-evenly mt-10">
+	<section>
+
+		{% if object_list %}
+
+		{% for appointment in object_list %}
+
+		<div class="flex flex--row mt-5">
+			<div class="card">
+				{% if perms.login_signup.can_use_medical_stuff %}
+				<h3 class="md-subheader">Avec {{appointment.user}}</h3>
+				{% else %}
+				<h3 class="md-subheader">{{appointment.doctor}} - {{appointment.doctor.job}}</h3>
+				{% endif %}
+				<div class="card__content">
+					<p class="sm-subheader">Lieu</p>
+					<h3>{{appointment.location}}</h3>
+				</div>
+				<div class="card__content">
+					<p class="sm-subheader">Date</p>
+					<h3>{{appointment.date}}</h3>
+				</div>
+				<div class="card__content">
+					<p class="sm-subheader">Heure</p>
+					<h3>{{appointment.time}}</h3>
+				</div>
+			</div>
+
+			<div class="card--col mr-5 {% if not perms.login_signup.can_use_medical_stuff %}hidden{% endif %}">
+				<div class="card card--delete">
+					{% if not appointment.is_active %}
+					<a href="{% url 'home:restore_appointment' appointment.id %}" title="Restaurer">
+						<img src="{% static 'img/backup.svg' %}" alt="" />
+					</a>
+					{% else %}
+					<a href="{% url 'home:delete_appointement' appointment.id %}" title="Supprimer">
+						<img src="{% static 'img/delete.svg' %}" alt="" />
+					</a>
+					{% endif %}
+				</div>
+
+				<div class="card card--edit">
+					<a href="{% url 'home:edit_appointement' appointment.id %}" title="Éditer">
+						<img src="{% static 'img/pen.svg' %}" alt="" />
+					</a>
+				</div>
+			</div>
+
+		</div>
+
+		{% endfor %}
+
+		{% else %}
+
+		<div class="alert alert--neutral">
+			<h3 class="alert__header">Tu n'as aucun rendez-vous de prévu 💤</h3>
+		</div>
+
+		{% endif %}
+
+	</section>
+
+</div>
+{% endblock content	 %}
+
+{% block script %}
+<script src="{% static 'js/form-control.js' %}" type="text/javascript"></script>
+{% endblock script %}

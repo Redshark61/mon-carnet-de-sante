@@ -57,6 +57,12 @@ class SignupView(View):
 
     def get(self, request, **kwargs):
         context = self.set_context(request, **kwargs)
+        if request.user.is_authenticated:
+            if kwargs['number'] != request.user.current_signup_progress:
+                return redirect(f'/signup/{request.user.current_signup_progress}')
+        else:
+            if kwargs['number'] != 1:
+                return redirect('/signup/1')
 
         if self.number == 4:
             # Those fields are populated directly in the template
@@ -74,6 +80,10 @@ class SignupView(View):
         # For the 4th page the user doesn't need to fill all the fields except the main doctor
         # For the 5th page the user doesn't need to fill the fields
         if form.is_valid() or (self.number == 4 and request.POST.get('doctor') != '') or self.number == 5:
+            if request.user.is_authenticated:
+                request.user.current_signup_progress = nextNumber
+                request.user.save()
+
             if self.number == 1:
                 password = form.cleaned_data['password']
                 confirm_password = form.cleaned_data['confirm_password']

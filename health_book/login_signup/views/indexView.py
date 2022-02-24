@@ -33,6 +33,8 @@ class IndexView(View):
     def get(self, request):
 
         # Don't render immediately but first set the cookie
+        if request.user.is_authenticated:
+            return redirect('home:home')
         response = render(request, self.template_name)
         response.set_cookie('medical', False)
 

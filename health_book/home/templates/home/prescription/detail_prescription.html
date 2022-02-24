@@ -1,0 +1,54 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Détail{% endblock title %}
+
+{% block content %}
+
+<h1>Ordonnance de {{prescription.doctor}}</h1>
+
+<div class="flex flex--col flex--center-all">
+  <div>
+
+    <div class="flex flex--col mb-5">
+      {% if prescription.description %}
+      <h2>Description</h2>
+      <p>{{prescription.description}}</p>
+      {% endif %}
+    </div>
+
+    <div class="flex flex--col mb-5">
+      <h2>Traitement</h2>
+      <p>{{prescription.treatment}}</p>
+    </div>
+
+    <div class="flex flex--col mb-5">
+      <h2>Durée</h2>
+      {% if not prescription.is_permanent %}
+      <p>{{prescription.end_date}}</p>
+      {% else %}
+      <p>Permanent</p>
+      {% endif %}
+    </div>
+
+    <div class="flex flex--col mb-5">
+      <h2>Docteur</h2>
+      <p>{{prescription.doctor}}</p>
+    </div>
+
+    {% if prescription.prescription_scan %}
+    <div class="flex flex--col mb-5">
+      <h2>Scan de l'ordonnance</h2>
+      <p><img src="{{prescription.prescription_scan.url}}" alt="Ordonnance" class="detail__img-prescription"></p>
+      <a href="{{prescription.prescription_scan.url}}" target="_blank">Télécharger</a>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="flex flex--row--center-all mb-10">
+  <a href="{% url 'home:prescription' %}" class="btn btn--dark-green">Retour</a>
+</div>
+{% endif %}
+
+{% endblock content %}

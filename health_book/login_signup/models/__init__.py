@@ -9,3 +9,4 @@ from login_signup.models.treatment import Treatment
 from login_signup.models.userDisease import UserDisease
 from login_signup.models.job import Job
 from login_signup.models.rpps import RPPS
+from login_signup.models.message import Message

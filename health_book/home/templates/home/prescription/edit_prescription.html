@@ -1,0 +1,18 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Éditer une ordonnance{% endblock title %}
+
+{% block content %}
+
+<h1>Éditer</h1>
+
+<form action="" method="post">
+  {% csrf_token %}
+  {{form}}
+  <div class="flex flex--col btn-group">
+    <button type="submit" class="btn btn--light-green mt-5">Sauvegarder</button>
+    <a href="{% url 'home:prescription' %}" class="btn btn--dark-green btn--small">Retour</a>
+  </div>
+</form>
+
+{% endblock content %}

@@ -39,6 +39,17 @@
 	align-items: center;
 }
 
+.card--col {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	& > .card {
+		height: auto;
+	}
+}
+
 .card--dotted-line::after {
 	content: "";
 	position: absolute;

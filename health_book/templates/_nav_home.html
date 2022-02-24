@@ -21,6 +21,10 @@
   {%if url_name == 'prescription' %}link--active{% endif %}">
   <img src="{% static '/img/prescription.svg' %}" alt="">Ordonnances</a>
 
+<a href="{% url 'home:messages' %}" class="flex flex--center btn btn--dim-orange--empty btn-group
+  {%if url_name == 'messages' %}link--active{% endif %}">
+  <img src="{% static '/img/chat.svg' %}" alt="">Messagerie</a>
+
 {% if perms.login_signup.can_use_medical_stuff %}
 <a href="{% url 'home:patients_view' %}" class="flex flex--center btn btn--dim-orange--empty btn-group">
   <img src="{% static '/img/person.svg' %}" alt="">Voir mes patients</a>

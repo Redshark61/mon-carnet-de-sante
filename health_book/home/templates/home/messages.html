@@ -1,0 +1,33 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}Messages{% endblock title %}
+
+{% block content %}
+
+
+<h1>Messages</h1>
+
+<form action="" method="post" class="flex flex--row btn-group flex--center-all">
+  {% csrf_token %}
+
+  {% for field in form %}
+  <div class="form__group">
+    {{ field.label }}
+    {{field}}
+  </div>
+  {% endfor %}
+
+  <button type="submit" class="btn btn--light-green btn--small">Écrire</button>
+</form>
+
+<div class="grid grid--wrap grid--5 mt-5">
+  {% for messageData in zipped %}
+  <div class="card flex flex--col grid__element">
+    <h3 class="bold">{{messageData.0}}</h3>
+    <p class="md-subheader">pour</p>
+    <h3 class="bold mb-3">{{user}}</h3>
+    <a href="{% url 'home:message' messageData.1%}">Afficher</a>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

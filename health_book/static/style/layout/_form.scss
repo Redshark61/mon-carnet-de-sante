@@ -5,6 +5,15 @@ form {
 	align-items: stretch;
 	margin-inline: auto;
 	margin-top: 2rem;
+
+	&.flex.flex--row button[type="submit"] {
+		height: fit-content;
+	}
+
+	& > textarea {
+		width: 80%;
+		resize: none;
+	}
 }
 
 .form__group {

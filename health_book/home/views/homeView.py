@@ -2,12 +2,10 @@ from django.shortcuts import render
 from login_signup.models.appointment import Appointment
 from login_signup.models.prescription import Prescription
 from login_signup.models.doctor import Doctor
-from django.utils.decorators import method_decorator
 from django.views import View
-from django.contrib.auth.decorators import login_required
 
 
-@method_decorator(login_required(login_url='index'), name="get")
+# @login_required(login_url='index')
 class HomeView(View):
     """
     Home page view

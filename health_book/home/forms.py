@@ -18,6 +18,7 @@ class UserForm(forms.ModelForm):
             #   'parent1',
             #   'parent2',
             'birth_date',
+            'profile_picture'
         )
         labels = {
             'username': 'Nom d\'utilisateur',
@@ -39,33 +40,26 @@ class UserForm(forms.ModelForm):
                 'class': 'form__control ',
                 'placeholder': 'example@gmail.com'
             }),
-            'gender': forms.Select(attrs={
-                'class': 'form__control ',
-            }),
-            'first_name': forms.TextInput(attrs={
-                'class': 'form__control '
-            }),
-            'last_name': forms.TextInput(attrs={
-                'class': 'form__control '
-            }),
-            'main_doctor': forms.Select(attrs={
-                'class': 'form__control ',
-            }),
             # 'parent1': forms.Select(attrs={
             #     'class': 'form__control '
             # }),
             # 'parent2': forms.Select(attrs={
             #     'class': 'form__control '
             # }),
-            'birth_date': forms.DateInput(attrs={
-                'class': 'form__control ',
+            'birth_date': forms.DateInput(format=('%Y-%m-%d'), attrs={
                 'type': 'date'
-            })
+            }),
+            'profile_picture': forms.FileInput()
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].validators = []
+
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form__control '
+            })
 
 
 class PasswordChangingForm(PasswordChangeForm):
@@ -130,9 +124,11 @@ class AddAppointmentForm(forms.ModelForm):
         exclude = ('is_active',)
 
         widgets = {
-            'date': forms.DateInput(attrs={
-                'type': 'date'
-            }),
+            'date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'type': 'date'
+                }),
             'time': forms.TimeInput(attrs={
                 'type': 'time'
             }),
@@ -165,9 +161,11 @@ class AddPrescriptionForm(forms.ModelForm):
         fields = '__all__'
         exclude = ('is_active',)
         widgets = {
-            'end_date': forms.DateInput(attrs={
-                'type': 'date'
-            }),
+            'end_date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'type': 'date'
+                }),
         }
 
         labels = {
@@ -180,3 +178,28 @@ class AddPrescriptionForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form__control ',
             })
+
+
+class CreateNewMessageForm(forms.Form):
+    destination = forms.ModelChoiceField(
+        queryset=CustomUser.objects.all(),
+        widget=forms.Select(attrs={
+            'class': 'form__control ',
+        }),
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        self.fields['destination'].label = 'Destinataire'
+        if user.has_perm('login_signup.can_use_medical_stuff'):
+            self.fields['destination'].queryset = CustomUser.objects.filter(
+                is_superuser=False,
+                role="PATIENT"
+            )
+        else:
+            self.fields['destination'].queryset = CustomUser.objects.filter(
+                is_superuser=False,
+                role="MEDICAL_USER"
+            )

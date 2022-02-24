@@ -1,0 +1,32 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+
+{% block title %}Messages{% endblock title %}
+
+{% block content %}
+
+
+<h1>Messages avec <a href="{% url 'home:patient_view' userChat.id %}">{{userChat}}</a></h1>
+<a href="{% url 'home:block' slug %}">Bloquer cet utilisateur</a>
+
+{% for message in messages %}
+<div class="chat" data-position="{% if user == message.sender %}right{% else %}left{% endif %}">
+  <h2 class="sm-subheader">{{message.sender}}</h2>
+  <p>{{message.message}}</p>
+</div>
+{% endfor %}
+
+<form action="" method="post" class="flex flex--col btn-group flex--center-all mt-10">
+  {% csrf_token %}
+
+  <textarea name="message" id="message" rows="10"></textarea>
+
+  <button type="submit" class="btn btn--light-green">Envoyer</button>
+</form>
+
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'js/form-control.js' %}"></script>
+{% endblock script %}

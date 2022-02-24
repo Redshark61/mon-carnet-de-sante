@@ -21,13 +21,13 @@
     </div>
 
 
-    <aside class="grid__3 flex flex--col btn-group--3 js-nav">
+    <nav class="grid__3 flex flex--col btn-group--3 js-nav">
       <div class="btn-group flex flex--col">
         <a href="{% url 'home:settings' %}" class="flex flex--center btn btn--light-green">
-          <img src="{% static '/img/gear.svg'%}" alt="">
+          <img src="{% static '/img/gear.svg'%}" alt="Paramètres">
           Paramètre</a>
         <a href="{% url 'logout' %}" class="flex flex--center btn btn--light-green">
-          <img src="{% static '/img/leave.svg'%}" alt="">
+          <img src="{% static '/img/leave.svg'%}" alt="Se déconnecter">
           Se déconnecter</a>
       </div>
 
@@ -38,11 +38,12 @@
         {% endwith %}
 
       </div>
-    </aside>
+    </nav>
     <main class="grid__7">
       {% block content %}{% endblock content %}
     </main>
   </body>
+  <script src="{% static '/js/nav-button.js' %}"></script>
   {% block script %}{% endblock script %}
 
 </html>

@@ -123,6 +123,7 @@ STATICFILES_DIRS = (
 AUTH_USER_MODEL = 'login_signup.CustomUser'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 LOGOUT_REDIRECT_URL = 'index'
+LOGIN_URL = 'index'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'

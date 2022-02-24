@@ -1,3 +1,4 @@
+from email.mime import message
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 # from login_signup.models import appointment, customUser, diseases, doctor, job, location, rpps, treatment, trustedUser, userDisease
@@ -18,7 +19,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         *UserAdmin.fieldsets,  # original form fieldsets, expanded
         (                      # new fieldset added on to the bottom
-            'Custom Field',  # heading
+            'Extra field',  # heading
             {
                 'fields': (
                     'gender',
@@ -26,7 +27,8 @@ class CustomUserAdmin(UserAdmin):
                     'parent2',
                     'main_doctor',
                     'birth_date',
-                    'treatments'
+                    'treatments',
+                    'blocked_user',
                 ),
             },
         ),
@@ -62,3 +64,4 @@ admin.site.register(trustedUser.TrustedPerson)
 admin.site.register(userDisease.UserDisease, CustomUserDiseasesAdmin)
 admin.site.register(appointment.Appointment)
 admin.site.register(prescription.Prescription, CustomPrescriptionAdmin)
+admin.site.register(message.Message)

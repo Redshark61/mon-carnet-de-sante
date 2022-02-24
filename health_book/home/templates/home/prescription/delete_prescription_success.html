@@ -1,0 +1,12 @@
+{% extends 'home/_base.html' %}
+{% load static %}
+
+{% block title %} Succès de la suppression {% endblock title %}
+
+{% block content %}
+
+<h1>L'ordonnance a bien été supprimé</h1>
+<div class="flex flex--row--center-all mb-10">
+    <a href="{% url 'home:prescription' %}" class="btn btn--light-green">Retour aux ordonnances</a>
+</div>
+{% endblock content %}
