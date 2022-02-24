@@ -11,6 +11,20 @@
 		width: auto;
 		margin-inline: 5vw;
 	}
+
+	&.not-red {
+		&::after {
+			content: "";
+			position: absolute;
+			top: -10px;
+			right: -10px;
+			width: 20px;
+			height: 20px;
+			background-color: red;
+			opacity: 1;
+			border-radius: 50%;
+		}
+	}
 }
 
 .card--edit {

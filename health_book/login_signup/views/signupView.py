@@ -125,7 +125,8 @@ class SignupView(View):
                     password=form.cleaned_data['password'],
                     first_name=form.cleaned_data['first_name'],
                     last_name=form.cleaned_data['last_name'],
-                    role="PATIENT" if isMedical == 'False' else "MEDICAL_USER"
+                    role="PATIENT" if isMedical == 'False' else "MEDICAL_USER",
+                    current_signup_progress=nextNumber,
                 )
                 if isMedical == 'True':
                     permission = Permission.objects.get(codename='can_use_medical_stuff')
@@ -147,12 +148,12 @@ class SignupView(View):
                 # Add the fileds birth_date and phone_number to the user
                 request.user.birth_date = form.cleaned_data['birth_date']
                 request.user.gender = form.cleaned_data['gender']
+                request.user.current_signup_progress = nextNumber
                 request.user.save()
 
                 # If the user is a medical user, we redirect it to the main page
                 if isMedical == 'True':
                     return redirect('home:home')
-
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 3:
                 # Save the location of the user
@@ -160,6 +161,8 @@ class SignupView(View):
                 location.user = request.user
                 location.postal_code = request.POST.get('postal_code')
                 location.save()
+                request.user.current_signup_progress = nextNumber
+                request.user.save()
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 4:
 
@@ -188,6 +191,7 @@ class SignupView(View):
 
                 main_doctor = Doctor.objects.get(user=doctor_user)
                 request.user.main_doctor = main_doctor
+                request.user.current_signup_progress = nextNumber
                 request.user.save()
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 5:
@@ -198,6 +202,8 @@ class SignupView(View):
                     return redirect('login_signup:signup', nextNumber)
                 trustedPerson.user = request.user
                 trustedPerson.save()
+                request.user.current_signup_progress = nextNumber
+                request.user.save()
                 return redirect('login_signup:signup', nextNumber)
             if self.number == 6:
                 return redirect('home:home')

@@ -45,4 +45,5 @@ class MessageView(View):
             sender=request.user,
             destination=slugUser,
         )
+
         return redirect('home:message', slug=slug)
