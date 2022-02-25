@@ -10,7 +10,9 @@ from .views.homeView import HomeView
 from .views.passwordSuccess import passwordSuccess
 from .views.settingsView import SettingsView
 from .views.changePasswordView import ChangePasswordView
+from .views.customProfilePicture import CustomProfilePicture
 from .views.message import messageView, messagesView, blockUser
+
 
 app_name = 'home'
 urlpatterns = [
@@ -78,4 +80,6 @@ urlpatterns = [
          redirect_field_name=None), name="password_change"),
     path('settings/password_success', login_required(passwordSuccess,
          redirect_field_name=None), name="password_success"),
+    path('settings/custom_profile_picture', login_required(CustomProfilePicture.as_view(),
+         redirect_field_name=None), name="custom_profile_picture"),
 ]
