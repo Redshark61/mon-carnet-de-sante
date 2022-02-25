@@ -1,6 +1,7 @@
 from django.views import View
 from django.shortcuts import render, redirect
-from login_signup.models import doctor, customUser, message
+from django.core.exceptions import ObjectDoesNotExist
+from login_signup.models import doctor, customUser, message, notification
 
 
 class MessageView(View):
@@ -18,6 +19,10 @@ class MessageView(View):
         else:
             doctorUser = doctor.Doctor.objects.get(user=user)
             messages = message.Message.objects.filter(user=request.user, doctor=doctorUser)
+
+        onWaitingNotifications = notification.Notification.objects.filter(
+            for_user=request.user, from_user=user)
+        onWaitingNotifications.delete()
 
         context = {
             'messages': messages,
@@ -37,6 +42,17 @@ class MessageView(View):
         else:
             doctorUser = doctor.Doctor.objects.get(user=user)
             user = request.user
+
+        try:
+            previousNotif = notification.Notification.objects.get(from_user=request.user, for_user=slugUser)
+            previousNotif.delete()
+            print("is deleted")
+        except ObjectDoesNotExist:
+            notification.Notification.objects.create(
+                from_user=request.user, for_user=slugUser, content="Nouveau message")
+        else:
+            notification.Notification.objects.create(
+                from_user=request.user, for_user=slugUser, content="Nouveau message")
 
         message.Message.objects.create(
             user=user,

@@ -1,5 +1,7 @@
 {% extends 'home/_base.html' %}
 
+{% load custom_tags %}
+
 {% block title %}Messages{% endblock title %}
 
 {% block content %}
@@ -22,7 +24,7 @@
 
 <div class="grid grid--wrap grid--5 mt-5">
   {% for messageData in zipped %}
-  <div class="card flex flex--col grid__element {% if not messageData.2 %}not-red{% endif %}">
+  <div class="card flex flex--col grid__element {% if messageData.0|to_str in notifications %}not-red{% endif %}">
     <h3 class="bold">{{messageData.0}}</h3>
     <p class="md-subheader">pour</p>
     <h3 class="bold mb-3">{{user}}</h3>
