@@ -4,6 +4,7 @@ from login_signup.models.doctor import Doctor
 from login_signup.models.rpps import RPPS
 from login_signup.models.customUser import CustomUser
 from login_signup.models.diseases import Diseases
+from login_signup.models.notification import Notification
 from login_signup.models.treatment import Treatment
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import Permission
@@ -188,9 +189,13 @@ class SignupView(View):
                 doctor_first_name, doctor_last_name = request.POST['doctor'].split()
                 doctor_user = CustomUser.objects.get(
                     first_name=doctor_first_name, last_name=doctor_last_name)
-
                 main_doctor = Doctor.objects.get(user=doctor_user)
                 request.user.main_doctor = main_doctor
+                Notification.objects.create(
+                    for_user=main_doctor.user,
+                    from_user=request.user,
+                    notification_type="NP"
+                )
                 request.user.current_signup_progress = nextNumber
                 request.user.save()
                 return redirect('login_signup:signup', nextNumber)

@@ -21,7 +21,7 @@ class MessageView(View):
             messages = message.Message.objects.filter(user=request.user, doctor=doctorUser)
 
         onWaitingNotifications = notification.Notification.objects.filter(
-            for_user=request.user, from_user=user)
+            for_user=request.user, from_user=user, notification_type='M')
         onWaitingNotifications.delete()
 
         context = {
@@ -44,15 +44,16 @@ class MessageView(View):
             user = request.user
 
         try:
-            previousNotif = notification.Notification.objects.get(from_user=request.user, for_user=slugUser)
+            previousNotif = notification.Notification.objects.get(
+                from_user=request.user, for_user=slugUser, notification_type='M')
             previousNotif.delete()
             print("is deleted")
         except ObjectDoesNotExist:
             notification.Notification.objects.create(
-                from_user=request.user, for_user=slugUser, content="Nouveau message")
+                from_user=request.user, for_user=slugUser, notification_type='M')
         else:
             notification.Notification.objects.create(
-                from_user=request.user, for_user=slugUser, content="Nouveau message")
+                from_user=request.user, for_user=slugUser, notification_type='M')
 
         message.Message.objects.create(
             user=user,

@@ -35,7 +35,8 @@ class MessagesView(FormView):
             slugName = [(f"{name.user.first_name} {name.user.last_name}").replace(' ', '-')
                         for name in userNames]
 
-        onWaitingNotifications = notification.Notification.objects.filter(for_user=self.request.user)
+        onWaitingNotifications = notification.Notification.objects.filter(
+            for_user=self.request.user, notification_type='M')
 
         context["zipped"] = zip(userNames, slugName)
         if onWaitingNotifications.exists():

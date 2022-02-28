@@ -1,5 +1,6 @@
 {% extends 'home/_base.html' %}
 {% load static %}
+{% load custom_tags %}
 
 {% block title %} Maladies {% endblock title %}
 
@@ -12,7 +13,7 @@
     {% if perms.login_signup.can_use_medical_stuff %}
     <div class="grid grid--wrap grid--5 mt-5">
       {% for patient in object_list %}
-      <div class="card flex flex--col flex--center grid__element">
+      <div class="card flex flex--col flex--center grid__element {% if patient in notifications %}not-read{% endif %}">
         <h3>{{ patient }}</h3>
         <a href="{% url 'home:patient_view' patient.id %}">Voir les infos</a>
       </div>
