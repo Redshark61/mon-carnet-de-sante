@@ -13,8 +13,9 @@
 <div class="chat-container">
   {% for message in messages %}
   <div class="chat" data-position="{% if user == message.sender %}right{% else %}left{% endif %}">
-    <h2 class="sm-subheader">{{message.sender}}</h2>
+    <h2 class="sm-subheader chat__name">{{message.sender}}</h2>
     <p>{{message.message}}</p>
+    <h2 class="sm-subheader chat__date">{{message.date}}</h2>
   </div>
   {% endfor %}
 

@@ -1006,13 +1006,13 @@ form > textarea {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 2rem;
-  margin: 3rem 0;
+  padding: 2rem 2rem 1rem 2rem;
+  margin: 6rem 0 0 0;
   color: white;
   font-size: clamp(0.7rem, 2vw, 1rem);
 }
 
-.chat h2 {
+.chat .chat__name {
   position: absolute;
   top: -1.3rem;
   font-size: clamp(0.7rem, 2vw, 1rem);
@@ -1023,12 +1023,18 @@ form > textarea {
   width: max-content;
 }
 
+.chat:hover > .chat__date {
+  -webkit-transform: translateY(2rem);
+          transform: translateY(2rem);
+  opacity: 1;
+}
+
 .chat[data-position="left"] {
   background-color: #007120;
   border-radius: 0 14px 14px 0;
 }
 
-.chat[data-position="left"] h2 {
+.chat[data-position="left"] .chat__name {
   left: 1rem;
 }
 
@@ -1060,7 +1066,7 @@ form > textarea {
   border-radius: 14px 0 0 14px;
 }
 
-.chat[data-position="right"] h2 {
+.chat[data-position="right"] .chat__name {
   right: 1rem;
 }
 
@@ -1084,6 +1090,15 @@ form > textarea {
   width: 40px;
   height: 40px;
   border-top-right-radius: 50%;
+}
+
+.chat__date {
+  opacity: 0;
+  color: #222;
+  -webkit-transform: translateY(2rem);
+          transform: translateY(2rem);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .login {
