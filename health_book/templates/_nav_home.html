@@ -27,5 +27,7 @@
 
 {% if perms.login_signup.can_use_medical_stuff %}
 <a href="{% url 'home:patients_view' %}" class="flex flex--center btn btn--dim-orange--empty btn-group">
-  <img src="{% static '/img/person.svg' %}" alt="">Voir mes patients</a>
+  <img src="{% static '/img/person.svg' %}" alt="">Mes patients</a>
+<a href="{% url 'home:chart_view' %}" class="flex flex--center btn btn--dim-orange--empty btn-group">
+  <img src="{% static '/img/chart.svg' %}" alt="">Des stats</a>
 {% endif %}

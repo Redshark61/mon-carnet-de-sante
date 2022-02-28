@@ -13,6 +13,7 @@ from .views.changePasswordView import ChangePasswordView
 from .views.customProfilePicture import CustomProfilePicture
 from .views.message import messageView, messagesView, blockUser
 from .views.chart import ChartView
+from .views.chartYear import ChartYearView
 
 
 app_name = 'home'
@@ -20,6 +21,8 @@ urlpatterns = [
     path('', login_required(HomeView.as_view(), redirect_field_name=None), name="home"),
     path('charts', login_required(ChartView.as_view(),
                                   redirect_field_name=None), name="chart_view"),
+    path('charts/year', login_required(ChartYearView.as_view(),
+                                       redirect_field_name=None), name="chart_year_view"),
     ### Message ###
     path('message/', login_required(messagesView.MessagesView.as_view(), redirect_field_name=None), name="messages"),
     path('message/block/<str:slug>', login_required(blockUser.BlockUser.as_view(),

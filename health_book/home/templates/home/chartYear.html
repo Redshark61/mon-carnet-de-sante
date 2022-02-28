@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="flex flex--center-all">
-<a href="{% url 'home:chart_year_view' %}" class="btn btn--light-green mt-5 mb-5">Voir par année</a>
+  <a href="{% url 'home:chart_view' %}" class="btn btn--light-green mt-5 mb-5">Voir par semaine</a>
 </div>
 
 <canvas id="chart"></canvas>
@@ -16,19 +16,19 @@
 <script>
   const chart = document.getElementById('chart');
   const labels = [
-    {% for day, count in countDays.items %}
-      '{{day|capfirst}}',
+    {% for month, count in countMonths.items %}
+      '{{month|capfirst}}',
     {% endfor %}
   ];
 
   const data = {
     labels: labels,
     datasets: [{
-      label: 'Nombre de rendez-vous dans la semaine',
+      label: 'Nombre de rendez-vous dans l\'année',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [
-          {% for day, count in countDays.items %}
+          {% for month, count in countMonths.items %}
           {{count}},
           {% endfor %}
 
