@@ -405,6 +405,7 @@ form > textarea {
 }
 
 .btn {
+  position: relative;
   border: none;
   text-decoration: none;
   text-align: center;
@@ -468,6 +469,22 @@ form > textarea {
     height: 25px;
     aspect-ratio: 1;
   }
+}
+
+.btn.not-read {
+  outline: 1px red solid;
+}
+
+.btn.not-read::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  opacity: 1;
+  border-radius: 50%;
 }
 
 .btn--light-green {
@@ -731,7 +748,7 @@ form > textarea {
   }
 }
 
-.card.not-red::after {
+.card.not-read::after {
   content: "";
   position: absolute;
   top: -10px;
