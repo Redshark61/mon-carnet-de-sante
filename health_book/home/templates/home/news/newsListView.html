@@ -1,0 +1,30 @@
+{% extends 'home/_base.html' %}
+
+{% block title %}News{% endblock title %}
+
+{% block content %}
+
+<h1>Voici les news</h1>
+{% if perms.login_signup.can_use_medical_stuff %}
+
+<div class="flex flex--row flex--center-all">
+  <a href="{% url 'home:addNews' %}" class="btn btn--light-green">Créer un billet</a>
+</div>
+
+{% endif %}
+
+<div class="grid grid--wrap grid--2 mt-5">
+  {% for news in news_list %}
+  
+  <div class="card card--col grid__element">
+    <h2>{{news.title}} {% if perms.login_signup.can_use_medical_stuff %} <a href="{% url 'home:deleteNews' news.id %}">Supprimer</a>
+      {% endif %}</h2>
+    <p>{{news.content}}</p>
+    <h2 class="sm-subheader">{{news.author}} - {{news.date}}</h2>
+  </div>
+  
+  
+  {% endfor %}
+</div>
+
+{% endblock content %}

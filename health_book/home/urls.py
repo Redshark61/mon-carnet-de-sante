@@ -14,6 +14,7 @@ from .views.customProfilePicture import CustomProfilePicture
 from .views.message import messageView, messagesView, blockUser
 from .views.chart import ChartView
 from .views.chartYear import ChartYearView
+from .views.news import newsListView, addNews, deleteNews
 
 
 app_name = 'home'
@@ -23,6 +24,11 @@ urlpatterns = [
                                   redirect_field_name=None), name="chart_view"),
     path('charts/year', login_required(ChartYearView.as_view(),
                                        redirect_field_name=None), name="chart_year_view"),
+    ### News ###
+    path('news/', login_required(newsListView.NewsListView.as_view(), redirect_field_name=None), name="newsList"),
+    path('news/add/', login_required(addNews.AddNews.as_view(), redirect_field_name=None), name="addNews"),
+    path('news/delete/<int:pk>', login_required(deleteNews.DeleteNews.as_view(),
+                                                redirect_field_name=None), name="deleteNews"),
     ### Message ###
     path('message/', login_required(messagesView.MessagesView.as_view(), redirect_field_name=None), name="messages"),
     path('message/block/<str:slug>', login_required(blockUser.BlockUser.as_view(),

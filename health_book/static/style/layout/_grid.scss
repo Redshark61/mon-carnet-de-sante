@@ -37,9 +37,16 @@ main.grid__7 {
 	}
 }
 
-.grid__element {
-	// Make the span on column fit the width of the element
-	grid-column: span 2;
+.grid--5 {
+	> .grid__element {
+		grid-column: span 2;
+	}
+}
+
+.grid--2 {
+	> .grid__element {
+		grid-column: span 5;
+	}
 }
 
 .grid--center {

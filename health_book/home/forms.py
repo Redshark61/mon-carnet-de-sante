@@ -1,6 +1,6 @@
 from django import forms
 from login_signup.models.customUser import CustomUser
-from login_signup.models import diseases, treatment, appointment, prescription
+from login_signup.models import diseases, treatment, appointment, prescription, news
 from django.contrib.auth.forms import PasswordChangeForm
 
 
@@ -203,3 +203,30 @@ class CreateNewMessageForm(forms.Form):
                 is_superuser=False,
                 role="MEDICAL_USER"
             )
+
+
+class CreateNewsForm(forms.ModelForm):
+
+    class Meta:
+        model = news.News
+        fields = '__all__'
+
+        widgets = {
+            'date': forms.DateInput(
+                format=('%Y-%m-%d'),
+                attrs={
+                    'type': 'date'
+                }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user')
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form__control ',
+            })
+
+        self.fields['author'].queryset = CustomUser.objects.filter(
+            id=user.id
+        )
