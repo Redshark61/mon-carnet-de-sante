@@ -3,8 +3,15 @@ from django.views.generic.list import ListView
 from login_signup.models.appointment import Appointment
 from login_signup.models.doctor import Doctor
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class AppointmentsView(ListView):
     """
     Display the appointments for the current user

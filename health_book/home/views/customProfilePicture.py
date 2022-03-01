@@ -2,8 +2,15 @@ from django.views import View
 from django.shortcuts import render
 from PIL import Image, ImageDraw, ImageFont
 from login_signup.models.customUser import CustomUser
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class CustomProfilePicture(View):
     template_name = 'home/customProfilePicture.html'
 

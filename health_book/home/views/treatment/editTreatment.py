@@ -2,8 +2,15 @@ from django.shortcuts import render, redirect
 from django.views import View
 from home import forms
 from login_signup.models.treatment import Treatment
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class EditTreatment(View):
     form = forms.AddTreatmentForm
     template_name = 'home/treatment/edit_treatment.html'
