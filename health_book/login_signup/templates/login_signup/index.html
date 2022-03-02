@@ -3,6 +3,8 @@
 
 {% block title %}Accueil{% endblock title %}
 
+{% block bodyID %}id="index"{% endblock bodyID %}
+
 {% block content %}
 
 <!---- MODAL ---->
@@ -19,14 +21,61 @@
 </div>
 <!---- MODAL END  ---->
 
-<div class="login flex flex--col">
-    <h1 class="mt-5">Mon carnet de santé</h1>
-    <div class="flex flex--row">
-        <a href="#" id="login" class="btn btn--dark-green js-modal-input">Accéder à mon carnet</a>
-        <a href="#" id="signup" class="btn btn--light-green js-modal-input">Créer un compte</a>
+<nav class="flex flex--row">
+    <h3>Mon carnet de santé</h3>
+
+    <div class="nav__btn-group">
+        <a href="#" id="login" class="js-modal-input">Accéder à mon carnet</a>
+        <a href="#" id="signup" class="js-modal-input">Créer un compte</a>
     </div>
-    <img src="{% static 'img/files.svg'%}" alt="">
-</div>
+</nav>
+
+<section id="hero">
+    <div class="img__wrapper"><img src="{% static 'img/index/hero_img.png' %}" ></div>
+    <div class="hero__description mt-5">
+        <h1 class="title">Mais où est mon carnet de santé ?</h1>
+        <h2>Avoir son carnet dans la poche, c'est plus pratique non ?</h2>
+        <a href="#" id="signup" class="hero__call-to-action mt-5 flex flex--row">J'utilise mon carnet maintenant <img
+                src="{% static 'img/index/animation_click.gif' %}" ></a>
+    </div>
+    <img src="{% static 'img/index/wave.svg' %}" class="divider">
+</section>
+
+
+<section id="second">
+    <h1 class="title title--dimmed">Cette application est faite pour</h1>
+    <br>
+    <h1 class="title title--orange">VOUS !</h1>
+    <img src="{% static 'img/index/animation_doctor.gif' %}" class="m-i-auto mt-5">
+    <div class="second__wrapper mt-10">
+        <h2>Que vous soyez</h2>
+        <div class="mt-3">
+            <h1 class="title--orange">Patient</h1>
+            <h2>ou</h2>
+            <h1 class="title--orange">Médecin</h1>
+        </div>
+    </div>
+</section>
+
+<div class="fixed-bg"></div>
+
+<section>
+    <h1>Quel intérêt ?</h1>
+    <div>
+        <div>
+            <img src="{% static 'img/index/animation_list.gif' %}" >
+            <p>Gardez un historique de vos maladies et traitements</p>
+        </div>
+        <div>
+            <p>Ayez le contrôle sur vos rendez-vous et ordonnances en cours</p>
+            <img src="{% static 'img/index/clock.svg' %}" >
+        </div>
+        <div>
+            <img src="{% static 'img/index/animation_chat.gif' %}" >
+            <p>Discutez avec vos professionnels de santé, n’importe où, n’importe quand</p>
+        </div>
+    </div>
+</section>
 {% endblock content %}
 
 {% block script %}
