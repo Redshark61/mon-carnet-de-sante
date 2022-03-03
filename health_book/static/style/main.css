@@ -1247,6 +1247,10 @@ section#hero .img__wrapper {
   position: relative;
 }
 
+section#hero .img__wrapper > img {
+  width: 60vw;
+}
+
 section#hero .img__wrapper::after {
   content: "";
   position: absolute;
@@ -1370,6 +1374,10 @@ section#second h2 {
   text-align: center;
 }
 
+section#third .title {
+  margin-bottom: 20vh;
+}
+
 .fixed-bg {
   background-attachment: fixed;
   background-position: center;
@@ -1399,6 +1407,45 @@ img.divider {
   width: 100%;
   position: absolute;
   bottom: 0;
+}
+
+.list__item {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 80%;
+  margin-bottom: 10vh;
+  position: relative;
+  padding-bottom: 5vh;
+}
+
+.list__item > img {
+  height: 30vh;
+}
+
+.list__item > p {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 26px;
+  color: #ffffff;
+}
+
+.list__item:not(.list__item:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 30%;
+  height: 2px;
+  background: #000;
+  opacity: 0.5;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+lottie-player {
+  margin-inline: auto;
 }
 
 body {
@@ -1433,6 +1480,10 @@ body {
 
 .mt-10 {
   margin-top: 10vh;
+}
+
+.pt-10 {
+  padding-top: 10vh;
 }
 
 .mr-5 {
