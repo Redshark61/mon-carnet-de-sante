@@ -18,6 +18,7 @@ class PatientTreatmentsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         treatments = self.object.treatments.all()
         treatments = [treatment.name for treatment in treatments]
         prescriptions = Prescription.objects.filter(user=self.object)

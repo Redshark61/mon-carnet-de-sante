@@ -1431,17 +1431,32 @@ img.divider {
   color: #ffffff;
 }
 
-.list__item:not(.list__item:last-child)::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  width: 30%;
-  height: 2px;
-  background: #000;
-  opacity: 0.5;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+.divider__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.divider__wrapper > .line-divider {
+  width: 50%;
+  height: 1px;
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+  opacity: 0;
+  position: relative;
+  -webkit-transform: translateX(-10vw);
+          transform: translateX(-10vw);
 }
 
 lottie-player {

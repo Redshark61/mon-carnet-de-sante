@@ -20,6 +20,7 @@ class ChartView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         context = super().get_context_data(**kwargs)
+
         if self.request.user.has_perm('login_signup.can_use_medical_stuff'):
             doctor = Doctor.objects.get(user=self.request.user)
             appointments = Appointment.objects.filter(doctor=doctor, is_active=True)

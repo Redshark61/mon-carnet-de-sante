@@ -207,17 +207,22 @@ img.divider {
 		line-height: 26px;
 		color: #ffffff;
 	}
+}
+.divider__wrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 
-	&:not(&:last-child)::after {
-		content: "";
-		position: absolute;
-		bottom: -2px;
-		left: 50%;
-		width: 30%;
-		height: 2px;
-		background: #000;
-		opacity: 0.5;
-		transform: translateX(-50%);
+	> .line-divider {
+		width: 50%;
+		height: 1px;
+		background-color: #ffffff;
+		margin-bottom: 1rem;
+		opacity: 0;
+		position: relative;
+		transform: translateX(-10vw);
 	}
 }
 
