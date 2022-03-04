@@ -1,0 +1,24 @@
+{% extends 'home/_base.html' %}
+
+
+{% block title %}Supprimer{% endblock title %}
+
+
+{% block content %}
+
+<h1>Supprimer un billet</h1>
+
+
+<form action="" method="post">
+  {% csrf_token %}
+
+  <h2>Veux-tu vraiment supprimer un élément</h2>
+
+  <div class="flex flex--row flex--center-all btn-group mt-5">
+    <button type="submit" class="btn btn--warning">Supprimer</button>
+    <a href="{% url 'home:newsList' %}" class="btn btn--dark-green btn--small">Retour</a>
+  </div>
+
+</form>
+
+{% endblock content %}

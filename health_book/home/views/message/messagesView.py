@@ -3,8 +3,15 @@ from django.shortcuts import redirect
 from django.db.models import Q
 from login_signup.models import customUser, message, doctor, notification
 from home.forms import CreateNewMessageForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class MessagesView(FormView):
     form_class = CreateNewMessageForm
     template_name = 'home/messages.html'
@@ -35,7 +42,8 @@ class MessagesView(FormView):
             slugName = [(f"{name.user.first_name} {name.user.last_name}").replace(' ', '-')
                         for name in userNames]
 
-        onWaitingNotifications = notification.Notification.objects.filter(for_user=self.request.user)
+        onWaitingNotifications = notification.Notification.objects.filter(
+            for_user=self.request.user, notification_type='M')
 
         context["zipped"] = zip(userNames, slugName)
         if onWaitingNotifications.exists():

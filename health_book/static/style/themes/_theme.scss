@@ -1,16 +1,7 @@
 body {
 	background-color: $light-blue;
-	background-image: url("../img/bg.png");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: -10vh;
-
-	&[class*="no-bg"] {
-		background-image: none;
-	}
 
 	@include media-min($phone) {
-		background-image: none;
 		height: 100vh;
 	}
 }
@@ -27,12 +18,20 @@ body {
 	margin-bottom: 3vh;
 }
 
+.mt-3 {
+	margin-top: 3vh;
+}
+
 .mt-5 {
 	margin-top: 5vh;
 }
 
 .mt-10 {
 	margin-top: 10vh;
+}
+
+.pt-10 {
+	padding-top: 10vh;
 }
 
 .mr-5 {
@@ -139,6 +138,7 @@ main {
 
 .m-i-auto {
 	margin-inline: auto;
+	display: block;
 }
 
 .img-prescription {

@@ -1,8 +1,15 @@
 from django.views import View
 from home.forms import UserForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class SettingsView(View):
     """
     View to change the user's settings

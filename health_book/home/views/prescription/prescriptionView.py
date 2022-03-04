@@ -2,8 +2,15 @@ import datetime
 from django.views.generic import ListView
 from login_signup.models import prescription
 from login_signup.models.doctor import Doctor
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class PrescriptionView(ListView):
     """
     View for the prescription

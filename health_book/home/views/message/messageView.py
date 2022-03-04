@@ -2,8 +2,15 @@ from django.views import View
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from login_signup.models import doctor, customUser, message, notification
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class MessageView(View):
     template_name = 'home/message.html'
 
@@ -21,7 +28,7 @@ class MessageView(View):
             messages = message.Message.objects.filter(user=request.user, doctor=doctorUser)
 
         onWaitingNotifications = notification.Notification.objects.filter(
-            for_user=request.user, from_user=user)
+            for_user=request.user, from_user=user, notification_type='M')
         onWaitingNotifications.delete()
 
         context = {
@@ -44,15 +51,16 @@ class MessageView(View):
             user = request.user
 
         try:
-            previousNotif = notification.Notification.objects.get(from_user=request.user, for_user=slugUser)
+            previousNotif = notification.Notification.objects.get(
+                from_user=request.user, for_user=slugUser, notification_type='M')
             previousNotif.delete()
             print("is deleted")
         except ObjectDoesNotExist:
             notification.Notification.objects.create(
-                from_user=request.user, for_user=slugUser, content="Nouveau message")
+                from_user=request.user, for_user=slugUser, notification_type='M')
         else:
             notification.Notification.objects.create(
-                from_user=request.user, for_user=slugUser, content="Nouveau message")
+                from_user=request.user, for_user=slugUser, notification_type='M')
 
         message.Message.objects.create(
             user=user,

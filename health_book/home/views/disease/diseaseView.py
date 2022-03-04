@@ -2,8 +2,15 @@ from django.views.generic.list import ListView
 from login_signup.models.userDisease import UserDisease
 from login_signup.models.prescription import Prescription
 from login_signup.models.diseases import Diseases
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class DiseasesView(ListView):
     """
     Display the diseases for the current user

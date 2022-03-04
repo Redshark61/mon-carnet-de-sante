@@ -3,9 +3,11 @@ from login_signup.models.appointment import Appointment
 from login_signup.models.prescription import Prescription
 from login_signup.models.doctor import Doctor
 from django.views import View
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
-# @login_required(login_url='index')
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class HomeView(View):
     """
     Home page view

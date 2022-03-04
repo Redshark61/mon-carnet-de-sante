@@ -11,3 +11,4 @@ from login_signup.models.job import Job
 from login_signup.models.rpps import RPPS
 from login_signup.models.message import Message
 from login_signup.models.notification import Notification
+from login_signup.models.news import News

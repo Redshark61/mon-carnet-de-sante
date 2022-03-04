@@ -10,12 +10,14 @@
 <h1>Messages avec <a href="{% url 'home:patient_view' userChat.id %}">{{userChat}}</a></h1>
 <a href="{% url 'home:block' slug %}">Bloquer cet utilisateur</a>
 
-{% for message in messages %}
-<div class="chat" data-position="{% if user == message.sender %}right{% else %}left{% endif %}">
-  <h2 class="sm-subheader">{{message.sender}}</h2>
-  <p>{{message.message}}</p>
-</div>
-{% endfor %}
+<div class="chat-container">
+  {% for message in messages %}
+  <div class="chat" data-position="{% if user == message.sender %}right{% else %}left{% endif %}">
+    <h2 class="sm-subheader chat__name">{{message.sender}}</h2>
+    <p>{{message.message}}</p>
+    <h2 class="sm-subheader chat__date">{{message.date}}</h2>
+  </div>
+  {% endfor %}
 
 <form action="" method="post" class="flex flex--col btn-group flex--center-all mt-10">
   {% csrf_token %}
@@ -24,6 +26,7 @@
 
   <button type="submit" class="btn btn--light-green">Envoyer</button>
 </form>
+</div>
 
 {% endblock content %}
 

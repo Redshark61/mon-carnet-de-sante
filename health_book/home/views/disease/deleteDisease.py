@@ -1,8 +1,15 @@
 from django.views import View
 from django.shortcuts import render, redirect
 from login_signup.models.userDisease import UserDisease
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+decorators = [
+    login_required(login_url='login')
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class DeleteDisease(View):
     """
     Delete the disease from the user
