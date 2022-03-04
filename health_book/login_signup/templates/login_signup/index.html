@@ -21,7 +21,15 @@
 </div>
 <!---- MODAL END  ---->
 
-<nav class="flex flex--row">
+    <div class="back-button js-nav-button">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+
+
+
+<nav class="flex flex--row js-nav">
     <h3>Mon carnet de santé</h3>
 
     <div class="nav__btn-group">
@@ -35,7 +43,8 @@
     <div class="hero__description mt-5">
         <h1 class="title">Mais où est mon carnet de santé ?</h1>
         <h2>Avoir son carnet dans la poche, c'est plus pratique non ?</h2>
-        <a href="#" id="signup" class="hero__call-to-action mt-5 flex flex--row">J'utilise mon carnet maintenant <img
+        <a href="#" id="signup" class="hero__call-to-action mt-5 flex flex--row js-modal-input">J'utilise mon carnet
+            maintenant <img
                 src="{% static 'img/index/animation_click.gif' %}" ></a>
     </div>
     <img src="{% static 'img/index/wave.svg' %}" class="divider">
@@ -47,7 +56,7 @@
     <br>
     <h1 class="title title--orange">VOUS !</h1>
     <lottie-player src="https://assets7.lottiefiles.com/private_files/lf30_4FGi6N.json"
-        background="transparent" speed="1" loop autoplay>
+        background="transparent" speed="1" loop autoplay id="lottie-doctor">
     </lottie-player>
 
 
@@ -69,7 +78,7 @@
         <div class="flex flex--row flex--space-around list__item">
             <lottie-player
                 src="https://assets6.lottiefiles.com/packages/lf20_phdimzuf.json"
-                background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
+                background="transparent" speed="1" style="width: 300px; height: 300px;" id="lottie-list" loop autoplay>
             </lottie-player>
             <p>Gardez un historique de vos maladies et traitements</p>
         </div>
@@ -86,7 +95,7 @@
         <div class="flex flex--row flex--space-around list__item">
             <lottie-player
                 src="https://assets3.lottiefiles.com/packages/lf20_dn2wyuxu.json"
-                background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay>
+                background="transparent" speed="1" style="width: 300px; height: 300px;" id="lottie-chat" loop autoplay>
             </lottie-player>
             <p>Discutez avec vos professionnels de santé, n’importe où, n’importe quand</p>
         </div>
@@ -102,4 +111,6 @@
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src="{% static 'js/style-lottie.js' %}"></script>
 <script src="{% static 'js/gsap-style.js' %}"></script>
+<script src="{% static '/js/nav-button.js' %}"></script>
+
 {% endblock script %}
