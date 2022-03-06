@@ -1,6 +1,10 @@
 {% extends '_base.html' %}
 {% load static %}
 
+{% block head %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock head %}
+
 {% block title %}Accueil{% endblock title %}
 
 {% block bodyID %}id="index"{% endblock bodyID %}
@@ -83,14 +87,16 @@
             <p>Gardez un historique de vos maladies et traitements</p>
         </div>
             <div class="divider__wrapper">
-                <div class="line-divider"></div>
+                <div class="line-divider" data-aos="fade-right" data-aos-duration="1000"
+                    data-aos-anchor-placement="top-top"></div>
             </div>
         <div class="flex flex--row flex--space-around list__item">
             <p>Ayez le contrôle sur vos rendez-vous et ordonnances en cours</p>
             <img src="{% static 'img/index/clock.svg' %}" >
         </div>
             <div class="divider__wrapper">
-                <div class="line-divider"></div>
+                <div class="line-divider" data-aos="fade-right" data-aos-duration="1000"
+                    data-aos-anchor-placement="top-top"></div>
             </div>
         <div class="flex flex--row flex--space-around list__item">
             <lottie-player
@@ -105,12 +111,13 @@
 
 {% block script %}
 <script src="{% static 'js/modal.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/CSSPlugin.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 <script src="{% static 'js/style-lottie.js' %}"></script>
-<script src="{% static 'js/gsap-style.js' %}"></script>
 <script src="{% static '/js/nav-button.js' %}"></script>
+
+<script>
+    AOS.init();
+</script>
 
 {% endblock script %}
