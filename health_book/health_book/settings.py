@@ -2,6 +2,7 @@ import os
 from os import getenv
 from pathlib import Path
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,7 +19,7 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY')
 # DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'personnal-health-book.herokuapp.com']
 
 
 # Application definition
@@ -119,6 +120,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
+django_heroku.settings(locals())
+
 
 AUTH_USER_MODEL = 'login_signup.CustomUser'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
