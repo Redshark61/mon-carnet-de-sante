@@ -79,8 +79,7 @@
 
 .btn-group {
 	gap: 1rem;
-
-	&[class*="btn-group--3"] {
-		gap: 3rem;
-	}
+}
+.btn-group--3 {
+	gap: 3rem;
 }
