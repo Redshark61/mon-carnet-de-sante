@@ -584,7 +584,7 @@ form > textarea {
   gap: 1rem;
 }
 
-.btn-group[class*="btn-group--3"] {
+.btn-group--3 {
   gap: 3rem;
 }
 
