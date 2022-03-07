@@ -1,231 +1,288 @@
-nav {
-	justify-content: space-between;
-	align-items: center;
-}
+body#index {
+	// -------- nav --------
 
-.nav__btn-group {
-	position: relative;
-	display: flex;
-	align-items: center;
-	margin: 1rem;
-	background: $dim-orange;
-	border-radius: 7px;
-	overflow: hidden;
-
-	a {
-		padding: 1rem;
-		font-family: "Merriweather", serif;
-		text-decoration: none;
-		background-image: linear-gradient(to right, $light-green 0%, $light-green 100%);
-		background-size: 0 100%;
-		background-repeat: no-repeat;
-		transition: background-size 0.5s ease;
-
-		&:first-child {
-			background-position: 0 100%;
-			border-right: 2px solid $dark-blue;
-		}
-
-		&:last-child {
-			background-position: 100% 100%;
-		}
-		&:hover {
-			background-size: 100% 100%;
-		}
-	}
-}
-
-h3 {
-	font-family: "Merriweather", serif;
-	font-size: 2rem;
-	color: #fff;
-}
-
-section {
-	&:not(section#hero) {
-		background-color: $dark-blue;
+	.back-button {
+		position: fixed;
 	}
 
-	h1 {
-		margin: 0;
-	}
-
-	&#hero {
-		display: flex;
-		flex-direction: row;
+	nav {
 		justify-content: space-between;
+		align-items: center;
+
+		@include media-min($phone) {
+			justify-content: flex-start;
+		}
+	}
+
+	.nav__btn-group {
 		position: relative;
-		padding-bottom: 2rem;
+		display: flex;
+		align-items: center;
+		margin: 1rem;
+		background: $dim-orange;
+		border-radius: 7px;
+		overflow: hidden;
 
-		.img__wrapper {
-			position: relative;
+		@include media-min($phone) {
+			flex-direction: column;
+		}
 
-			& > img {
-				width: 60vw;
+		a {
+			padding: 1rem;
+			font-family: "Merriweather", serif;
+			text-decoration: none;
+			background-image: linear-gradient(to right, $light-green 0%, $light-green 100%);
+			background-size: 0 100%;
+			background-repeat: no-repeat;
+			transition: background-size 0.5s ease;
+
+			&:first-child {
+				background-position: 0 100%;
+				border-right: 2px solid $dark-blue;
+
+				@include media-min($phone) {
+					border-right: none;
+					border-bottom: 2px solid $dark-blue;
+				}
 			}
 
-			&::after {
-				content: "";
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(270deg, #f0f3ff 0, rgba(240, 243, 255, 0) 100%);
+			&:last-child {
+				background-position: 100% 100%;
 			}
+			&:hover {
+				background-size: 100% 100%;
+			}
+		}
+	}
+
+	// -------- fin nav --------
+	// -------- section --------
+
+	h3 {
+		font-family: "Merriweather", serif;
+		font-size: 2rem;
+		color: #fff;
+	}
+
+	section {
+		&:not(section#hero) {
+			background-color: $dark-blue;
 		}
 
 		h1 {
-			color: #000;
-			margin-bottom: 1rem;
+			margin: 0;
 		}
 
-		h2 {
-			font-style: normal;
-			font-weight: normal;
-			font-size: 14px;
-			line-height: 15px;
-			color: rgba(0, 0, 0, 0.6);
-		}
-
-		.hero__description {
+		&#hero {
 			display: flex;
-			flex-direction: column;
-			justify-content: start;
-			align-items: flex-start;
-		}
+			flex-direction: row;
+			justify-content: space-between;
+			position: relative;
+			padding-bottom: 2rem;
 
-		.hero__call-to-action {
-			justify-content: start;
-			align-items: center;
-			background: $dark-blue;
-			padding: 1rem;
-			color: $strong-orange;
-			text-decoration: none;
-			border-radius: 7px;
-			box-shadow: 6px 7px 17px -2px rgba(0, 0, 0, 0.5);
-			transition: box-shadow 0.3s ease;
-
-			&:hover {
-				box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.7);
+			@include media-min($phone) {
+				flex-direction: column;
 			}
 
-			&:visited {
-				color: $strong-orange;
+			.img__wrapper {
+				position: relative;
+
+				@include media-min($phone) {
+					height: 100%;
+				}
+
+				& > img {
+					width: 60vw;
+
+					@include media-min($phone) {
+						width: 100vw;
+					}
+				}
+
+				&::after {
+					content: "";
+					position: absolute;
+					inset: 0;
+					background: linear-gradient(270deg, #f0f3ff 0, rgba(240, 243, 255, 0) 100%);
+
+					@include media-min($phone) {
+						background: linear-gradient(0deg, #f0f3ff 0, rgba(240, 243, 255, 0) 100%);
+					}
+				}
 			}
 
-			img {
-				margin-left: 1rem;
-				width: 44px;
-				aspect-ratio: 1;
+			h1 {
+				color: #000;
+				margin-bottom: 1rem;
 			}
-		}
-	}
 
-	&#second {
-		padding: 10vh 0;
+			h2 {
+				font-style: normal;
+				font-weight: normal;
+				font-size: 14px;
+				line-height: 15px;
+				color: rgba(0, 0, 0, 0.6);
+			}
 
-		.second__wrapper {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-
-			& > div {
+			.hero__description {
 				display: flex;
-				flex-direction: row;
-				justify-content: space-between;
+				flex-direction: column;
+				justify-content: start;
+				align-items: flex-start;
+
+				@include media-min($phone) {
+					margin: 5vw;
+				}
+			}
+
+			.hero__call-to-action {
+				justify-content: start;
+				align-items: center;
+				background: $dark-blue;
+				padding: 1rem;
+				color: $strong-orange;
+				text-decoration: none;
+				border-radius: 7px;
+				box-shadow: 6px 7px 17px -2px rgba(0, 0, 0, 0.5);
+				transition: box-shadow 0.3s ease;
+
+				&:hover {
+					box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.7);
+				}
+
+				&:visited {
+					color: $strong-orange;
+				}
+
+				img {
+					margin-left: 1rem;
+					width: 44px;
+					aspect-ratio: 1;
+				}
+			}
+		}
+
+		&#second {
+			padding: 10vh 0;
+
+			.second__wrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
 				align-items: center;
 
-				h2 {
-					color: $light-purple;
-				}
+				& > div {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-between;
+					align-items: center;
 
-				h1 {
-					margin: 0 1rem;
+					h2 {
+						color: $light-purple;
+					}
+
+					h1 {
+						&:first-child {
+							margin: 0 1rem 0 0;
+						}
+
+						&:last-child {
+							margin: 0 0 0 1rem;
+						}
+					}
 				}
+			}
+
+			h2 {
+				font-size: 2rem;
+				font-family: "Merriweather", serif;
+				color: $light-blue;
+				text-align: center;
 			}
 		}
 
-		h2 {
-			font-size: 2rem;
-			font-family: "Merriweather", serif;
-			color: $light-blue;
-			text-align: center;
+		&#third {
+			.title {
+				margin-bottom: 20vh;
+			}
 		}
 	}
 
-	&#third {
-		.title {
-			margin-bottom: 20vh;
+	.fixed-bg {
+		background-attachment: fixed;
+		background-position: center;
+		background-image: url("../img/index/pattern.svg");
+		height: 20vh;
+	}
+
+	.title {
+		font-weight: bold;
+		font-size: 64px;
+		line-height: 60px;
+		text-align: left;
+
+		@include media-min($phone) {
+			font-size: 48px;
+			line-height: 48px;
 		}
 	}
-}
 
-.fixed-bg {
-	background-attachment: fixed;
-	background-position: center;
-	background-image: url("../img/index/pattern.svg");
-	height: 20vh;
-}
-
-.title {
-	font-weight: bold;
-	font-size: 64px;
-	line-height: 60px;
-	text-align: left;
-}
-
-.title--dimmed {
-	color: $light-blue;
-	text-align: center;
-}
-
-.title--orange {
-	margin-top: 1rem;
-	color: $strong-orange;
-	text-align: center;
-}
-
-img.divider {
-	width: 100%;
-	position: absolute;
-	bottom: 0;
-}
-
-.list__item {
-	align-items: center;
-	width: 80%;
-	margin-bottom: 10vh;
-	position: relative;
-	padding-bottom: 5vh;
-	> img {
-		height: 30vh;
+	.title--dimmed {
+		color: $light-blue;
+		text-align: center;
 	}
 
-	> p {
-		font-style: normal;
-		font-weight: normal;
-		font-size: 24px;
-		line-height: 26px;
-		color: #ffffff;
-	}
-}
-.divider__wrapper {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
+	.title--orange {
+		margin-top: 1rem;
+		color: $strong-orange;
+		text-align: center;
 
-	> .line-divider {
-		width: 50%;
-		height: 1px;
-		background-color: #ffffff;
-		margin-bottom: 1rem;
-		opacity: 0;
+		@include media-min($phone) {
+			font-size: 24px;
+			line-height: 24px;
+		}
+	}
+
+	img.divider {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+	}
+
+	.list__item {
+		align-items: center;
+		width: 80%;
+		margin-bottom: 10vh;
 		position: relative;
-		transform: translateX(-10vw);
-	}
-}
+		padding-bottom: 5vh;
+		> img {
+			height: 30vh;
+		}
 
-lottie-player {
-	margin-inline: auto;
+		> p {
+			font-style: normal;
+			font-weight: normal;
+			font-size: 24px;
+			line-height: 26px;
+			color: #ffffff;
+		}
+	}
+	.divider__wrapper {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+
+		> .line-divider {
+			width: 50%;
+			height: 1px;
+			background-color: #ffffff;
+			margin-bottom: 1rem;
+		}
+	}
+
+	lottie-player {
+		margin-inline: auto;
+	}
 }

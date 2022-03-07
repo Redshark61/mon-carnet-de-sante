@@ -2,7 +2,7 @@ body {
 	background-color: $light-blue;
 
 	@include media-min($phone) {
-		height: 100vh;
+		min-height: 100vh;
 	}
 }
 
@@ -47,6 +47,7 @@ nav {
 	@include media-min($phone) {
 		position: fixed;
 		width: 70vw;
+		top: 0;
 		z-index: 1;
 		padding: 5vw;
 		padding-top: $button-nav-size + 1rem;
