@@ -82,7 +82,13 @@
 				<h3>{{prescription.treatment}}</h3>
 				<div class="flex flex--col">
 					<p class="sm-subheader">Jusqu'au</p>
-					<h3>{{prescription.end_date}}</h3>
+					<h3>
+						{% if not prescription.end_date %}
+						INDETERMINÉ
+						{% else %}
+						{{prescription.end_date}}
+						{% endif %}
+					</h3>
 				</div>
 
 			</div>
