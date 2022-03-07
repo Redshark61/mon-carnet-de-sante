@@ -1,1 +1,1 @@
-web: gunicorn health_book.health_book.wsgi
+web: gunicorn health_book.wsgi
