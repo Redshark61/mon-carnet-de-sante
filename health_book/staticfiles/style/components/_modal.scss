@@ -1,0 +1,88 @@
+.modal-bg--active {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.modal {
+	display: none;
+	&--active {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		position: fixed;
+		z-index: 2;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: $dark-blue;
+		color: $light-green;
+		padding: 2rem 5vw;
+		width: 50vw;
+		height: 35vh;
+		border-radius: 14px;
+
+		@include media-min($phone) {
+			width: 90vw;
+			height: 50vh;
+		}
+
+		a {
+			color: $light-green;
+			text-decoration: none;
+		}
+	}
+}
+
+.modal__close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	font-size: 2rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		transform: rotate(90deg);
+	}
+}
+
+.modal__title {
+	text-align: center;
+	font-size: 2rem;
+}
+
+.modal__choices {
+	display: flex;
+	width: 100%;
+	flex-direction: row;
+	justify-content: space-around;
+
+	@include media-min($phone) {
+		flex-direction: column;
+	}
+}
+
+.modal__choice {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	padding: 1rem;
+	border: 1px solid $light-green;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	background-color: transparent;
+	color: white;
+
+	&:hover {
+		background-color: $light-green;
+		color: $dark-green;
+	}
+}

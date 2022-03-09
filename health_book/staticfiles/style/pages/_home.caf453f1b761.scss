@@ -1,0 +1,42 @@
+.home {
+	h1 {
+		@include media-min($phone) {
+			margin-top: 5vh;
+			display: block;
+		}
+	}
+
+	nav {
+		a {
+			&.btn--dim-orange--empty {
+				padding: 1rem 0.5rem;
+
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+
+			&.flex--center.btn.btn--light-green {
+				@include media-min($phone) {
+					gap: 1rem;
+				}
+			}
+		}
+	}
+
+	.middle-line {
+		background-color: #000;
+		width: 2px;
+		height: 50vh;
+
+		@include media-min($phone) {
+			height: 2px;
+			width: 80vw;
+			margin: 5vh auto;
+		}
+	}
+
+	section {
+		width: 100%;
+	}
+}

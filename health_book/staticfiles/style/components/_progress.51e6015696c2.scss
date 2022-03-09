@@ -1,0 +1,50 @@
+.progression-container {
+    margin-inline: auto;
+    width: fit-content;
+    display: flex;
+
+
+}
+
+.progression-dot {
+    margin: 2rem;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    @include btn-dark-green;
+    border-radius: 50%;
+    position: relative;
+
+    @include media-min($phone) {
+        margin: 0.5rem;
+    }
+
+    span {
+        line-height: 2rem;
+    }
+
+    &:not(.progression-dot:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 60%;
+        width: 4rem + 2rem;
+
+        @include media-min($phone) {
+            width: 1rem + 2rem;
+        }
+
+        height: .7rem;
+        background: $dim-orange;
+        z-index: -1;
+    }
+
+    &[data-active="true"] {
+        @include active-btn-purple;
+    }
+
+    &[data-active="false"] {
+        @include btn-purple;
+    }
+}

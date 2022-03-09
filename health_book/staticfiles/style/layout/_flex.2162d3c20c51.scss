@@ -1,0 +1,40 @@
+.flex {
+	display: flex;
+	word-break: break-word;
+
+	&[class*="--col"] {
+		flex-direction: column;
+	}
+
+	&[class*="--row"] {
+		flex-direction: row;
+
+		@include media-min($phone) {
+			flex-direction: column;
+		}
+	}
+
+	.flex--center {
+		align-items: center;
+	}
+
+	&.flex--center-j {
+		justify-content: center;
+	}
+
+	&[class*="--center-all"] {
+		align-items: center;
+		justify-content: center;
+	}
+	&[class*="--space-around"] {
+		justify-content: space-around;
+	}
+
+	&[class*="--space-between"] {
+		justify-content: space-between;
+	}
+
+	&[class*="--space-evenly"] {
+		justify-content: space-evenly;
+	}
+}

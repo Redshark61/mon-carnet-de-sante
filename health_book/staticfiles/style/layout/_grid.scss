@@ -1,0 +1,55 @@
+.grid {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+
+	@include media-min($phone) {
+		grid-template-rows: min-content;
+	}
+
+	> a {
+		width: 80%;
+	}
+}
+
+.grid__3 {
+	grid-column: 1/3;
+}
+
+.grid__7 {
+	grid-column: 3/11;
+}
+
+main.grid__7 {
+	@include media-min($phone) {
+		grid-column: 1/11;
+	}
+}
+
+.grid--wrap {
+	grid-template-columns: repeat(10, 1fr);
+	grid-auto-rows: minmax(100px, auto);
+	gap: 1rem;
+
+	@include media-min($phone) {
+		grid-template-columns: repeat(4, 1fr);
+		grid-auto-rows: minmax(100px, auto);
+		gap: 1rem;
+	}
+}
+
+.grid--5 {
+	> .grid__element {
+		grid-column: span 2;
+	}
+}
+
+.grid--2 {
+	> .grid__element {
+		grid-column: span 5;
+	}
+}
+
+.grid--center {
+	justify-content: center;
+	align-items: center;
+}
