@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.views.generic import TemplateView
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
@@ -12,6 +13,8 @@ urlpatterns = [
     path('home/', include('home.urls'), name='home'),
     path('login/', LoginView.as_view(), name="login"),
     path('', include('django.contrib.auth.urls')),
+    path('sw.js', TemplateView.as_view(template_name='sw.js',
+         content_type='application/javascript'), name='sw.js'),
 ]
 
 handler404 = "health_book.views.page_not_found"
