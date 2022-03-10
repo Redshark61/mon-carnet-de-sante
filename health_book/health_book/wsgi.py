@@ -8,9 +8,10 @@ https://docs.djangoproject.com/en/4.0/howto/deployment/wsgi/
 """
 
 import os
-
+from dotenv import load_dotenv
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'health_book.settings.development')
+load_dotenv()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', os.getenv('SETTINGS'))
 
 application = get_wsgi_application()
