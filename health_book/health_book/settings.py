@@ -135,7 +135,7 @@ MEDIA_URL = '/media/'
 
 # COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
-# CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 # CSRF_TRUSTED_ORIGINS = ['https://personnal-health-book.herokuapp.com']
 
 SESSION_COOKIE_SECURE = True
