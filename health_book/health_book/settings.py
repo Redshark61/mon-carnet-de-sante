@@ -14,7 +14,7 @@ PROJECT_DIR = os.path.dirname(__file__)
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv('DJANGO_SECRET_KEY')
+SECRET_KEY = getenv('DJANGO_SECRET_KEY_PRODUCTION')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
@@ -74,11 +74,11 @@ WSGI_APPLICATION = 'health_book.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv('DB_NAME'),
-        'USER': getenv('DB_USER'),
-        'PASSWORD': getenv('DB_PASSWORD'),
-        'HOST': getenv('DB_HOST'),
-        'PORT': getenv('DB_PORT'),
+        'NAME': getenv('DB_NAME_PRODUCTION'),
+        'USER': getenv('DB_USER_PRODUCTION'),
+        'PASSWORD': getenv('DB_PASSWORD_PRODUCTION'),
+        'HOST': getenv('DB_HOST_PRODUCTION'),
+        'PORT': getenv('DB_PORT_PRODUCTION'),
     }
 }
 
