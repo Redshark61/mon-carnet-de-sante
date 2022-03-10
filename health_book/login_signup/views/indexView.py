@@ -1,7 +1,15 @@
 from django.views import View
 from django.shortcuts import redirect, render
+# import the csrf_exempt decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+decorators = [
+    csrf_exempt
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class IndexView(View):
     """
     Main page of the website

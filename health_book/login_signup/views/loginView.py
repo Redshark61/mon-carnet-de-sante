@@ -2,8 +2,15 @@ from django.contrib.auth import authenticate, login as loginUser
 from django.shortcuts import redirect, render
 from login_signup.forms import LoginForm
 from login_signup.views.indexView import IndexView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+decorators = [
+    csrf_exempt
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class LoginView(IndexView):
     """
     Login page.

@@ -12,8 +12,15 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth import login as loginUser
 from login_signup.forms import *
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+decorators = [
+    csrf_exempt
+]
 
 
+@method_decorator(decorators, name='dispatch')
 class SignupView(View):
     """
     All the signup pages
