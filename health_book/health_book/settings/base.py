@@ -6,21 +6,16 @@ import django_heroku
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-# PROJECT_DIR = os.path.dirname(__file__)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PROJECT_DIR = os.path.dirname(__file__)
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = getenv('DJANGO_SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'personnal-health-book.herokuapp.com']
+SECRET_KEY = getenv('DJANGO_SECRET_KEY_PRODUCTION')
 
 
 # Application definition
@@ -47,7 +42,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'health_book.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -74,11 +68,11 @@ WSGI_APPLICATION = 'health_book.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': getenv('DB_NAME'),
-        'USER': getenv('DB_USER'),
-        'PASSWORD': getenv('DB_PASSWORD'),
-        'HOST': getenv('DB_HOST'),
-        'PORT': getenv('DB_PORT'),
+        'NAME': getenv('DB_NAME_PRODUCTION'),
+        'USER': getenv('DB_USER_PRODUCTION'),
+        'PASSWORD': getenv('DB_PASSWORD_PRODUCTION'),
+        'HOST': getenv('DB_HOST_PRODUCTION'),
+        'PORT': getenv('DB_PORT_PRODUCTION'),
     }
 }
 
@@ -118,7 +112,7 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
@@ -135,13 +129,6 @@ MEDIA_URL = '/media/'
 
 # COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
-CSRF_COOKIE_SECURE = False
-CSRF_TRUSTED_ORIGINS = ['https://personnal-health-book.herokuapp.com']
-
-SESSION_COOKIE_SECURE = False
-SECURE_SSL_REDIRECT = False
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_HSTS_PRELOAD = False
 
 LOGGING = {
     'version': 1,
