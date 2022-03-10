@@ -2,10 +2,12 @@ import os
 from os import getenv
 from pathlib import Path
 from dotenv import load_dotenv
+import django_heroku
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# PROJECT_DIR = os.path.dirname(__file__)
 
 
 # Quick-start development settings - unsuitable for production
@@ -18,7 +20,7 @@ SECRET_KEY = getenv('DJANGO_SECRET_KEY')
 # DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '10.0.2.2']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'personnal-health-book.herokuapp.com']
 
 
 # Application definition
@@ -116,9 +118,12 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = os.path.join(PROJECT_DIR, 'static/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static/"),
 )
+django_heroku.settings(locals())
+
 
 AUTH_USER_MODEL = 'login_signup.CustomUser'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
@@ -127,7 +132,55 @@ LOGIN_URL = 'index'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
-# mimetypes.add_type("text/css", ".css", True)
+
+# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+
+CSRF_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = ['https://personnal-health-book.herokuapp.com']
+
+SESSION_COOKIE_SECURE = False
+SECURE_SSL_REDIRECT = False
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': ('%(asctime)s [%(process)d] [%(levelname)s] '
+                       'pathname=%(pathname)s lineno=%(lineno)s '
+                       'funcname=%(funcName)s %(message)s'),
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
