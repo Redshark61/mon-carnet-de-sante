@@ -13,7 +13,7 @@ urlpatterns = [
     path('home/', include('home.urls'), name='home'),
     path('login/', LoginView.as_view(), name="login"),
     path('', include('django.contrib.auth.urls')),
-    path('sw.js/', TemplateView.as_view(template_name='sw.js',
+    path('sw.js', TemplateView.as_view(template_name='sw.js',
          content_type='application/javascript'), name='sw.js'),
 ]
 
