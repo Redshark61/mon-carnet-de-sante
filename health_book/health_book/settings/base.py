@@ -6,21 +6,16 @@ import django_heroku
 
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PROJECT_DIR = os.path.dirname(__file__)
 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = getenv('DJANGO_SECRET_KEY_PRODUCTION')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'personnal-health-book.herokuapp.com']
 
 
 # Application definition
@@ -47,7 +42,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'health_book.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -135,14 +129,6 @@ MEDIA_URL = '/media/'
 
 # COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
-CSRF_COOKIE_SECURE = True
-# CSRF_TRUSTED_ORIGINS = ['https://personnal-health-book.herokuapp.com']
-
-SESSION_COOKIE_SECURE = True
-SECURE_HSTS_SECONDS = 0
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
 LOGGING = {
     'version': 1,
