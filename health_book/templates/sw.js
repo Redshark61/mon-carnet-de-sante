@@ -1,4 +1,4 @@
-const staticCacheName = "site-static";
+const staticCacheName = "site-static-v1";
 const assets = [
 	"/",
 	"/static/js/pwa/manifest.json",
@@ -29,7 +29,6 @@ const assets = [
 
 // install service worker
 self.addEventListener("install", (e) => {
-	// console.log("Service Worker Installed");
 	e.waitUntil(
 		caches.open(staticCacheName).then((cache) => {
 			cache.addAll(assets);
@@ -39,15 +38,19 @@ self.addEventListener("install", (e) => {
 
 // activate service worker
 self.addEventListener("activate", (e) => {
-	console.log("Service Worker Activated");
+	e.waitUntil(
+		caches.keys().then((keys) => {
+			return Promise.all(
+				keys.filter((key) => key !== staticCacheName).map((key) => caches.delete(key))
+			);
+		})
+	);
 });
 
 // fetch event
 self.addEventListener("fetch", (e) => {
-	// console.log("Fetch Event", e);
 	e.respondWith(
 		caches.match(e.request).then((cacheRes) => {
-			console.log("Cache Response", cacheRes);
 			return cacheRes || fetch(e.request);
 		})
 	);
