@@ -1,9 +1,10 @@
-const staticCacheName = "site-static-v1";
+const staticCacheName = "site-static-v2";
 const assets = [
 	"/",
 	"/static/js/pwa/manifest.json",
 	"/static/js/pwa/app.js",
 	"/static/js/modal.js",
+	"/static/js/intersection.js",
 	"/static/js/style-lottie.js",
 	"/static/js/nav-button.js",
 	"/static/style/main.css",
