@@ -1,0 +1,85 @@
+.btn {
+	position: relative;
+	border: none;
+	@include button;
+
+	@include media-min($phone) {
+		@include button($size: 0.7rem);
+
+		> img {
+			height: 25px;
+			aspect-ratio: 1;
+		}
+	}
+
+	&.not-read {
+		outline: 1px red solid;
+		&::after {
+			content: "";
+			position: absolute;
+			top: -10px;
+			right: -10px;
+			width: 20px;
+			height: 20px;
+			background-color: red;
+			opacity: 1;
+			border-radius: 50%;
+		}
+	}
+}
+
+.btn--light-green {
+	@include btn-light-green($opacity: 0.4);
+
+	&:hover {
+		background: $hover-light-green;
+	}
+}
+
+.btn--warning {
+	background-color: rgb(255, 166, 0);
+	box-shadow: 4px 4px 5px rgba(255, 166, 0, 0.4);
+
+	&:hover {
+		background: rgba(255, 166, 0, 0.4);
+	}
+}
+
+.btn--dim-orange {
+	@include btn-dim-orange;
+
+	&[class*="--empty"] {
+		background: none;
+		box-shadow: none;
+		color: $dim-orange;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&:hover {
+		text-decoration: underline;
+		color: $hover-light-green;
+	}
+}
+
+.btn--small {
+	@include button(0.7rem, $color: inherit);
+	width: fit-content;
+}
+
+.btn--dark-green {
+	@include btn-dark-green($opacity: 0.4);
+
+	&:hover {
+		background: $hover-dark-green;
+	}
+}
+
+.btn-group {
+	gap: 1rem;
+}
+.btn-group--3 {
+	gap: 3rem;
+}

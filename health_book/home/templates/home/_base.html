@@ -24,10 +24,10 @@
     <nav class="grid__3 flex flex--col btn-group--3 js-nav">
       <div class="btn-group flex flex--col">
         <a href="{% url 'home:settings' %}" class="flex flex--center btn btn--light-green">
-          <img src="{% static '/img/gear.svg'%}" alt="Paramètres">
+          <img src="{% static 'img/gear.svg'%}" alt="Paramètres">
           Paramètre</a>
         <a href="{% url 'logout' %}" class="flex flex--center btn btn--light-green">
-          <img src="{% static '/img/leave.svg'%}" alt="Se déconnecter">
+          <img src="{% static 'img/leave.svg'%}" alt="Se déconnecter">
           Se déconnecter</a>
       </div>
 
@@ -43,8 +43,8 @@
       {% block content %}{% endblock content %}
     </main>
   </body>
+  <script src="{% static 'js/nav-button.js' %}"></script>
   {% block script %}
-  <script src="{% static '/js/nav-button.js' %}"></script>
   {% endblock script %}
 
 </html>

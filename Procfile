@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: guinicorn health_book.wsgi --log-file=-
+web: cd health_book && gunicorn health_book.wsgi

@@ -1,0 +1,40 @@
+.alert {
+	width: 80%;
+	margin: 2rem auto;
+	padding: 2rem;
+	border-radius: 14px;
+
+	&.alert--neutral {
+		margin-top: 5vh;
+		background: rgba($dim-orange, 0.5);
+	}
+
+	&.alert--success {
+		margin-top: 5vh;
+		background: rgba(0, 255, 0, 0.5);
+	}
+
+	&.alert--error {
+		margin-top: 5vh;
+		background: rgba(255, 0, 0, 0.719);
+
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 2rem 0 0;
+
+			&:not(.no-m) {
+				margin: 0;
+			}
+		}
+	}
+
+	&.alert--warning {
+		margin-top: 5vh;
+		background: rgb(255, 166, 0);
+	}
+
+	&.alert--max {
+		width: 100%;
+	}
+}

@@ -4,37 +4,37 @@
 
 <a href="{% url 'home:home' %}"
   class="flex flex--center btn btn--dim-orange--empty btn-group {% if url_name == 'home' %}link--active{% endif %}">
-  <img src="{% static '/img/home.svg'%}" alt="">Accueil</a>
+  <img src="{% static 'img/home.svg'%}" alt="">Accueil</a>
 
 <a href="{% url 'home:diseases' %}" class="flex flex--center btn btn--dim-orange--empty btn-group
   {%if url_name == 'diseases'%}link--active{% endif %}">
-  <img src="{% static '/img/bacteria.svg'%}" alt="">Maladies</a>
+  <img src="{% static 'img/bacteria.svg'%}" alt="">Maladies</a>
 
 <a href="{% url 'home:treatments' %}"
   class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'treatments'%}link--active{% endif %}">
-  <img src="{% static '/img/pills.svg'%}" alt="">Traitements</a>
+  <img src="{% static 'img/pills.svg'%}" alt="">Traitements</a>
 
 <a href="{% url 'home:appointments' %}"
   class="flex flex--center btn btn--dim-orange--empty btn-group {%if url_name == 'appointments'%}link--active{% endif %}">
-  <img src="{% static '/img/calendar.svg'%}" alt="">Rendez-vous</a>
+  <img src="{% static 'img/calendar.svg'%}" alt="">Rendez-vous</a>
 
 <a href="{% url 'home:prescription' %}" class="flex flex--center btn btn--dim-orange--empty btn-group
   {%if url_name == 'prescription' %}link--active{% endif %}">
-  <img src="{% static '/img/prescription.svg' %}" alt="">Ordonnances</a>
+  <img src="{% static 'img/prescription.svg' %}" alt="">Ordonnances</a>
 
 <a href="{% url 'home:messages' %}" class="flex flex--center btn btn--dim-orange--empty btn-group
   {%if url_name == 'messages' %}link--active{% endif %} {% if user|notification_message %}not-read{% endif %}">
-  <img src="{% static '/img/chat.svg' %}" alt="">Messagerie
+  <img src="{% static 'img/chat.svg' %}" alt="">Messagerie
 </a>
 
 <a href="{% url 'home:newsList' %}" class="flex flex--center btn btn--dim-orange--empty btn-group
   {%if url_name == 'newsList' %}link--active{% endif %}">
-  <img src="{% static '/img/news.svg' %}" alt="">Nouveauté</a>
+  <img src="{% static 'img/news.svg' %}" alt="">Nouveauté</a>
 
 {% if perms.login_signup.can_use_medical_stuff %}
 <a href="{% url 'home:patients_view' %}"
   class="flex flex--center btn btn--dim-orange--empty btn-group  {% if user|notification_patient %}not-read{% endif %}">
-  <img src="{% static '/img/person.svg' %}" alt="">Mes patients</a>
+  <img src="{% static 'img/person.svg' %}" alt="">Mes patients</a>
 <a href="{% url 'home:chart_view' %}" class="flex flex--center btn btn--dim-orange--empty btn-group">
-  <img src="{% static '/img/chart.svg' %}" alt="">Des stats</a>
+  <img src="{% static 'img/chart.svg' %}" alt="">Des stats</a>
 {% endif %}
