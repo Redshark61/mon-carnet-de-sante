@@ -210,6 +210,7 @@ class CreateNewsForm(forms.ModelForm):
     class Meta:
         model = news.News
         fields = '__all__'
+        exclude = ('author',)
 
         widgets = {
             'date': forms.DateInput(
@@ -226,7 +227,3 @@ class CreateNewsForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form__control ',
             })
-
-        self.fields['author'].queryset = CustomUser.objects.filter(
-            id=user.id
-        )

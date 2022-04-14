@@ -13,4 +13,3 @@ class NewsListView(ListView):
     model = News
     template_name = 'home/news/newsListView.html'
     context_object_name = 'news_list'
-    paginate_by = 3
