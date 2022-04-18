@@ -26,10 +26,12 @@ class DiseasesView(ListView):
         """
         queryset = super().get_queryset()
         if self.isFilter:
+            prescriptions = Prescription.objects.filter(user=self.request.user)
             userDiseases = queryset.filter(user=self.request.user)
         else:
+            prescriptions = Prescription.objects.filter(user=self.request.user, is_active=True)
             userDiseases = queryset.filter(user=self.request.user, is_active=True)
-        return userDiseases
+        return (userDiseases, prescriptions)
 
     def post(self, request, *args, **kwargs):
         """
@@ -40,7 +42,7 @@ class DiseasesView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
+        # context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
         context['diseases'] = Diseases.objects.all()
         context['isFilter'] = self.isFilter
         return context

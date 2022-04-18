@@ -36,9 +36,9 @@
       {% endfor %}
     </div>
     {% else %}
-    {% if object_list or prescription %}
+    {% if object_list %}
 
-    {% for disease in object_list %}
+    {% for disease in object_list.0 %}
     <div class="flex flex--row mt-5 flex--center-all">
       <div class="card card--row card--dotted-line">
         <h3>{{disease.disease}}</h3>
@@ -57,13 +57,16 @@
     </div>
     {% endfor %}
 
-    {% for prescription in prescriptions %}
+    {% for prescription in object_list.1 %}
     <div class="flex flex--row mt-5 flex--center-all">
       <div class="card card--row card--dotted-line">
         <h3>{{prescription.diseases}}</h3>
         <div class="flex flex--col">
           <p class="sm-subheader">Jusqu'au</p>
-          <h3>{{prescription.end_date}}</h3>
+          <h3>{% if prescription.end_date %}{{prescription.end_date}}
+            {% else %}
+            INDETERMINÉ
+            {% endif %}</h3>
         </div>
       </div>
 
