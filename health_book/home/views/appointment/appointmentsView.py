@@ -54,6 +54,8 @@ class AppointmentsView(ListView):
             userAppointments = queryset.filter(doctor=doctor)
         else:
             userAppointments = queryset.filter(user=self.request.user)
+            # sort the appointments from the newest to the oldest
+            userAppointments = userAppointments.order_by('-date')
 
         if not self.isFilter:
             userAppointments = userAppointments.filter(is_active=True)
