@@ -12,38 +12,38 @@
 	Bienvenue <br> {{user.first_name}} - {{user.last_name}}</h1>
 
 <div class="flex flex--row--space-evenly mt-10">
+	{% if not perms.login_signup.can_use_medical_stuff %}
 	<section>
-		<h2 class="text-center">Traitements</h2>
-		{% if user.treatments.all or prescriptions %}
-		{% for treatment in user.treatments.all %}
-		<div class="card card--row card--dotted-line mt-5">
-			<h3>{{treatment}}</h3>
-			<div class="flex flex--col">
-				<p class="sm-subheader">Jusqu'au</p>
-				<h3>INDETERMINÉ</h3>
-			</div>
-		</div>
-		{% endfor %}
-		{% for prescription in prescriptions %}
-		<div class="card card--row card--dotted-line mt-5">
-			<h3>{{prescription.treatment}}</h3>
-			<div class="flex flex--col">
-				<p class="sm-subheader">Jusqu'au</p>
-				<h3>{{prescription.end_date}}</h3>
-			</div>
-		</div>
+			<h2 class="text-center">Traitements</h2>
+			{% if user.treatments.all or prescriptions %}
+				{% for treatment in user.treatments.all %}
+					<div class="card card--row card--dotted-line mt-5">
+						<h3>{{treatment}}</h3>
+						<div class="flex flex--col">
+							<p class="sm-subheader">Jusqu'au</p>
+							<h3>INDETERMINÉ</h3>
+						</div>
+					</div>
+				{% endfor %}
+				{% for prescription in prescriptions %}
+					<div class="card card--row card--dotted-line mt-5">
+						<h3>{{prescription.treatment}}</h3>
+						<div class="flex flex--col">
+							<p class="sm-subheader">Jusqu'au</p>
+							<h3>{{prescription.end_date}}</h3>
+						</div>
+					</div>
+				{% endfor %}
+				{% else %}
+				<div class="alert alert--neutral">
+					<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
+				</div>
+			{% endif %}
 
-		{% endfor %}
-		{% else %}
-		<div class="alert alert--neutral">
-			<h3 class="alert__header">Youhou, tu es en bonne santé 🎉</h3>
-		</div>
+		</section>
 
+		<div class="middle-line"></div>
 		{% endif %}
-
-	</section>
-
-	<div class="middle-line"></div>
 
 	<section>
 		<h2 class="text-center">Rendez-vous</h2>
