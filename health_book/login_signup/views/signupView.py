@@ -29,12 +29,12 @@ class SignupView(View):
     number = 1
     template_name = f'login_signup/signup/{number}.html'
 
-    @staticmethod
-    def set_context(request, **kwargs):
+    def set_context(self, request, **kwargs):
         """
         Set the context for the current page as well as the form
         """
         number = kwargs['number']
+
         className = eval(f"Connection{number}")
         nextNumber = number + 1
         previousNumber = number - 1
@@ -60,7 +60,13 @@ class SignupView(View):
         """
         Set the current progression in the signup process by getting the number of the current page
         """
-        self.number = kwargs['number']
+        number = kwargs['number']
+        if number > 6:
+            className = eval(f"Connection{self.number}()")
+            context = {'is_valid': False, 'form': className}
+            return render(request, f'login_signup/signup/{self.number}.html', context)
+        self.number = number
+
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, **kwargs):

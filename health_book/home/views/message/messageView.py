@@ -53,12 +53,7 @@ class MessageView(View):
         try:
             previousNotif = notification.Notification.objects.get(
                 from_user=request.user, for_user=slugUser, notification_type='M')
-            previousNotif.delete()
-            print("is deleted")
         except ObjectDoesNotExist:
-            notification.Notification.objects.create(
-                from_user=request.user, for_user=slugUser, notification_type='M')
-        else:
             notification.Notification.objects.create(
                 from_user=request.user, for_user=slugUser, notification_type='M')
 
