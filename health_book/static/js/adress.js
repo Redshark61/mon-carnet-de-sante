@@ -14,7 +14,7 @@ window.addEventListener("keydown", (event) => {
 	}
 });
 
-// add event listener to input on enter key
+// add event listener to input on <ENTER> key
 inputAdress.addEventListener("keyup", async function (e) {
 	if (e.keyCode === 13) {
 		// Cancel the default action, if needed
@@ -117,6 +117,7 @@ async function getCities() {
 			.then((data) => {
 				const lines = data.split("\n");
 				const list = document.querySelector("datalist");
+
 				lines.forEach(function (line) {
 					const columns = line.split(";");
 					const option = document.createElement("option");

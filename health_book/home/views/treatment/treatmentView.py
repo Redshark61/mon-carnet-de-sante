@@ -20,6 +20,13 @@ class TreatmentsView(ListView):
     isFilter = False
 
     def get_queryset(self):
+        """
+        The get_queryset() method is called when the view is used to retrieve data.
+        The super() method is used to call the get_queryset() method of the parent class.
+        The filter() method is used to filter the queryset based on the User_treatment field.
+        The filter() method is used to filter the queryset based on the is_active field.
+        The return statement returns the filtered queryset
+        """
         queryset = super().get_queryset()
         if self.isFilter:
             userTreatments = queryset.filter(User_treatment=self.request.user)
@@ -35,7 +42,11 @@ class TreatmentsView(ListView):
         self.isFilter = request.POST.get('displayPast')
         return self.get(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs) -> dict:
+        """
+        This function is called when the view is rendered. It adds the prescriptions and treatments to the
+        context dictionary
+        """
         context = super().get_context_data(**kwargs)
         context['prescriptions'] = Prescription.objects.filter(user=self.request.user)
         context['treatments'] = Treatment.objects.all()
